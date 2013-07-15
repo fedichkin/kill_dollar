@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source source="LOCAL" name="kill_dollar" product="MySQL" version="5.5.31-MariaDB" jdbc-version="4.0" driver-name="mariadb-jdbc" driver-version="1.2" uuid="19f6f238-40ac-4d81-a189-e2d9433b76d0">
+    <extra-name-characters>#@</extra-name-characters>
+    <identifier-quote-string>`</identifier-quote-string>
+    <synchronize>true</synchronize>
+    <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+    <jdbc-url>jdbc:mysql://localhost:3306/kill_dollar</jdbc-url>
+    <user-name>root</user-name>
+    <user-password>dfd0dfcbdfc2dfcbdfd8dfc5dfdcdfcb</user-password>
+    <schema-pattern>kill_dollar.*</schema-pattern>
+    <default-schemas>kill_dollar.*</default-schemas>
+    <libraries>
+      <library>
+        <url>file://$PROJECT_DIR$/../flyway-commandline-2.1.1/jars/mariadb-java-client-1.1.3.jar</url>
+      </library>
+    </libraries>
+    <schema name="" catalog="kill_dollar"/>
+    <table name="group_resources" schema="" catalog="kill_dollar" type="BASE TABLE" remarks="0JPRgNGD0L/Qv9GLINGA0LXRgdGD0YDRgdC+0LI=">
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" remarks="0J3QsNC40LzQtdC90L7QstCw0L3QuNC1INCz0YDRg9C/0L/Riw=="/>
+    </table>
+    <table name="resources" schema="" catalog="kill_dollar" type="BASE TABLE" remarks="0KDQtdGB0YPRgNGB0Ysg0LTQvtGB0YLRg9C/0L3Ri9C1INC40LPRgNC+0LrQsNC8">
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" remarks="0J3QsNC40LzQtdC90L7QstCw0L3QuNC1INGA0LXRgdGD0YDRgdCw"/>
+      <column name="group_r" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JPRgNGD0L/Qv9CwINGA0LXRgdGD0YDRgdCw"/>
+      <column name="type_r" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0KLQuNC/INGA0LXRgdGD0YDRgdCw"/>
+      <column name="img" sqlType="VARCHAR" length="256" precision="0" nullable="true" jdbcType="12" remarks="0J/Rg9GC0Ywg0Log0LjQutC+0L3QutC1INGA0LXRgdGD0YDRgdCw"/>
+    </table>
+    <table name="role" schema="" catalog="kill_dollar" type="BASE TABLE" remarks="0KDQvtC70Lgg0L/QvtC70YzQt9C+0LLQsNGC0LXQu9C10Lk=">
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" remarks="0J3QsNC40LzQtdC90L7QstCw0L3QuNC1INGA0L7Qu9C4"/>
+    </table>
+    <table name="schema_version" schema="" catalog="kill_dollar" type="BASE TABLE">
+      <column name="version_rank" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="installed_rank" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="version" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12"/>
+      <column name="type" sqlType="VARCHAR" length="20" precision="0" nullable="false" jdbcType="12"/>
+      <column name="script" sqlType="VARCHAR" length="1000" precision="0" nullable="false" jdbcType="12"/>
+      <column name="checksum" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="installed_by" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12"/>
+      <column name="installed_on" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="execution_time" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="success" sqlType="TINYINT" length="3" precision="0" nullable="false" jdbcType="-6"/>
+    </table>
+    <table name="type_resources" schema="" catalog="kill_dollar" type="BASE TABLE" remarks="0KLQuNC/0Ysg0YDQtdGB0YPRgNGB0L7Qsg==">
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" remarks="0J3QsNC40LzQtdC90L7QstCw0L3QuNC1INGC0LjQv9Cw"/>
+    </table>
+    <table name="usr" schema="" catalog="kill_dollar" type="BASE TABLE" remarks="0KLQsNCx0LvQuNGG0LAg0L/QvtC70YzQt9C+0LLQsNGC0LXQu9C10Lk=">
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="login" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" remarks="0JvQvtCz0LjQvSDQv9C+0LvRjNC30L7QstCw0YLQtdC70Y8="/>
+      <column name="pswd" sqlType="VARCHAR" length="32" precision="0" nullable="false" jdbcType="12" remarks="0J/QsNGA0L7Qu9GMINC/0L7Qu9GM0LfQvtCy0LDRgtC10LvRjw=="/>
+      <column name="email" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" remarks="RS1tYWlsINC/0L7Qu9GM0LfQvtCy0LDRgtC10LvRjw=="/>
+    </table>
+    <table name="usr_resources" schema="" catalog="kill_dollar" type="BASE TABLE" remarks="0KDQtdGB0YPRgNGB0Ysg0L/QvtC70YzQt9C+0LLQsNGC0LXQu9C10Lk=">
+      <column name="usr" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JjQtNC10L3RgtC40YTQuNC60LDRgtC+0YAg0L/QvtC70YzQt9C+0LLQsNGC0LXQu9GP"/>
+      <column name="resources" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JjQtNC10L3RgtC40YTQuNC60LDRgtC+0YAg0YDQtdGB0YPRgNGB0LA="/>
+      <column name="count_res" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MA==" remarks="0JrQvtC70LjRh9C10YHRgtCy0L4g0YDQtdGB0YPRgNGB0L7QsiDRgyDQv9C+0LvRjNC30L7QstCw0YLQtdC70Y8="/>
+      <column name="hide_res" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MQ==" remarks="0JrQu9GO0YcsINC/0L7Qt9Cy0L7Qu9GP0LXRgiDRgdC60YDRi9Cy0LDRgtGMINGA0LXRgdGD0YDRgdGLINC+0YIg0LTRgNGD0LPQuNGFINC/0L7Qu9GM0LfQvtCy0LDRgtC10LvQtdC5ICgxIC0g0YHQutGA0YvRgtC+LCAwIC0g0LLQuNC00L3Qvik="/>
+      <column name="show_count" sqlType="INT UNSIGNED" length="10" precision="0" nullable="true" jdbcType="-5" remarks="0JXRgdC70Lgg0YDQtdGB0YPRgNGB0Ysg0LLQuNC00L3RiyDRgtC+INGA0LDQstC90L4g0LrQvtC70LjRh9C10YHRgtCy0YMg0YDQtdGB0YPRgNGB0L7Qsiwg0LXRgdC70Lgg0YHQutGA0YvRgtGLINGC0L4g0Y3RgtC+INC30L3QsNGH0LXQvdC40LUg0LfQsNC00LDRkdGCINC/0L7Qu9GM0LfQvtCy0LDRgtC10LvRjA=="/>
+    </table>
+    <table name="usr_role" schema="" catalog="kill_dollar" type="BASE TABLE" remarks="0KHQstGP0LfRjCDQv9C+0LvRjNC30L7QstCw0YLQtdC70Y8g0Lgg0YDQvtC70Lg=">
+      <column name="usr" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JjQtNC10L3RgtC40YTQuNC60LDRgtC+0YAg0L/QvtC70YzQt9C+0LLQsNGC0LXQu9GP"/>
+      <column name="role" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JjQtNC10L3RgtC40YTQuNC60LDRgtC+0YAg0YDQvtC70Lg="/>
+    </table>
+    <table name="usrname_rolename" schema="" catalog="kill_dollar" type="VIEW" remarks="VklFVw==">
+      <column name="login" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" remarks="0JvQvtCz0LjQvSDQv9C+0LvRjNC30L7QstCw0YLQtdC70Y8="/>
+      <column name="name" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" remarks="0J3QsNC40LzQtdC90L7QstCw0L3QuNC1INGA0L7Qu9C4"/>
+    </table>
+  </data-source>
+</component>

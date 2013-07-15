@@ -1,0 +1,1 @@
+INSERT INTO `group_resources` (`id`,`name`) VALUES	(2,'Производящие ресурсы');
