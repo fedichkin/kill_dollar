@@ -34,36 +34,26 @@
     <div class="row">
         <div class="span6">
             <div id="resources" class="form-actions">
-                <h3>Сырье</h3>
             </div>
         </div>
         <div class="span6">
             <div class="form-actions">
-                <h6 class="text-center">Сырье</h6>
+                <h6 class="text-center" id="res_group"></h6>
                 <div class="row">
-                    <div class="span2">
-                        <img src="/img/resources/Ag.png" class="img-rounded" />
+                    <div class="span2" id="res_img">
                     </div>
                     <div class="span3">
-                        <h3 class="text-center">Золото</h3>
+                        <h3 class="text-center" id="res_name"></h3>
+                        <h6 class="text-center" id="res_type"></h6>
                     </div>
                 </div>
-                <h4>Количество: 10</h4>
-                <h4>
-                    Отображение:
-                    <div class="btn-group" data-toggle="buttons-checkbox">
-                        <button type="button" class="btn btn-primary">Видно всем</button>
+                <h4 id="res_count"></h4>
+                <h4 id="comm_check">
+                    <div class="btn-group" data-toggle="buttons-checkbox" id="res_hide">
                     </div>
                 </h4>
-                <h4>Количество для всех: 10</h4>
-                <h6>
-                    <img src="/img/resources/Mag_min.png" class="img-rounded" />(1)
-                    <img src="/img/resources/plus.png" class="img-rounded" />
-                    <img src="/img/resources/Oil_min.png" class="img-rounded" />(1)
-                    <img src="/img/resources/plus.png" class="img-rounded" />
-                    <img src="/img/resources/Fe_min.png" class="img-rounded" />(1)
-                    <img src="/img/resources/equally.png" class="img-rounded" />
-                    <img src="/img/resources/Ag_min.png" class="img-rounded" />(5)
+                <h4 id="res_show"></h4>
+                <h6 id="img_f">
                 </h6>
             </div>
         </div>
@@ -71,6 +61,6 @@
 
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/kill_dollar.js"></script>
+    <script src="js/usr_game.js"></script>
     </body>
 </html>

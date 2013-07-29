@@ -1,2 +1,6 @@
 .btn-res{margin-top: 5px;margin-right: 5px;}
 .head_site{background-color:#00BFFF;border-top:1px solid #00BFFF;}
+.fon_game{background-color:#008B8B;}
+.list_game{border: 4px double black; padding: 10px;}
+.link_game{text-decoration: none; color: #FFFFF0}
+.link_game:hover{text-decoration: none; color: #FFDAB9}

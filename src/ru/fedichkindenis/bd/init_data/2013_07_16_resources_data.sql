@@ -1,0 +1,13 @@
+UPDATE `resources` SET `img_min` = '/img/resources/Ag_min.png'    WHERE `id` = 1;
+UPDATE `resources` SET `img_min` = '/img/resources/Fe_min.png'    WHERE `id` = 2;
+UPDATE `resources` SET `img_min` = '/img/resources/Oil_min.png'   WHERE `id` = 3;
+UPDATE `resources` SET `img_min` = '/img/resources/E_min.png'     WHERE `id` = 4;
+UPDATE `resources` SET `img_min` = '/img/resources/Tag_min.png'   WHERE `id` = 5;
+UPDATE `resources` SET `img_min` = '/img/resources/Tfe_min.png'   WHERE `id` = 6;
+UPDATE `resources` SET `img_min` = '/img/resources/Toil_min.png'  WHERE `id` = 7;
+UPDATE `resources` SET `img_min` = '/img/resources/Tbl_min.png'   WHERE `id` = 8;
+UPDATE `resources` SET `img_min` = '/img/resources/Mag_min.png'   WHERE `id` = 9;
+UPDATE `resources` SET `img_min` = '/img/resources/Mfe_min.png'   WHERE `id` = 10;
+UPDATE `resources` SET `img_min` = '/img/resources/Moil_min.png'  WHERE `id` = 11;
+UPDATE `resources` SET `img_min` = '/img/resources/Mt_min.png'    WHERE `id` = 12;
+UPDATE `resources` SET `img_min` = '/img/resources/Me_min.png'    WHERE `id` = 13;

@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import ru.fedichkindenis.bd.DbUtils;
+import ru.fedichkindenis.bd.SqlQuery;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,12 +41,15 @@ public class GetListResources extends HttpServlet {
 
         try {
             c = DbUtils.getConnect();
-            st = c.prepareStatement("select res.id ID, res.name RES_NAME, res.img IMG, gres.name GR, tres.name TYP, ifnull(ures.count_res, 0) CNT " +
-                    "from resources res " +
-                    "join group_resources gres on gres.id = res.group_r " +
-                    "join type_resources tres on tres.id = res.type_r left " +
-                    "join usr_resources ures on ures.resources = res.id and ures.usr = (select id from usr where login = ?)" +
-                    " order by gres.name, res.name");
+
+            String textQuery = null;
+
+            if(SqlQuery.isQuery("get_list_resources")){
+
+                textQuery = SqlQuery.getQuery("get_list_resources");
+            }
+
+            st = c.prepareStatement(textQuery);
             st.setString(1,request.getUserPrincipal().getName());
             rs = st.executeQuery();
 

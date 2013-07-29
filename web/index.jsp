@@ -48,20 +48,12 @@
                     </div>
                 </div>
                 <h4 id="res_count"></h4>
-                <h4>
-                    Отображение:
+                <h4 id="comm_check">
                     <div class="btn-group" data-toggle="buttons-checkbox" id="res_hide">
                     </div>
                 </h4>
                 <h4 id="res_show"></h4>
-                <h6>
-                    <img src="/img/resources/Mag_min.png" class="img-rounded" />(1)
-                    <img src="/img/resources/plus.png" class="img-rounded" />
-                    <img src="/img/resources/Oil_min.png" class="img-rounded" />(1)
-                    <img src="/img/resources/plus.png" class="img-rounded" />
-                    <img src="/img/resources/Fe_min.png" class="img-rounded" />(1)
-                    <img src="/img/resources/equally.png" class="img-rounded" />
-                    <img src="/img/resources/Ag_min.png" class="img-rounded" />(5)
+                <h6 id="img_f">
                 </h6>
             </div>
         </div>
@@ -69,6 +61,6 @@
 
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/kill_dollar.js"></script>
+    <script src="js/usr_game.js"></script>
     </body>
 </html>

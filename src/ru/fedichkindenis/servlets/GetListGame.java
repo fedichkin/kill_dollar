@@ -22,77 +22,72 @@ import java.sql.SQLException;
 /**
  * Created with IntelliJ IDEA.
  * User: Fedichkin.DY
- * Date: 14.07.13
- * Time: 21:12
+ * Date: 27.07.13
+ * Time: 21:27
  * To change this template use File | Settings | File Templates.
  */
-@WebServlet("/GetResourceInfo")
-public class GetResourceInfo extends HttpServlet {
+@WebServlet("/GetListGame")
+public class GetListGame extends HttpServlet {
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Connection c = null;
         PreparedStatement st = null;
         ResultSet rs = null;
 
         JSONObject jo = new JSONObject();
+        JSONArray ja = new JSONArray();
 
         response.setContentType("text/x-json;charset=windows-1251");
         Writer writer = response.getWriter();
 
         try {
 
-            long idRes = SlUtils.getLongParameter(request, "id_res", "id_res", -1, false);
+            String listType = SlUtils.getStringParameter(request, "listType", "listType", null, false);
 
             String textQuery = null;
 
-            if(SqlQuery.isQuery("get_resources_info")){
+            if(listType.equals("short_lists_game")){
+                if(SqlQuery.isQuery("get_short_lists_game")){
 
-                textQuery = SqlQuery.getQuery("get_resources_info");
+                    textQuery = SqlQuery.getQuery("get_short_lists_game");
+                }
+            }
+            else if(listType.equals("list_future_game")){
+                if(SqlQuery.isQuery("get_list_future_game")){
+
+                    textQuery = SqlQuery.getQuery("get_list_future_game");
+                }
+            }
+            else if(listType.equals("list_current_game")){
+                if(SqlQuery.isQuery("get_list_current_game")){
+
+                    textQuery = SqlQuery.getQuery("get_list_current_game");
+                }
+            }
+            else if(listType.equals("list_old_game")){
+                if(SqlQuery.isQuery("get_list_old_game")){
+
+                    textQuery = SqlQuery.getQuery("get_list_old_game");
+                }
             }
 
             c = DbUtils.getConnect();
             st = c.prepareStatement(textQuery);
-            st.setString(1,request.getUserPrincipal().getName());
-            st.setLong(2, idRes);
             rs = st.executeQuery();
 
-            if(rs.next()){
-                jo.put("res_name", rs.getString("RES_NAME"));
-                jo.put("res_img", rs.getString("RES_IMG"));
-                jo.put("res_group", rs.getString("RES_GROUP"));
-                jo.put("res_type", rs.getString("RES_TYPE"));
-                jo.put("res_count", rs.getString("RES_COUNT"));
-                jo.put("res_hide", rs.getString("RES_HIDE"));
-                jo.put("res_show", rs.getString("RES_SHOW"));
-                jo.put("res_parent_cnt", rs.getString("RES_PARENT_CNT"));
-                jo.put("res_img_min", rs.getString("RES_IMG_MIN"));
-            }
-
-            DbUtils.close(c, st, rs);
-
-            textQuery = null;
-
-            if(SqlQuery.isQuery("get_list_child_resources")){
-
-                textQuery = SqlQuery.getQuery("get_list_child_resources");
-            }
-
-            c = DbUtils.getConnect();
-            st = c.prepareStatement(textQuery);
-            st.setString(1,request.getUserPrincipal().getName());
-            st.setLong(2, idRes);
-            rs = st.executeQuery();
-
-            JSONArray child = new JSONArray();
             while(rs.next()){
-                JSONObject tmp = new JSONObject();
-                tmp.put("name", rs.getString("CHILD_NAME"));
-                tmp.put("img_min", rs.getString("CHILD_IMG_MIN"));
-                tmp.put("count_usr", rs.getString("CHILD_COUNT"));
-                tmp.put("count_f", rs.getString("CHILD_F_CNT"));
-                child.put(tmp);
+                JSONObject res = new JSONObject();
+                res.put("game_id",     rs.getString("ID"));
+                res.put("game_name",   rs.getString("NAME_GAME"));
+                res.put("max_player",  rs.getString("MAX_PLAYER"));
+                res.put("current_usr", rs.getString("CURRENT_USR"));
+                res.put("sd",          rs.getString("SD"));
+                res.put("fd",          rs.getString("FD"));
+                res.put("time_status", rs.getString("TIME_STATUS"));
+                ja.put(res);
             }
 
-            jo.put("child", child);
+            jo.put("data", ja);
             jo.put("success", true);
 
             writer.write(jo.toString());

@@ -1,5 +1,9 @@
 package ru.fedichkindenis.bd;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.sql.*;
 
 /**
@@ -15,14 +19,16 @@ public class DbUtils {
 
         Connection c = null;
 
+        Context context = null;
         try {
-            Class.forName("org.mariadb.jdbc.Driver");
-            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/kill_dollar", "root", "zaharova");
-        }
-        catch (SQLException e){
+            InitialContext initialContext = new InitialContext();
+            context = (Context) initialContext.lookup("java:comp/env");
+            DataSource ds = (DataSource) context.lookup("connpool");
+            c = ds.getConnection();
+        } catch (NamingException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return c;
@@ -41,7 +47,7 @@ public class DbUtils {
                 rs.close();
             }
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
     }
 }

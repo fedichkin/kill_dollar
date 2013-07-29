@@ -20,6 +20,12 @@
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="name" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" remarks="0J3QsNC40LzQtdC90L7QstCw0L3QuNC1INCz0YDRg9C/0L/Riw=="/>
     </table>
+    <table name="link_resources" schema="" catalog="kill_dollar" type="BASE TABLE" remarks="0KHQstGP0LfRjCDRgNC10YHRg9GA0YHQvtCyINCyINC/0YDQvtC40LfQstC+0LTRgdGC0LLQtSDQtNGA0YPQs9C40YUg0YDQtdGB0YPRgNGB0L7Qsg==">
+      <column name="parent" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0J/RgNC+0LjQt9Cy0L7QtNC40LzRi9C5INGA0LXRgdGD0YDRgQ=="/>
+      <column name="parent_count" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="child" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0J/RgNC+0LjQt9Cy0L7QtNGP0YnQuNC5INGA0LXRgdGD0YDRgQ=="/>
+      <column name="child_count" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5"/>
+    </table>
     <table name="resources" schema="" catalog="kill_dollar" type="BASE TABLE" remarks="0KDQtdGB0YPRgNGB0Ysg0LTQvtGB0YLRg9C/0L3Ri9C1INC40LPRgNC+0LrQsNC8">
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="name" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" remarks="0J3QsNC40LzQtdC90L7QstCw0L3QuNC1INGA0LXRgdGD0YDRgdCw"/>
