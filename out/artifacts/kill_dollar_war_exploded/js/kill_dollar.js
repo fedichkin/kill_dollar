@@ -34,8 +34,6 @@ load_detail_res = function(res_id){
             $('#res_type').append(data.res_type);
             $('#res_count').empty();
             $('#res_count').append('Количество: ' + data.res_count);
-            $('#comm_check').empty();
-            $('#comm_check').append('Отображение: ');
             if(data.res_hide == 1){
                 $('#res_hide').empty();
                 $('#res_hide').append('<button type="button" class="btn btn-primary active" onClick="click_ide_btn()">Скрыт</button>');
@@ -45,23 +43,11 @@ load_detail_res = function(res_id){
                 $('#res_hide').append('<button type="button" class="btn btn-primary active" onClick="click_ide_btn()">Видно всем</button>');
             }
             $('#res_show').empty();
-
             if(data.res_show == -1){
                 $('#res_show').append('Видно для всех: нет данных');
             }
             else{
                 $('#res_show').append('Видно для всех: ' + data.res_show);
-            }
-            $('#img_f').empty();
-            if(data.child.length > 0){
-                for(var i = 0;i < data.child.length;i++){
-                    $('#img_f').append('<img src="' + data.child[i].img_min + '" class="img-rounded" />(' + data.child[i].count_f + ')');
-                    if(i !=  (data.child.length - 1)){
-                        $('#img_f').append('<img src="/img/resources/plus.png" class="img-rounded" />');
-                    }
-                }
-                $('#img_f').append('<img src="/img/resources/equally.png" class="img-rounded" />');
-                $('#img_f').append('<img src="' + data.res_img_min + '" class="img-rounded" />(' + data.res_parent_cnt + ')');
             }
         }
     });
