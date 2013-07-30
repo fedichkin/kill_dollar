@@ -1,5 +1,6 @@
 $( document ).ready(function() {
     load_lists_game();
+    //alert(window.location.href);
 });
 
 load_lists_game = function(){

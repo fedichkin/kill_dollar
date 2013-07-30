@@ -13,8 +13,8 @@
         <auth-method>FORM</auth-method>
         <form-login-config>
             <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/login_err.jsp</form-error-page>
         </form-login-config>
-        <realm-name>default</realm-name>
     </login-config>
 
     <security-role>
