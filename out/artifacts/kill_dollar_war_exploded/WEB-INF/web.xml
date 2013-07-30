@@ -26,11 +26,16 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Application</web-resource-name>
-            <url-pattern>/index.jsp</url-pattern>
+            <url-pattern>/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>admin</role-name>
         </auth-constraint>
     </security-constraint>
+
+    <error-page>
+        <error-code>403</error-code>
+        <location>/403.jsp</location>
+    </error-page>
 
 </web-app>
