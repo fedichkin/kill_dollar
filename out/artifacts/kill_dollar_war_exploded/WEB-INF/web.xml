@@ -6,22 +6,8 @@
            version="3.0">
 
     <welcome-file-list>
-        <welcome-file>/</welcome-file>
+        <welcome-file>/index.jsp</welcome-file>
     </welcome-file-list>
-
-    <servlet>
-        <display-name>test</display-name>
-        <servlet-name>Test</servlet-name>
-        <servlet-class>ru.fedichkindenis.bd.Test</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>GetListResources</servlet-name>
-        <servlet-class>ru.fedichkindenis.servlets.GetListResources</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>GetResourceInfo</servlet-name>
-        <servlet-class>ru.fedichkindenis.servlets.GetResourceInfo</servlet-class>
-    </servlet>
 
     <login-config>
         <auth-method>FORM</auth-method>

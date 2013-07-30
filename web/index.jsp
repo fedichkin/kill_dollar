@@ -7,6 +7,15 @@
  * To change this template use File | Settings | File Templates.
  */
 --%>
+
+<%
+    if(request.getUserPrincipal() == null){
+%>
+     <jsp:forward page="login.jsp"></jsp:forward>
+<%
+    }
+%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 <html>
