@@ -40,26 +40,24 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="span6">
+<div class="row-fluid">
+    <div class="span8">
         <div id="resources" class="form-actions">
         </div>
     </div>
-    <div class="span6">
+    <div class="span4">
         <div class="form-actions">
             <h6 class="text-center" id="res_group"></h6>
-            <div class="row">
-                <div class="span2" id="res_img">
+            <div class="row-fluid">
+                <div class="span4" id="res_img">
                 </div>
-                <div class="span3">
+                <div class="span8">
                     <h3 class="text-center" id="res_name"></h3>
                     <h6 class="text-center" id="res_type"></h6>
                 </div>
             </div>
             <h4 id="res_count"></h4>
             <h4 id="comm_check">
-                <div class="btn-group" data-toggle="buttons-checkbox" id="res_hide">
-                </div>
             </h4>
             <h4 id="res_show"></h4>
             <h6 id="img_f">

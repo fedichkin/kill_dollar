@@ -40,6 +40,7 @@ load_detail_res = function(res_id){
             $('#res_count').append('Количество: ' + data.res_count);
             $('#comm_check').empty();
             $('#comm_check').append('Отображение: ');
+            $('#comm_check').append('<div class="btn-group" data-toggle="buttons-checkbox" id="res_hide"></div>');
             if(data.res_hide == 1){
                 $('#res_hide').empty();
                 $('#res_hide').append('<button type="button" class="btn btn-primary active" onClick="click_ide_btn()">Скрыт</button>');
@@ -84,7 +85,7 @@ click_ide_btn = function(){
 
 getUrlVars = function() {
     var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&#]*)/gi, function(m,key,value) {
         vars[key] = value;
     });
     return vars;

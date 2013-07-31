@@ -51,6 +51,7 @@ public class SlUtils {
             }
         } else {
             try{
+                strValue.replace('#', ' ');
                 value = Integer.parseInt(strValue.trim());
             } catch (Exception e) {
                 throw new Exception("недопустимые символы в параметре \"" + displayParametrName + "\"");
@@ -88,6 +89,7 @@ public class SlUtils {
             }
         } else {
             try{
+                strValue.replace('#', ' ');
                 value = Long.parseLong(strValue.trim());
             } catch (Exception e) {
                 throw new Exception("недопустимые символы в параметре \"" + displayParametrName + "\"");
@@ -116,6 +118,7 @@ public class SlUtils {
             }
         } else {
             try{
+                strValue.replace('#', ' ');
                 value = Float.parseFloat(strValue.trim().replace(',', '.'));
             } catch (Exception e) {
                 throw new Exception("недопустимые символы в параметре \"" + displayParametrName + "\"");
@@ -144,6 +147,7 @@ public class SlUtils {
         } else {
             try{
 
+                strValue.replace('#', ' ');
                 value = new BigDecimal(strValue.trim().replace(',', '.'));
             } catch (Exception e) {
                 throw new Exception("недопустимые символы в параметре \"" + displayParametrName + "\"");
