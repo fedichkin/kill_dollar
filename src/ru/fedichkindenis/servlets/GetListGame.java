@@ -37,7 +37,7 @@ public class GetListGame extends HttpServlet {
         JSONObject jo = new JSONObject();
         JSONArray ja = new JSONArray();
 
-        response.setContentType("text/x-json;charset=windows-1251");
+        response.setContentType("text/x-json;charset=utf-8");
         Writer writer = response.getWriter();
 
         try {

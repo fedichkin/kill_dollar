@@ -15,4 +15,4 @@ WHERE now() > g.finish_date
 
 GROUP BY g.id, g.name, g.max_player, g.start_date, g.finish_date
 
-ORDER BY g.start_date
+ORDER BY g.finish_date DESC,  g.start_date DESC

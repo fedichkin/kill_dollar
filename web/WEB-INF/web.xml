@@ -38,6 +38,7 @@
             <web-resource-name>Protected access</web-resource-name>
             <url-pattern>/index.jsp</url-pattern>
             <url-pattern>/list_game.jsp</url-pattern>
+            <url-pattern>/game_space.jsp</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>admin</role-name>

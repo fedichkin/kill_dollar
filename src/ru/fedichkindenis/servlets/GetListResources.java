@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import ru.fedichkindenis.bd.DbUtils;
 import ru.fedichkindenis.bd.SqlQuery;
+import ru.fedichkindenis.tools.SlUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,46 +33,79 @@ public class GetListResources extends HttpServlet {
         Connection c = null;
         PreparedStatement st = null;
         ResultSet rs = null;
+        int isUsrGame = 0;
 
         JSONObject jo = new JSONObject();
         JSONArray ja = new JSONArray();
 
-        response.setContentType("text/x-json;charset=windows-1251");
+        response.setContentType("text/x-json;charset=utf-8");
         Writer writer = response.getWriter();
 
         try {
+
+            Long gameId = SlUtils.getLongParameter(request, "game_id", "game_id", -1, false);
+
             c = DbUtils.getConnect();
 
             String textQuery = null;
 
-            if(SqlQuery.isQuery("get_list_resources")){
+            if(SqlQuery.isQuery("get_is_usr_game")){
 
-                textQuery = SqlQuery.getQuery("get_list_resources");
+                textQuery = SqlQuery.getQuery("get_is_usr_game");
             }
 
             st = c.prepareStatement(textQuery);
-            st.setString(1,request.getUserPrincipal().getName());
+            st.setLong(1, gameId);
+            st.setString(2, request.getUserPrincipal().getName());
             rs = st.executeQuery();
 
-            while(rs.next()){
-                JSONObject res = new JSONObject();
-                res.put("res_id", rs.getString("ID"));
-                res.put("res_name", rs.getString("RES_NAME"));
-                res.put("res_img", rs.getString("IMG"));
-                res.put("res_group", rs.getString("GR"));
-                res.put("res_type", rs.getString("TYP"));
-                res.put("res_count", rs.getString("CNT"));
-                ja.put(res);
+            if(rs.next()){
+                isUsrGame = rs.getInt("CNT");
             }
 
-            jo.put("data", ja);
-            jo.put("success", true);
+            DbUtils.close(c, st, rs);
 
-            writer.write(jo.toString());
+            if(isUsrGame != 0){
+
+                c = DbUtils.getConnect();
+
+                if(SqlQuery.isQuery("get_list_resources")){
+
+                    textQuery = SqlQuery.getQuery("get_list_resources");
+                }
+
+                st = c.prepareStatement(textQuery);
+                st.setLong(1, gameId);
+                st.setString(2, request.getUserPrincipal().getName());
+                rs = st.executeQuery();
+
+                while(rs.next()){
+                    JSONObject res = new JSONObject();
+                    res.put("res_id", rs.getString("ID"));
+                    res.put("res_name", rs.getString("RES_NAME"));
+                    res.put("res_img", rs.getString("IMG"));
+                    res.put("res_group", rs.getString("GR"));
+                    res.put("res_type", rs.getString("TYP"));
+                    res.put("res_count", rs.getString("CNT"));
+                    ja.put(res);
+                }
+
+                jo.put("data", ja);
+                jo.put("success", true);
+
+                writer.write(jo.toString());
+            }
+            else{
+                jo.put("success", false);
+
+                writer.write(jo.toString());
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             DbUtils.close(c, st, rs);

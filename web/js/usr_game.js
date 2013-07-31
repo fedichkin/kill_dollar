@@ -3,7 +3,7 @@ $( document ).ready(function() {
 });
 
 load_resources = function(){
-    $.get('/GetListResources', function(data){
+    $.get('/GetListResources', {game_id: getUrlVars()['game_id']} , function(data){
         if(data.success){
             var temp = '';
             for(var i = 0;i < data.data.length;i++){
@@ -17,6 +17,10 @@ load_resources = function(){
                     + data.data[i].res_img
                     + '" class="img-rounded" alt="' + data.data[i].res_name + '" />' + data.data[i].res_count + '</a>');
             }
+        }
+        else{
+
+           // $(".modal").slideToggle("slow");
         }
     }, 'json');
 }
@@ -76,4 +80,12 @@ click_ide_btn = function(){
         $('#res_hide > button').empty();
         $('#res_hide > button').append('Скрыт');
     }
+}
+
+getUrlVars = function() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
 }

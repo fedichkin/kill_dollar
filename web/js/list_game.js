@@ -10,18 +10,22 @@ load_lists_game = function(){
                 var el = data.data[i];
                 var sel, sel_child;
                 var text_link;
+                var url_link;
 
                 if(el.time_status == "curr"){
                     sel = $('#current_game');
                     text_link = "Играть";
+                    url_link = "game_space.jsp?game_id=" + el.game_id;
                 }
                 else if(el.time_status == "future"){
                     sel = $('#future_game');
                     text_link = "Присоедениться";
+                    url_link = "#";
                 }
                 else if(el.time_status == "old"){
                     sel = $('#old_game');
                     text_link = "Просмотреть результаты";
+                    url_link = "#";
                 }
 
                 sel.append('<div class="form-actions fon_game"></div>');
@@ -46,7 +50,7 @@ load_lists_game = function(){
 
                 sel_child = $(sel.selector + ' > .fon_game:last > .unit1');
                 $(sel_child.selector + ' > .span9').append('<h3>' + el.game_name + '</h3>');
-                $(sel_child.selector + ' > .span3').append('<h4 class="pull-right"><a href="#" class="link_game">' + text_link + '</a></h4>');
+                $(sel_child.selector + ' > .span3').append('<h4 class="pull-right"><a href="' + url_link + '" class="link_game">' + text_link + '</a></h4>');
 
                 sel_child =  $(sel.selector + ' > .fon_game:last > .unit2 > .span4');
                 $(sel_child.selector + ':eq(0)').append('<h6>Текущее количество игроков: ' + el.current_usr + '</h6>');
