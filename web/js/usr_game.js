@@ -60,7 +60,8 @@ load_detail_res = function(res_id){
             $('#img_f').empty();
             if(data.child.length > 0){
                 for(var i = 0;i < data.child.length;i++){
-                    $('#img_f').append('<img src="' + data.child[i].img_min + '" class="img-rounded" />(' + data.child[i].count_f + ')');
+                    menuForChildRes('#img_f', data.child[i].img_min, data.child[i].count_f, data.child[i].count_usr);
+                    //$('#img_f').append('<img src="' + data.child[i].img_min + '" class="img-rounded" />(' + data.child[i].count_f + ')');
                     if(i !=  (data.child.length - 1)){
                         $('#img_f').append('<img src="/img/resources/plus.png" class="img-rounded" />');
                     }
@@ -89,4 +90,29 @@ getUrlVars = function() {
         vars[key] = value;
     });
     return vars;
+}
+
+menuForChildRes = function(selector, img, countF, count){
+
+    idChild = (new Date()).getTime();
+
+    $(selector).append('<div class="btn-group" id="' + idChild + '"></div>');
+
+    $('#' + idChild).append('<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><img src="' +
+        img + '" class="img-rounded" />(' + countF + ') ' + count + '<span class="caret"></span></a>');
+
+    if(count >= countF){
+        $('#' + idChild + ' > a').addClass('btn-success');
+    }
+    else if(count == 0){
+        $('#' + idChild + ' > a').addClass('btn-danger');
+    }
+    else{
+        $('#' + idChild + ' > a').addClass('btn-warning');
+    }
+
+    $('#' + idChild).append('<ul class="dropdown-menu"></ul>');
+
+    $('#' + idChild + ' > ul').append('<li><a href="#">Попросить в другой стране</a></li>');
+    $('#' + idChild + ' > ul').append('<li><a href="#">Произвести</a></li>');
 }
