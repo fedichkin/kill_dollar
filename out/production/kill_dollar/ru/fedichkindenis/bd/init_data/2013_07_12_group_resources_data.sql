@@ -1,1 +1,0 @@
-INSERT INTO `group_resources` (`id`,`name`) VALUES	(1,'Сырье');
