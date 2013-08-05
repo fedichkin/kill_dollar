@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="kill_dollar:war exploded">
+  <artifact type="war" name="kill_dollar:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/kill_dollar_war_exploded</output-path>
-    <root id="root">
+    <root id="archive" name="kill_dollar_war exploded.war">
       <element id="javaee-facet-resources" facet="kill_dollar/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -12,6 +12,9 @@
           <element id="file-copy" path="$PROJECT_DIR$/lib/json-lib-2.4-jdk15.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/lib/json-20090211.jar" />
         </element>
+      </element>
+      <element id="directory" name="resources">
+        <element id="dir-copy" path="$PROJECT_DIR$/web" />
       </element>
     </root>
   </artifact>
