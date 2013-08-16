@@ -8,6 +8,9 @@
  */
 --%>
 
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
 <%
     if(request.getUserPrincipal() == null){
 %>
@@ -20,6 +23,3 @@
 <%
     }
 %>
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />

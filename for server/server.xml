@@ -121,7 +121,7 @@
       </Realm>
 	  
 	  <Realm className="org.apache.catalina.realm.JDBCRealm"
-		driverName="org.mariadb.jdbc.Driver"
+		driverName="org.mariadb.jdbc.Driver" digest="md5"
 		connectionURL="jdbc:mysql://localhost:3306/kill_dollar?user=root&amp;password=zaharova"
 		userTable="usr" userNameCol="login" userCredCol="pswd"
 		userRoleTable="usrname_rolename" roleNameCol="name"/>
