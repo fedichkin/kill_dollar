@@ -1,0 +1,56 @@
+/*
+*   Created by IntelliJ IDEA
+*   User: fedichkin_du
+*   Date: 29.09.2013
+*   Time: 19:26
+*/
+body {
+    background: #f5f5f5 url(../img/moon.jpg) 100% 100% no-repeat;
+    background-size: cover;
+}
+
+#logo {
+    margin: 5% 5%;
+}
+
+#login-form {
+    background-color: #252a31;
+    font-family: DeusEx;
+    color: #FFFFF0;
+    width: 340;
+}
+
+.form-signin {
+    margin-left: 5%;
+}
+
+#login-form label {
+    width: 100px;
+}
+
+#lg,#pswd {
+    margin-left: 120px;
+}
+
+.form-signin input[type="text"],.form-signin input[type="password"] {
+    background-color: #000000;
+    border: none;
+    font-family: DeusEx;
+}
+
+@font-face {
+    font-family: DeusEx;
+    src: url(../font/Viachaslav_Ilinskiy_DeusEx.otf);
+}
+
+#head1 {
+    float: left;
+    border-bottom: 40px solid #252a31;
+    border-left: 40px solid #000000;
+}
+
+#head2 {
+    float: left;
+    width: 300px;
+    height: 40px;
+}

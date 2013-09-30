@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="moon_2040">
+    <output-path>$PROJECT_DIR$/out/artifacts/moon_2040</output-path>
+    <root id="root">
+      <element id="module-output" name="kill_dollar" />
+      <element id="javaee-facet-resources" facet="kill_dollar/web/Web" />
+      <element id="archive" name="moon_2040.jar" />
+    </root>
+  </artifact>
+</component>
