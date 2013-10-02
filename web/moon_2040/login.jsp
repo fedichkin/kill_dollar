@@ -35,8 +35,13 @@
                 <input type="password" id="input-pswd" name="j_password">
             </div>
         </div>
+        <div id="footer"><div id="footer1">ВХОД / РЕГИСТРАЦИЯ</div><div id="footer2"></div><div></div></div>
     </div>
 </form>
+
+<div id="about">
+
+</div>
 
 
 <script src="js/jquery-1.10.2.min.js"></script>

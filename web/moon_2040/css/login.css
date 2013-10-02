@@ -10,7 +10,7 @@ body {
 }
 
 #logo {
-    margin: 5% 5%;
+    margin: 5% 20%;
 }
 
 #login-form {
@@ -21,7 +21,9 @@ body {
 }
 
 .form-signin {
-    margin-left: 5%;
+    float: left;
+    margin-left: 20%;
+    margin-top: 80px;
 }
 
 #login-form label {
@@ -30,6 +32,10 @@ body {
 
 #lg,#pswd {
     margin-left: 120px;
+}
+
+#pswd {
+    margin-bottom: 20px;
 }
 
 .form-signin input[type="text"],.form-signin input[type="password"] {
@@ -45,12 +51,41 @@ body {
 
 #head1 {
     float: left;
-    border-bottom: 40px solid #252a31;
-    border-left: 40px solid #000000;
+    border-bottom: 20px solid #252a31;
+    border-left: 20px solid #000000;
+    margin-bottom: 20px;
 }
 
 #head2 {
     float: left;
     width: 300px;
-    height: 40px;
+    height: 20px;
+    margin-bottom: 20px;
+}
+
+#footer2 {
+    float: left;
+    border-top: 60px solid #252a31;
+    border-right: 60px solid transparent;
+    margin-top: -20px;
+}
+
+#footer1 {
+    float: left;
+    width: 280px;
+    height: 60px;
+    margin-top: -20px;
+    background-color: #252a31;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    line-height: 3.5;
+}
+
+#about {
+    float: left;
+    width: 380px;
+    height: 450px;
+    background-color: rgba(37, 42, 49, 0.7);
+    margin-left: 15%;
 }
