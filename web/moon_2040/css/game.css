@@ -1,0 +1,56 @@
+/**
+  Created with IntelliJ IDEA.
+  User: Fedichkin.DY
+  Date: 04.10.13
+  Time: 21:25
+  To change this template use File | Settings | File Templates.
+**/
+
+body {
+    background: #f5f5f5 url(../img/moon_map.jpg) 100% 100% no-repeat;
+    background-size: cover;
+}
+
+#statistic {
+    background-color: rgba(220,220,220,0.7);
+    min-height: 300px;
+    width: 95%;
+    margin-top: 2.5%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+
+.body-game {
+    border: 2px solid #7b7b7b;
+}
+
+#all-body {
+    margin-top: 5%;
+    background-color: #dddddd;
+}
+
+#players, #operations {
+    min-height: 100px;
+    min-height: 100px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    width: 24.5%;
+}
+
+#resources, #building {
+    min-height: 50px;
+}
+
+#resources {
+    margin-top: 2%;
+    margin-bottom: 0.5%;
+}
+
+#players {
+    margin-left: 0.6%;
+    margin-right: -2%;
+}
+
+#operations {
+    margin-left: 0.5%;
+}
