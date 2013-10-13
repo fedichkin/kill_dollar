@@ -12,6 +12,7 @@
     <title>Авторизация</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/login.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="//test.bizcontacts.net/app/widget/css/widget.css">
 </head>
 <body>
 
@@ -19,32 +20,25 @@
     <img src="img/Moon2040-logo.png">
 </div>
 
-
-<form class="form-signin" action="j_security_check" method="POST">
-    <div id="login-form" class="form-horizontal">
-        <div id="head_lgform"><div id="head1"></div><div id="head2"></div></div>
-        <div class="control-group">
-            <label class="control-label" for="input-login">ЛОГИН</label>
-            <div class="controls" id="lg">
-                <input type="text" id="input-login" name="j_username">
-            </div>
+<div class="row-fluid">
+    <div class="span6">
+        <div id="biz-moon" class='bizcontacts'
+             data-type='auth.join'
+             data-title='Регистрация'
+             data-app='525518562434d402d4f10cfe'
+             data-redirect='http://localhost:8081/Auth'
+             data-error=''>
         </div>
-        <div class="control-group">
-            <label class="control-label" for="input-pswd">ПАРОЛЬ</label>
-            <div class="controls" id="pswd">
-                <input type="password" id="input-pswd" name="j_password">
-            </div>
-        </div>
-        <div id="footer"><div id="footer1">ВХОД / РЕГИСТРАЦИЯ</div><div id="footer2"></div><div></div></div>
     </div>
-</form>
+    <div class="span6">
+        <div id="about">
 
-<div id="about">
-
+        </div>
+    </div>
 </div>
-
 
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script async src="//test.bizcontacts.net/app/widget/widget.js"></script>
 </body>
 </html>
