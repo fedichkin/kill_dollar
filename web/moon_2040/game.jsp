@@ -16,8 +16,39 @@
     </head>
     <body>
         <div class="row-fluid">
-            <div id="statistic" class="span12">
-
+            <div id="statistic">
+                <div class="span3">
+                    <ul class="unstyled">
+                        <li><p class="lead">Число колонистов: </p></li>
+                        <li><p class="lead">Изменения населения: </p></li>
+                        <li><p class="lead">Сумма самого богатого колониста: </p></li>
+                        <li><p class="lead">Сумма самого бедного колониста: </p></li>
+                    </ul>
+                </div>
+                <div class="span3">
+                    <ul class="unstyled">
+                        <li><p class="lead">Средняя сумма у колониста: </p></li>
+                        <li><p class="lead">Число безработных: </p></li>
+                        <li><p class="lead">Число тунеядцев: </p></li>
+                        <li><p class="lead">Суммарное число жилых мест: </p></li>
+                    </ul>
+                </div>
+                <div class="span3">
+                    <ul class="unstyled">
+                        <li><p class="lead">Число свободных жилых мест: </p></li>
+                        <li><p class="lead">Цена самого дорого жилья: </p></li>
+                        <li><p class="lead">Цена самого дешёвого жилья: </p></li>
+                        <li><p class="lead">Средняя цена на жильё: </p></li>
+                    </ul>
+                </div>
+                <div class="span3">
+                    <ul class="unstyled">
+                        <li><p class="lead">Самая высока зарплата: </p></li>
+                        <li><p class="lead">Самая низкая зарплата: </p></li>
+                        <li><p class="lead">Средняя зарплата: </p></li>
+                        <li><p class="lead">Статистика ресурсов: </p></li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="row-fluid">

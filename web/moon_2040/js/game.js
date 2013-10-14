@@ -8,3 +8,22 @@
 $( document ).ready(function() {
     load_statistics();
 });
+
+load_statistics = function(){
+    $.get('/GetMoonStatistics', {stat: 'moon_stat', game: 1} , function(data){
+        if(data.success){
+            /*var stat = $('#statistic').add('div').addClass('row-fluid');
+            var stat1 = stat.add('div').addClass('span3');
+            var stat2 = stat.add('div').addClass('span3');
+            var stat3 = stat.add('div').addClass('span3');*/
+        }
+    }, 'json');
+}
+
+getUrlVars = function() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&#]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
