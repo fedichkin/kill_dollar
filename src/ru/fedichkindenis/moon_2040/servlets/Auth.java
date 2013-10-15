@@ -6,6 +6,7 @@ import ru.fedichkindenis.tools.SlUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +30,7 @@ public class Auth extends HttpServlet {
 
         HttpURLConnection conn = null;
         InputStream is_config = null;
+        int max_age_cookie = 60 * 60 * 24;
 
         try {
             String code = SlUtils.getStringParameter(request, "code", "code", null, false);
@@ -68,7 +70,9 @@ public class Auth extends HttpServlet {
 
                 //conn.setRequestMethod("GET");
                 //conn.setRequestProperty("User-Agent", "moon_2040");
-
+                Cookie cookie = new Cookie("person_uid", person_uid);
+                cookie.setMaxAge(max_age_cookie);
+                response.addCookie(cookie);
                 if(conn.getResponseCode() == 200){
                     res = readStreamToString(conn.getInputStream(), "UTF-8");
                     jo = new JSONObject(res);
