@@ -1,3 +1,5 @@
+<%@ page import="java.io.InputStream" %>
+<%@ page import="ru.fedichkindenis.tools.ConfUtils" %>
 <%--
     Created by IntelliJ IDEA
     User: fedichkin_du
@@ -26,7 +28,7 @@
              data-type='auth.join'
              data-title='Регистрация'
              data-app='525518562434d402d4f10cfe'
-             data-redirect='http://localhost:8081/Auth'
+             data-redirect=''
              data-error=''>
         </div>
     </div>
@@ -40,5 +42,6 @@
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script async src="//test.bizcontacts.net/app/widget/widget.js"></script>
+<script src="js/login.js"></script>
 </body>
 </html>

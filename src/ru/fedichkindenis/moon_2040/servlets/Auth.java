@@ -36,16 +36,24 @@ public class Auth extends HttpServlet {
             String code = SlUtils.getStringParameter(request, "code", "code", null, false);
             is_config = this.getClass().getClassLoader().getResourceAsStream("bizcontacts.xml");
             String client_id = ConfUtils.getParamConfigXML(is_config, "client_id");
+
             if(is_config != null){
                 is_config.close();
             }
             is_config = this.getClass().getClassLoader().getResourceAsStream("bizcontacts.xml");
             String client_secret = ConfUtils.getParamConfigXML(is_config, "client_secret");
+
+            if(is_config != null){
+                is_config.close();
+            }
+            is_config = this.getClass().getClassLoader().getResourceAsStream("bizcontacts.xml");
+            String redirect_page = ConfUtils.getParamConfigXML(is_config, "redirect_page");
+
             String urlPath = "http://test.bizcontacts.net/app/oauth2/access_token";
             String urlParam = "?client_id=" + client_id + "&" +
                               "client_secret=" + client_secret + "&" +
                               "code=" + code + "&" +
-                              "redirect_uri=http://localhost:8081/Auth";
+                              "redirect_uri=" + redirect_page;
             URL url = new URL(urlPath + urlParam);
             conn = (HttpURLConnection)url.openConnection();
 
