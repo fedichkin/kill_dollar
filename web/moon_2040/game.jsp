@@ -6,6 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    if(session.getAttribute("person_uid") == null){
+
+        response.sendRedirect(request.getContextPath() + "/moon_2040/login.jsp");
+    }
+%>
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 <html>
     <head>

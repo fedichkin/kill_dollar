@@ -4,12 +4,11 @@ import org.json.JSONObject;
 import ru.fedichkindenis.tools.ConfUtils;
 import ru.fedichkindenis.tools.SlUtils;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -28,9 +27,15 @@ public class Auth extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException{
 
+
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException{
+
         HttpURLConnection conn = null;
         InputStream is_config = null;
         int max_age_cookie = 60 * 60 * 24;
+        String page = "/moon_2040/login.jsp";
 
         try {
             String code = SlUtils.getStringParameter(request, "code", "code", null, false);
@@ -51,9 +56,9 @@ public class Auth extends HttpServlet {
 
             String urlPath = "http://test.bizcontacts.net/app/oauth2/access_token";
             String urlParam = "?client_id=" + client_id + "&" +
-                              "client_secret=" + client_secret + "&" +
-                              "code=" + code + "&" +
-                              "redirect_uri=" + redirect_page;
+                    "client_secret=" + client_secret + "&" +
+                    "code=" + code + "&" +
+                    "redirect_uri=" + redirect_page;
             URL url = new URL(urlPath + urlParam);
             conn = (HttpURLConnection)url.openConnection();
 
@@ -76,16 +81,18 @@ public class Auth extends HttpServlet {
                 url = new URL(urlPath + urlParam);
                 conn = (HttpURLConnection)url.openConnection();
 
-                //conn.setRequestMethod("GET");
-                //conn.setRequestProperty("User-Agent", "moon_2040");
-                Cookie cookie = new Cookie("person_uid", person_uid);
+                /*Cookie cookie = new Cookie("person_uid", person_uid);
                 cookie.setMaxAge(max_age_cookie);
-                response.addCookie(cookie);
+                response.addCookie(cookie);*/
+
+                HttpSession session = request.getSession(true);
+                session.setAttribute("person_uid", person_uid);
+
                 if(conn.getResponseCode() == 200){
                     res = readStreamToString(conn.getInputStream(), "UTF-8");
                     jo = new JSONObject(res);
 
-                    response.sendRedirect("/moon_2040/game.jsp");
+                    page = "/moon_2040/game.jsp";
                 }
             }
 
@@ -103,11 +110,12 @@ public class Auth extends HttpServlet {
                 }
             }
         }
-    }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException{
-
-        doPost(request, response);
+        try {
+            response.sendRedirect(page);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private String readStreamToString(InputStream in, String encoding)

@@ -7,6 +7,12 @@
     Time: 19:05
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    if(session.getAttribute("person_uid") != null){
+
+        response.sendRedirect(request.getContextPath() + "/moon_2040/list_game.jsp");
+    }
+%>
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 <html>
 <head>

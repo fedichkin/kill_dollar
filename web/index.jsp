@@ -12,14 +12,11 @@
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
 <%
-    if(request.getUserPrincipal() == null){
-%>
-     <jsp:forward page="login.jsp"></jsp:forward>
-<%
+    if(session.getAttribute("person_uid") == null){
+
+        response.sendRedirect(request.getContextPath() + "/moon_2040/login.jsp");
     }
     else{
-%>
-    <jsp:forward page="list_game.jsp"></jsp:forward>
-<%
+        response.sendRedirect(request.getContextPath() + "/moon_2040/list_game.jsp");
     }
 %>
