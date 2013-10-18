@@ -25,7 +25,7 @@ import java.sql.ResultSet;
  * Time: 23:21
  * To change this template use File | Settings | File Templates.
  */
-@WebServlet("/GetMoonStatistics")
+
 public class GetMoonStatistics extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
