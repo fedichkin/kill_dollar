@@ -5,9 +5,9 @@
  * Time: 22:46
  * To change this template use File | Settings | File Templates.
  */
-$( document ).ready(function() {
+//$( document ).ready(function() {
    // load_infouser();
-});
+//});
 
 /*load_infouser = function(){
     $.get('/GetInfoUser', function(data){

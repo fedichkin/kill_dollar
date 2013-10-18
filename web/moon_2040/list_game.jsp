@@ -26,7 +26,19 @@
     <body>
         <div id="info_user"  class="row-fluid">
             <div class="span12">
-                <p><a href="/Logout">Выход</a></p>
+                <ul class="nav nav-pills">
+                    <li>
+                        <a id="us"  href="#">
+                            <img src="" class="img-rounded" />
+                            Федичкин Денис
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Logout">
+                            <img src="img/quit.png" class="img-rounded" alt="Выход" />
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
         <ul class="nav nav-pills">
@@ -46,6 +58,7 @@
 
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/users.js"></script>
     <script src="js/list_game.js"></script>
     <script async src="//test.bizcontacts.net/app/widget/widget.js"></script>
     </body>

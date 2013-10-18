@@ -6,6 +6,24 @@
   To change this template use File | Settings | File Templates.
 **/
 
+body {
+    font-family: DeusEx;
+}
+
 #info_user {
     background-color: #7b7b7b;
+}
+
+#info_user ul {
+    float: right;
+}
+
+#us {
+    color: #000000;
+    font-size: 20px;
+}
+
+@font-face {
+    font-family: DeusEx;
+    src: url(../font/Viachaslav_Ilinskiy_DeusEx.otf);
 }
