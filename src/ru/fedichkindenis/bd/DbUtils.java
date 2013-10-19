@@ -50,4 +50,18 @@ public class DbUtils {
             e.printStackTrace();
         }
     }
+
+    public static void close(Connection c, Statement st){
+
+        try {
+            if(c != null){
+                c.close();
+            }
+            if(st != null){
+                st.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -94,16 +94,17 @@ public class Auth extends HttpServlet {
                     jo = new JSONObject(res);
 
                     Connection c = DbUtils.getConnect();
+                    PreparedStatement st = null;
 
                     if(SqlQuery.isQuery("add_new_user")){
-                        PreparedStatement st = null;
                         st = c.prepareStatement(SqlQuery.getQuery("add_new_user"));
                         st.setString(1, jo.getString("uid"));
                         st.setString(2, jo.getString("email"));
                         st.setString(3, jo.getString("first_name"));
-                        st.setString(3, jo.getString("last_name"));
+                        st.setString(4, jo.getString("last_name"));
                         st.execute();
                     }
+                    DbUtils.close(c, st);
 
                     page = "/moon_2040/game.jsp";
                 }
