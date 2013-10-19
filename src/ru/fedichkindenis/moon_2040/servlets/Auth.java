@@ -1,6 +1,8 @@
 package ru.fedichkindenis.moon_2040.servlets;
 
 import org.json.JSONObject;
+import ru.fedichkindenis.bd.DbUtils;
+import ru.fedichkindenis.bd.SqlQuery;
 import ru.fedichkindenis.tools.ConfUtils;
 import ru.fedichkindenis.tools.SlUtils;
 
@@ -14,6 +16,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 
 /**
  * Created with IntelliJ IDEA.
@@ -81,16 +86,24 @@ public class Auth extends HttpServlet {
                 url = new URL(urlPath + urlParam);
                 conn = (HttpURLConnection)url.openConnection();
 
-                /*Cookie cookie = new Cookie("person_uid", person_uid);
-                cookie.setMaxAge(max_age_cookie);
-                response.addCookie(cookie);*/
-
                 HttpSession session = request.getSession(true);
                 session.setAttribute("person_uid", person_uid);
 
                 if(conn.getResponseCode() == 200){
                     res = readStreamToString(conn.getInputStream(), "UTF-8");
                     jo = new JSONObject(res);
+
+                    Connection c = DbUtils.getConnect();
+
+                    if(SqlQuery.isQuery("add_new_user")){
+                        PreparedStatement st = null;
+                        st = c.prepareStatement(SqlQuery.getQuery("add_new_user"));
+                        st.setString(1, jo.getString("uid"));
+                        st.setString(2, jo.getString("email"));
+                        st.setString(3, jo.getString("first_name"));
+                        st.setString(3, jo.getString("last_name"));
+                        st.execute();
+                    }
 
                     page = "/moon_2040/game.jsp";
                 }
