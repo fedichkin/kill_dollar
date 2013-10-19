@@ -1,0 +1,23 @@
+jcs.default=DISK_REGION
+jcs.default.cacheattributes=org.apache.jcs.engine.CompositeCacheAttributes
+jcs.default.cacheattributes.MaxObjects=1000
+jcs.default.cacheattributes.MemoryCacheName=
+  org.apache.jcs.engine.memory.lru.LRUMemoryCache
+
+jcs.region.OUR_REGION=DISK_REGION
+jcs.region.OUR_REGION.cacheattributes=org.apache.jcs.engine.CompositeCacheAttributes
+jcs.region.OUR_REGION.cacheattributes.MaxObjects=1000
+jcs.region.OUR_REGION.cacheattributes.MemoryCacheName=
+  org.apache.jcs.engine.memory.lru.LRUMemoryCache
+jcs.region.OUR_REGION.cacheattributes.UseMemoryShrinker=true
+jcs.region.OUR_REGION.cacheattributes.MaxMemoryIdleTimeSeconds=3600
+jcs.region.OUR_REGION.cacheattributes.ShrinkerIntervalSeconds=60
+jcs.region.OUR_REGION.cacheattributes.MaxSpoolPerRun=500
+jcs.region.OUR_REGION.elementattributes=org.apache.jcs.engine.ElementAttributes
+jcs.region.OUR_REGION.elementattributes.IsEternal=false
+
+jcs.auxiliary.DISK_REGION=org.apache.jcs.auxiliary.disk.indexed.IndexedDiskCacheFactory
+jcs.auxiliary.DISK_REGION.attributes=
+  org.apache.jcs.auxiliary.disk.indexed.IndexedDiskCacheAttributes
+jcs.auxiliary.DISK_REGION.attributes.DiskPath=d:/jcs/disk_region
+jcs.auxiliary.DISK_REGION.attributes.maxKeySize=100000
