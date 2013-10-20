@@ -17,13 +17,12 @@ import java.sql.SQLException;
  * To change this template use File | Settings | File Templates.
  */
 public class ManagerUser {
-    private static JCS userCache;
 
     public static User getUser(String uid){
         User usr = null;
 
         try {
-            userCache = JCS.getInstance("OUR_REGION");
+            JCS userCache = JCS.getInstance("OUR_REGION");
             usr = (User)userCache.get(uid);
         } catch (CacheException e) {
             usr = null;
@@ -34,11 +33,10 @@ public class ManagerUser {
         ResultSet rs = null;
         try {
             if(usr == null){
-                st = c.prepareStatement("select id, person_uid, email, first_name, last_name where person_uid = ?");
+                st = c.prepareStatement("select person_uid, email, first_name, last_name where person_uid = ?");
                 st.setString(1, uid);
                 rs = st.executeQuery();
-                usr = new User(rs.getLong("id"),
-                        rs.getString("person_uid"),
+                usr = new User(rs.getString("person_uid"),
                         rs.getString("email"),
                         rs.getString("first_name"),
                         rs.getString("last_name"));
@@ -52,11 +50,11 @@ public class ManagerUser {
         return usr;
     }
 
-    public static boolean setUser(long id, String person_uid, String email, String first_name, String last_name){
-        User usr = new User(id, person_uid, email, first_name, last_name);
+    public static boolean setUser(String person_uid, String email, String first_name, String last_name){
+        User usr = new User(person_uid, email, first_name, last_name);
 
         try {
-            userCache = JCS.getInstance("OUR_REGION");
+            JCS userCache = JCS.getInstance("OUR_REGION");
             userCache.put(person_uid, usr);
             return true;
         } catch (CacheException e) {
@@ -67,7 +65,7 @@ public class ManagerUser {
     public static boolean isUser(String uid){
 
         try {
-            userCache = JCS.getInstance("OUR_REGION");
+            JCS userCache = JCS.getInstance("OUR_REGION");
             User usr = (User)userCache.get(uid);
             if(usr == null){
                 return false;

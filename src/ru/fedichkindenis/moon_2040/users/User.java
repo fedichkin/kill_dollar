@@ -9,23 +9,17 @@ package ru.fedichkindenis.moon_2040.users;
  */
 public class User {
 
-    private long id;
     private String person_uid;
     private String email;
     private String first_name;
     private String last_name;
 
-    public User(long id, String person_uid, String email, String first_name, String last_name){
+    public User(String person_uid, String email, String first_name, String last_name){
 
-        this.id = id;
         this.person_uid = person_uid;
         this.email = email;
         this.first_name = first_name;
         this.last_name = last_name;
-    }
-
-    public long getId() {
-        return id;
     }
 
     public String getPerson_uid() {

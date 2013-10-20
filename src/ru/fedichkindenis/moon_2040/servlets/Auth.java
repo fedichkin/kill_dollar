@@ -3,11 +3,10 @@ package ru.fedichkindenis.moon_2040.servlets;
 import org.json.JSONObject;
 import ru.fedichkindenis.bd.DbUtils;
 import ru.fedichkindenis.bd.SqlQuery;
+import ru.fedichkindenis.moon_2040.users.ManagerUser;
 import ru.fedichkindenis.tools.ConfUtils;
 import ru.fedichkindenis.tools.SlUtils;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -18,7 +17,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.Statement;
 
 /**
  * Created with IntelliJ IDEA.
@@ -105,6 +103,13 @@ public class Auth extends HttpServlet {
                         st.execute();
                     }
                     DbUtils.close(c, st);
+
+                    if(!ManagerUser.isUser(jo.getString("uid"))){
+                        ManagerUser.setUser(jo.getString("uid"),
+                                jo.getString("email"),
+                                jo.getString("first_name"),
+                                jo.getString("last_name"));
+                    }
 
                     page = "/moon_2040/game.jsp";
                 }
