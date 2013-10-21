@@ -13,6 +13,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Connection;
@@ -58,15 +59,25 @@ public class Auth extends HttpServlet {
             String redirect_page = ConfUtils.getParamConfigXML(is_config, "redirect_page");
 
             String urlPath = "http://test.bizcontacts.net/app/oauth2/access_token";
-            String urlParam = "?client_id=" + client_id + "&" +
+            String urlParam = "client_id=" + client_id + "&" +
                     "client_secret=" + client_secret + "&" +
                     "code=" + code + "&" +
                     "redirect_uri=" + redirect_page;
-            URL url = new URL(urlPath + urlParam);
+            URL url = new URL(urlPath);
             conn = (HttpURLConnection)url.openConnection();
 
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("User-Agent", "moon_2040");
+            //StringBuffer query = new StringBuffer();
+
+
+            conn.setDoOutput(true);
+            OutputStreamWriter out =
+                    new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
+            out.write(urlParam);
+            out.flush();
+            out.close();
+
+            /*conn.setRequestMethod("GET");
+            conn.setRequestProperty("User-Agent", "moon_2040");*/
 
             if(conn.getResponseCode() == 200){
 
