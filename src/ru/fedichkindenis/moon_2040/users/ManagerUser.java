@@ -2,12 +2,9 @@ package ru.fedichkindenis.moon_2040.users;
 
 import org.apache.jcs.JCS;
 import org.apache.jcs.access.exception.CacheException;
-import ru.fedichkindenis.bd.DbUtils;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import org.json.JSONException;
+import org.json.JSONObject;
+import ru.fedichkindenis.moon_2040.bd.ManagerBD;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,7 +16,7 @@ import java.sql.SQLException;
 public class ManagerUser {
 
     public static User getUser(String uid){
-        User usr = null;
+        User usr;
 
         try {
             JCS userCache = JCS.getInstance("OUR_REGION");
@@ -28,23 +25,25 @@ public class ManagerUser {
             usr = null;
         }
 
-        Connection c = null;
-        PreparedStatement st = null;
-        ResultSet rs = null;
+        JSONObject jo;
         try {
             if(usr == null){
-                st = c.prepareStatement("select person_uid, email, first_name, last_name where person_uid = ?");
-                st.setString(1, uid);
-                rs = st.executeQuery();
-                usr = new User(rs.getString("person_uid"),
-                        rs.getString("email"),
-                        rs.getString("first_name"),
-                        rs.getString("last_name"));
+                jo = ManagerBD.getUser(uid);
+
+                if(jo != null){
+                    usr = new User(jo.getString("person_uid"),
+                            jo.getString("email"),
+                            jo.getString("first_name"),
+                            jo.getString("last_name"));
+
+                    setUser(jo.getString("person_uid"),
+                            jo.getString("email"),
+                            jo.getString("first_name"),
+                            jo.getString("last_name"));
+                }
             }
-        } catch (SQLException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
-        } finally {
-            DbUtils.close(c, st, rs);
         }
 
         return usr;
@@ -57,22 +56,6 @@ public class ManagerUser {
             JCS userCache = JCS.getInstance("OUR_REGION");
             userCache.put(person_uid, usr);
             return true;
-        } catch (CacheException e) {
-            return false;
-        }
-    }
-
-    public static boolean isUser(String uid){
-
-        try {
-            JCS userCache = JCS.getInstance("OUR_REGION");
-            User usr = (User)userCache.get(uid);
-            if(usr == null){
-                return false;
-            }
-            else{
-                return true;
-            }
         } catch (CacheException e) {
             return false;
         }

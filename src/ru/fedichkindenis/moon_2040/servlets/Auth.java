@@ -1,8 +1,7 @@
 package ru.fedichkindenis.moon_2040.servlets;
 
 import org.json.JSONObject;
-import ru.fedichkindenis.bd.DbUtils;
-import ru.fedichkindenis.bd.SqlQuery;
+import ru.fedichkindenis.moon_2040.bd.ManagerBD;
 import ru.fedichkindenis.moon_2040.users.ManagerUser;
 import ru.fedichkindenis.tools.ConfUtils;
 import ru.fedichkindenis.tools.SlUtils;
@@ -16,8 +15,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 
 /**
  * Created with IntelliJ IDEA.
@@ -38,7 +35,6 @@ public class Auth extends HttpServlet {
 
         HttpURLConnection conn = null;
         InputStream is_config = null;
-        int max_age_cookie = 60 * 60 * 24;
         String page = "/moon_2040/login.jsp";
 
         try {
@@ -66,18 +62,12 @@ public class Auth extends HttpServlet {
             URL url = new URL(urlPath);
             conn = (HttpURLConnection)url.openConnection();
 
-            //StringBuffer query = new StringBuffer();
-
-
             conn.setDoOutput(true);
             OutputStreamWriter out =
                     new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
             out.write(urlParam);
             out.flush();
             out.close();
-
-            /*conn.setRequestMethod("GET");
-            conn.setRequestProperty("User-Agent", "moon_2040");*/
 
             if(conn.getResponseCode() == 200){
 
@@ -102,21 +92,13 @@ public class Auth extends HttpServlet {
                     res = readStreamToString(conn.getInputStream(), "UTF-8");
                     jo = new JSONObject(res);
 
-                    Connection c = DbUtils.getConnect();
-                    PreparedStatement st = null;
-
-                    if(SqlQuery.isQuery("add_new_user")){
-                        st = c.prepareStatement(SqlQuery.getQuery("add_new_user"));
-                        st.setString(1, jo.getString("uid"));
-                        st.setString(2, jo.getString("email"));
-                        st.setString(3, jo.getString("first_name"));
-                        st.setString(4, jo.getString("last_name"));
-                        st.execute();
-                    }
-                    DbUtils.close(c, st);
-
-                    if(!ManagerUser.isUser(jo.getString("uid"))){
+                    if(ManagerUser.getUser(jo.getString("uid")) == null){
                         ManagerUser.setUser(jo.getString("uid"),
+                                jo.getString("email"),
+                                jo.getString("first_name"),
+                                jo.getString("last_name"));
+
+                        ManagerBD.addNewUser(jo.getString("uid"),
                                 jo.getString("email"),
                                 jo.getString("first_name"),
                                 jo.getString("last_name"));

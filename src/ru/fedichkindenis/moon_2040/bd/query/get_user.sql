@@ -1,0 +1,1 @@
+select person_uid, email, first_name, last_name where person_uid = ?
