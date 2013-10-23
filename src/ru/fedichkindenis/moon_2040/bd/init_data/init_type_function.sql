@@ -1,0 +1,1 @@
+insert into moon_2040.type_function (id, name) values (1, 'равенство');

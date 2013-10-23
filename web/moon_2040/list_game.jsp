@@ -43,16 +43,16 @@
         </div>
         <ul class="nav nav-pills">
             <li class="active">
-                <a href="#">Мои игры</a>
+                <a href="#" onclick="load_my_game()">Мои игры</a>
             </li>
             <li>
-                <a href="#">Текущие игры</a>
+                <a href="#" onclick="load_current_game()">Текущие игры</a>
             </li>
             <li>
-                <a href="#">Будущие игры</a>
+                <a href="#" onclick="load_future_game()">Будущие игры</a>
             </li>
             <li>
-                <a href="#">Прошедшие игры</a>
+                <a href="#" onclick="load_old_game()">Прошедшие игры</a>
             </li>
         </ul>
 

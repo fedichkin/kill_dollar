@@ -1,0 +1,1 @@
+select * from moon_2040.goal_game where game = ?
