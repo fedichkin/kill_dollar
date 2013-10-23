@@ -2,6 +2,7 @@ package ru.fedichkindenis.moon_2040.users;
 
 import org.apache.jcs.JCS;
 import org.apache.jcs.access.exception.CacheException;
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import ru.fedichkindenis.moon_2040.bd.ManagerBD;
@@ -15,9 +16,11 @@ import ru.fedichkindenis.moon_2040.bd.ManagerBD;
  */
 public class ManagerUser {
 
+    private static final Logger log = Logger.getLogger(ManagerUser.class);
+
     public static User getUser(String uid){
         User usr;
-
+        log.info(uid + " - get");
         try {
             JCS userCache = JCS.getInstance("OUR_REGION");
             usr = (User)userCache.get(uid);
@@ -51,7 +54,7 @@ public class ManagerUser {
 
     public static boolean setUser(String person_uid, String email, String first_name, String last_name){
         User usr = new User(person_uid, email, first_name, last_name);
-
+        log.info(person_uid + " - set");
         try {
             JCS userCache = JCS.getInstance("OUR_REGION");
             userCache.put(person_uid, usr);

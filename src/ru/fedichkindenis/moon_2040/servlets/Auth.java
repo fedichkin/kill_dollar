@@ -104,7 +104,7 @@ public class Auth extends HttpServlet {
                                 jo.getString("last_name"));
                     }
 
-                    page = "/moon_2040/game.jsp";
+                    page = "/moon_2040/list_game.jsp";
                 }
             }
 
