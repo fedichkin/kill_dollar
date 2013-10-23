@@ -1,63 +1,621 @@
-/**
-  Created with IntelliJ IDEA.
-  User: Fedichkin.DY
-  Date: 04.10.13
-  Time: 21:25
-  To change this template use File | Settings | File Templates.
-**/
-
-body {
-    background: #f5f5f5 url(../img/moon_map.jpg) 100% 100% no-repeat;
-    background-size: cover;
-    font-family: DeusEx;
-}
-
-#statistic {
-    background-color: rgba(220,220,220,0.7);
-    min-height: 300px;
-    width: 95%;
-    margin-top: 2.5%;
-    margin-left: 2.5%;
-    margin-right: 2.5%;
-    color: #FFFFF0;
-}
-
-.body-game {
-    border: 2px solid #7b7b7b;
-}
-
-#all-body {
-    margin-top: 5%;
-    background-color: #dddddd;
-}
-
-#players, #operations {
-    min-height: 100px;
-    min-height: 100px;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    width: 24.5%;
-}
-
-#resources, #building {
-    min-height: 50px;
-}
-
-#resources {
-    margin-top: 2%;
-    margin-bottom: 0.5%;
-}
-
-#players {
-    margin-left: 0.6%;
-    margin-right: -2%;
-}
-
-#operations {
-    margin-left: 0.5%;
-}
+/** SET FONTS */
 
 @font-face {
-    font-family: DeusEx;
-    src: url(../font/Viachaslav_Ilinskiy_DeusEx.otf);
+    font-family: Moon; /* Имя шрифта */
+    src: url(../font/Viachaslav_Ilinskiy_DeusEx.otf); /* Путь к файлу со шрифтом */
+}
+
+body,
+input,
+textarea,
+.pingback a.url {
+    font-family: Moon, Verdana, "Verdana", serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #ffffff;
+}
+
+/** GLOBAL */
+
+a, a:hover {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-style: normal;
+}
+
+.tip {
+    /** outline: none; */
+}
+
+.tip:hover {
+    cursor: pointer;
+}
+
+.tip span.hint {
+    /* margin-left: -999em; */
+    display: none;
+    position: absolute;
+    font-size: 10px;
+    opacity: 0.75;
+    color: #FFFFFF;
+    white-space:nowrap;
+}
+
+.tip:hover span.hint {
+    /* margin-left: 0px; */
+    display: block;
+    z-index: 2000;
+    border-left: 3px solid #c0c0c0;
+    border-right: 3px solid #c0c0c0;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background: #1a3968;
+    padding: 3px 5px 0px 5px;
+}
+
+.green { color: #21db2e;}
+.red { color: #ef290f; }
+.yellow { color: #ffe119; }
+.blue {}
+
+/** BACKGROUND */
+
+body {
+    background: #000000 url(../img/background.jpg) top center no-repeat;
+}
+
+/** WRAPPER */
+
+#wrapper {
+    position: relative;
+    margin: 0px auto;
+    width: 1100px;
+    min-height: 800px;
+}
+
+/** HEADER */
+
+#header {
+    background: transparent url(../img/header.png) top center no-repeat;
+    width: 1100px;
+    height: 100px;
+    position: absolute;
+    z-index: 100;
+}
+
+/** Название игры */
+
+#game_session_name {
+    position: absolute;
+    top: 8px;
+    left: 350px;
+    text-align: center;
+    width: 400px;
+    height: 32px;
+    font-size: 18px;
+}
+
+/** Сообщения, предложения и отчеты */
+
+#notify {
+    position: absolute;
+    top: 5px;
+    left: 30px;
+    width: 320px;
+    height: 50px;
+}
+
+#notify a {
+    display: block;
+    width: 50px;
+    height: 50px;
+    opacity: 0.7;
+    position: absolute;
+}
+
+#notify a span.count {
+    position: absolute;
+    top: 20px;
+    text-align: right;
+    display: block;
+    width: 44px;
+    height: 28px;
+    font-size: 24px;
+    text-shadow: -2px -2px 1px #333333;
+}
+
+#notify a:hover { opacity: 1; }
+#notify a:hover span.hint {left: 0px; top: 50px; text-align: center; }
+
+#mail { left: 0px; }
+#proposal { left: 60px; }
+#report { left: 120px; }
+
+
+/** Доступ в личный кабинет */
+
+#account_settings {
+    display: block;
+    width: 300px;
+    height: 35px;
+    position: absolute;
+    font-size: 14px;
+    top: 5px;
+    right: 35px;
+    opacity: 0.8;
+}
+
+#account_settings:hover {
+    opacity: 1;
+}
+
+#account_settings:hover span.hint { right: 0px; top: 50px; }
+
+img.user_pic {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #DADADA;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    overflow: hidden;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+#user_name, #user_corp {
+    position: absolute;
+    right: 52px;
+    text-align: right;
+    display: block;
+    width: 240px;
+}
+#user_name { top: 3px;}
+#user_corp { top: 25px; font-size: 11px; color: #cacaca;}
+
+/** Выход из игры (Logout) */
+
+#logout {
+    position: absolute;
+    top: 10px;
+    right: 7px;
+    opacity: 0.7;
+}
+
+#logout:hover { opacity: 1;}
+#logout:hover span.hint {right: 0px; top: 30px; text-align: center; }
+
+/** Информация о текуем ходе */
+
+#current_turn_message {
+    position: absolute;
+    top: 51px;
+    left: 370px;
+    width: 360px;
+    text-align: center;
+}
+
+
+/** STATISTIC */
+
+#statistic {
+    background: transparent url(../img/statistic-screen.png) top center no-repeat;
+    width: 1100px;
+    height: 400px;
+    position: absolute;
+    top: 80px;
+    z-index: 90;
+}
+
+/** Карусель со статистикой */
+
+#statistic-carousel {
+    position: absolute;
+    width: 1020px;
+    height: 360px;
+    top: 14px;
+    left: 40px;
+    border: 0px solid #FFFFFF;
+    border-top-left-radius:60px 120px;
+    -moz-border-radius-topleft:60px 120px;
+    -webkit-border-top-left-radius:60px 120px;
+    border-top-right-radius:60px 120px;
+    -moz-border-radius-topright:60px 120px;
+    -webkit-border-top-right-radius:60px 120px;
+    border-bottom-left-radius:60px 120px;
+    -moz-border-radius-bottomleft:60px 120px;
+    -webkit-border-bottom-left-radius:60px 120px;
+    border-bottom-right-radius:60px 120px;
+    -moz-border-radius-bottomright:60px 120px;
+    -webkit-border-bottom-right-radius:60px 120px;
+    overflow: hidden;
+    outline: none;
+    background: transparent url(../img/shadow-bg.png) repeat;
+}
+
+
+#statistic-carousel a.left { /** Тут потребовалось дополнительно круглить рамку левой стрелки.. почемуто по-умолчанию ее не почикало.. */
+    border-top-left-radius:60px 120px;
+    -moz-border-radius-topleft:60px 120px;
+    -webkit-border-top-left-radius:60px 120px;
+    border-bottom-left-radius:60px 120px;
+    -moz-border-radius-bottomleft:60px 120px;
+    -webkit-border-bottom-left-radius:60px 120px;
+    width: 60px;
+}
+#statistic-carousel a.right { width: 60px;}
+
+#statistic-carousel .carousel-indicators { /** Меняем дефолтные индикаторы */
+    bottom: -10px;
+}
+
+#statistic-carousel .carousel-indicators li { /** Меняем дефолтные индикаторы */
+    width: 32px;
+    height: 32px;
+    border-radius: 5px;
+    margin: 0px 2px;
+    border: 0px solid #afafaf;
+    opacity: 0.5;
+}
+
+#statistic-carousel .carousel-indicators li:hover { opacity: 1;}
+
+#statistic-carousel .carousel-indicators .active {
+    width: 32px;
+    height: 32px;
+    border-radius: 0px;
+    margin: 0px 2px;
+    border: 0px solid #dadada;
+    opacity: 1;
+}
+
+#statistic-carousel li.population { background: transparent url(../img/astronaut.png) top center no-repeat;}
+#statistic-carousel li.colony { background: transparent url(../img/office.png) top center no-repeat;}
+#statistic-carousel li.industry { background: transparent url(../img/factory-2.png) top center no-repeat;}
+#statistic-carousel li.earth { background: transparent url(../img/earth-proposal.png) top center no-repeat;}
+
+/** Страницы статистики */
+
+#statistic-carousel .item {
+    height: 360px;
+}
+
+#statistic-carousel .statistic-page {
+    margin: 5px 40px 5px 40px;
+    height: 320px;
+}
+
+#statistic-carousel .statistic-page-header {
+    font-size: 28px;
+    padding: 15px 0px 0px 140px;
+    position: absolute;
+    z-index: 1000;
+    width: 900px;
+    height: 128px;
+}
+
+.statistic-page-header.population { background: transparent url(../img/population.png) top left no-repeat; }
+.statistic-page-header.colony { background: transparent url(../img/colony.png) top left no-repeat; }
+.statistic-page-header.industry { background: transparent url(../img/forklift.png) top left no-repeat; }
+.statistic-page-header.earth { background: transparent url(../img/earth.png) top left no-repeat; }
+
+.statistic-page-content {
+    position: absolute;
+    top: 70px;
+    left: 180px;
+    width: 760px;
+    height: 250px;
+    z-index: 1400;
+    font-size: 20px;
+}
+
+.statistic-block {
+    width: 380px;
+    height: 50px;
+    float: left;
+    margin-bottom: 10px;
+}
+
+/** Таблица статистики */
+
+.statistic-table {
+    margin: 0px 0px 0px 15px;
+}
+.statistic-table td {
+    font-size: 18px;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/** Таблица торговли с Землей */
+
+.market-table {
+    margin: 0px 0px 0px 15px;
+}
+.market-table td {
+    font-size: 18px;
+    width: 120px;
+    height: 64px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+
+/** Панель управления */
+
+#control {
+    background: transparent url(../img/control-background.png) top center no-repeat;
+    width: 1100px;
+    height: 600px;
+    position: absolute;
+    top: 470px;
+    z-index: 120;
+}
+
+#end_turn_timer {
+    position: absolute;
+    top: 8px;
+    left: 370px;
+    width: 360px;
+    text-align: center;
+}
+
+/** Панель контактов */
+
+#contacts {
+    position: absolute;
+    width: 320px;
+    min-height: 550px;
+    top: 30px;
+    left: 20px;
+}
+
+#contacts p {
+    text-align: center;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+/** Карусель контактов */
+
+#contacts-carousel {
+    position: absolute;
+    width: 320px;
+    height: 300px;
+    top: 70px;
+}
+
+#contacts-carousel a.right, #contacts-carousel a.left {display: none;}
+
+#contacts-carousel .item .contacts-group {
+    font-weight: normal;
+    text-align: center;
+    font-size: 16px;
+    width: 320px;
+    overflow-y: visible;
+}
+
+#contacts-carousel .carousel-indicators { /** Меняем дефолтные индикаторы */
+    position: absolute;
+    top: -40px;
+    height: 48px;
+}
+
+#contacts-carousel .carousel-indicators li { /** Меняем дефолтные индикаторы */
+    width: 32px;
+    height: 32px;
+    border-radius: 5px;
+    margin: 0px 2px;
+    border: 0px solid #afafaf;
+    opacity: 0.5;
+}
+
+#contacts-carousel .carousel-indicators li:hover { opacity: 1;}
+
+#contacts-carousel .carousel-indicators .active {
+    width: 32px;
+    height: 32px;
+    border-radius: 0px;
+    margin: 0px 2px;
+    border: 0px solid #dadada;
+    opacity: 1;
+}
+
+
+#contacts-carousel li.friends { background: transparent url(../img/friends.png) top center no-repeat;}
+#contacts-carousel li.dealers { background: transparent url(../img/deal.png) top center no-repeat;}
+#contacts-carousel li.all { background: transparent url(../img/moon.png) top center no-repeat;}
+
+#contacts-carousel .contact {
+    position: relative;
+    width: 320px;
+    height: 40px;
+    background: transparent url(../img/light-shadow-bg.png) repeat;
+    margin: 0px 0px 5px 0px;
+    opacity: 0.85;
+}
+
+#contacts-carousel .contact:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+
+#contacts-carousel .contact img {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+}
+
+#contacts-carousel .contact .name {
+    position: absolute;
+    top: 5px;
+    left: 60px;
+    font-size: 12px;
+}
+
+#contacts-carousel .contact .company {
+    position: absolute;
+    top: 20px;
+    left: 60px;
+    font-size: 9px;
+    color: #dadada;
+}
+
+
+/** Панель сделок */
+
+#deals {
+    position: absolute;
+    width: 320px;
+    min-height: 550px;
+    top: 30px;
+    right: 20px;
+}
+
+#deals p {
+    text-align: center;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+/** Карусель сделок */
+
+#deals-carousel {
+    position: absolute;
+    width: 320px;
+    height: 300px;
+    top: 70px;
+}
+
+#deals-carousel a.right, #deals-carousel a.left {display: none;}
+
+#deals-carousel .item .contacts-group, .contacts-group-2 {
+    font-weight: normal;
+    text-align: center;
+    font-size: 16px;
+    width: 320px;
+    overflow-y: visible;
+}
+
+#deals-carousel .contacts-group-2 { margin-top: 10px; }
+
+#deals-carousel .carousel-indicators { /** Меняем дефолтные индикаторы */
+    position: absolute;
+    top: -40px;
+    height: 48px;
+}
+
+#deals-carousel .carousel-indicators li { /** Меняем дефолтные индикаторы */
+    width: 32px;
+    height: 32px;
+    border-radius: 5px;
+    margin: 0px 2px;
+    border: 0px solid #afafaf;
+    opacity: 0.5;
+}
+
+#deals-carousel .carousel-indicators li:hover { opacity: 1;}
+
+#deals-carousel .carousel-indicators .active {
+    width: 32px;
+    height: 32px;
+    border-radius: 0px;
+    margin: 0px 2px;
+    border: 0px solid #dadada;
+    opacity: 1;
+}
+
+
+#deals-carousel li.production { background: transparent url(../img/gear.png) top center no-repeat;}
+#deals-carousel li.deals { background: transparent url(../img/deal.png) top center no-repeat;}
+#deals-carousel li.earth { background: transparent url(../img/earth-proposal.png) top center no-repeat;}
+
+#deals-carousel .production {
+    position: relative;
+    width: 320px;
+    height: 60px;
+    background: transparent url(../img/light-shadow-bg.png) repeat;
+    margin: 0px 0px 5px 0px;
+    opacity: 0.85;
+}
+
+#deals-carousel .production:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+#deals-carousel .product {position: relative; width: 60px; height: 60px; float: left;}
+
+#deals-carousel .product img {
+    margin: 5px 10px 0px 5px;
+}
+
+#deals-carousel .product p {
+    position: absolute;
+    text-shadow: -1px -1px 0px #222222, -2px -2px 0px #333333, -1px 1px 0px #222222, 1px 1px 0px #222222, 1px -1px 0px #222222;
+    top: 35px;
+    right: 5px;
+    font-size: 16px;
+}
+
+#deals-carousel .contact .company {
+    position: absolute;
+    top: 20px;
+    left: 60px;
+    font-size: 9px;
+    color: #dadada;
+}
+
+/** Панель ресурсов */
+
+#resourses {
+    position: absolute;
+    top: 40px;
+    left: 350px;
+    border-left: 1px solid #999999;
+    border-right: 1px solid #999999;
+    width: 400px;
+    min-height: 400px;
+    padding: 0px 20px 0px 25px;
+}
+
+#resourses {
+    text-align: center;
+    font-size: 16px;
+}
+
+.resource-block {
+    position: relative;
+    width: 170px;
+    height: 50px;
+    float: left;
+    margin-bottom: 10px;
+    font-size: 14px;
+    padding-left: 50px;
+}
+
+.resource-block img {
+    position: absolute;
+    left: 15px;
+}
+
+.building-block {
+    position: relative;
+    width: 85px;
+    height: 80px;
+    float: left;
+    margin-bottom: 10px;
+    font-size: 14px;
+    padding-top: 50px;
+}
+
+.building-block img {
+    position: absolute;
+    top: 0px;
 }
