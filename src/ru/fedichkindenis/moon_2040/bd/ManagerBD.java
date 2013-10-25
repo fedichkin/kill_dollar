@@ -1,5 +1,6 @@
 package ru.fedichkindenis.moon_2040.bd;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import ru.fedichkindenis.bd.DbUtils;
@@ -69,6 +70,55 @@ public class ManagerBD {
             e.printStackTrace();
         } finally {
             DbUtils.close(c ,st ,rs);
+        }
+
+        return jo;
+    }
+
+    public static JSONObject getListGames(){
+        Connection c = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        JSONObject jo = null;
+        JSONArray ja = null;
+
+        try {
+
+            c = DbUtils.getConnect();
+
+            if(SqlQuery.isQuery("get_list_games")){
+                st = c.prepareStatement(SqlQuery.getQuery("get_list_games"));
+                rs = st.executeQuery();
+
+                ja = new JSONArray();
+                while(rs.next()){
+                    JSONObject tmp = new JSONObject();
+                    tmp.put("id", rs.getString("id"));
+                    tmp.put("name", rs.getString("name"));
+                    tmp.put("max_player", rs.getString("max_player"));
+                    tmp.put("start_date", rs.getString("start_date"));
+                    tmp.put("finish_date", rs.getString("finish_date"));
+                    tmp.put("step", rs.getString("step"));
+                    tmp.put("count_ppl", rs.getString("count_ppl"));
+                    tmp.put("credit_ppl", rs.getString("credit_ppl"));
+                    tmp.put("credit_user", rs.getString("credit_user"));
+                    tmp.put("life_out_flat", rs.getString("life_out_flat"));
+                    tmp.put("description", rs.getString("description"));
+                    ja.put(tmp);
+                }
+
+                if(ja.length() > 0){
+                    jo = new JSONObject();
+                    jo.put("games", ja);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.close(c, st,rs);
         }
 
         return jo;
