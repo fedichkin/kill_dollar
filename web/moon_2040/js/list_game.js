@@ -5,14 +5,14 @@
  * Time: 22:46
  * To change this template use File | Settings | File Templates.
  */
-//$( document ).ready(function() {
-   // load_infouser();
-//});
+$( document ).ready(function() {
+    load_listgame();
+});
 
-/*load_infouser = function(){
-    $.get('/GetInfoUser', function(data){
+load_listgame = function(){
+    $.get('/GetListGames', function(data){
         if(data.success){
-            $("#w_user").attr("data-uid", data.person_uid);
+
         }
     }, 'json');
-} */
+}

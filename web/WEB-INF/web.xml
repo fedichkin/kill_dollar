@@ -24,6 +24,11 @@
         <servlet-name>GetMoonStatistics</servlet-name>
     </filter-mapping>
 
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <servlet-name>GetListGames</servlet-name>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>GetInfoUser</servlet-name>
         <servlet-class>ru.fedichkindenis.moon_2040.servlets.GetInfoUser</servlet-class>
@@ -32,6 +37,11 @@
     <servlet>
         <servlet-name>GetMoonStatistics</servlet-name>
         <servlet-class>ru.fedichkindenis.moon_2040.servlets.GetMoonStatistics</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>GetListGames</servlet-name>
+        <servlet-class>ru.fedichkindenis.moon_2040.servlets.GetListGames</servlet-class>
     </servlet>
     
     <servlet-mapping>
@@ -42,6 +52,11 @@
     <servlet-mapping>
         <servlet-name>GetMoonStatistics</servlet-name>
         <url-pattern>/GetMoonStatistics</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>GetListGames</servlet-name>
+        <url-pattern>/GetListGames</url-pattern>
     </servlet-mapping>
 
     <login-config>

@@ -4,7 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import ru.fedichkindenis.bd.DbUtils;
-import ru.fedichkindenis.bd.SqlQuery;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
