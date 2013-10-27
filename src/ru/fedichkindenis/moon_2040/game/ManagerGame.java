@@ -36,7 +36,7 @@ public class ManagerGame {
         try{
             if(listMyGame == null){
                 JSONObject jo = ManagerBD.getListGames();
-
+                listMyGame = new ArrayList<Game>();
                 if(jo != null){
                     JSONArray ja = jo.getJSONArray("games");
                     for (int i = 0;i < ja.length();i++){

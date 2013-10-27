@@ -12,7 +12,11 @@ $( document ).ready(function() {
 load_listgame = function(){
     $.get('/GetListGames', function(data){
         if(data.success){
-
+            for(var i = 0;i < data.games.length;i++){
+                var el = $('body').add('div').addClass('row-fluid').add('div').addClass('span12');
+                var game = data.games[i];
+                el.add('p').text = 'sdfsd';
+            }
         }
     }, 'json');
 }
