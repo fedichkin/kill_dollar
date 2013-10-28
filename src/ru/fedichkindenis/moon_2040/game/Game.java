@@ -25,7 +25,7 @@ public class Game {
     private int creditUser;
     private int lifeOutFlat;
     private String description;
-    private ArrayList<User> listUsers;
+    private ArrayList<User> listUsers = new ArrayList<User>();
     private Goal win;
     private Goal loss;
 

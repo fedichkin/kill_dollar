@@ -6,8 +6,10 @@
  * To change this template use File | Settings | File Templates.
  */
 $( document ).ready(function() {
-    var type = $('#menu-games li.active').id;
-    load_listgame(type);
+    $('#my').click(function (e){load_listgame('my'); $(this).tab('show');})
+    $('#curr').click(function (e){load_listgame('curr'); $(this).tab('show');})
+    $('#new').click(function (e){load_listgame('new'); $(this).tab('show');})
+    $('#old').click(function (e){load_listgame('old'); $(this).tab('show');})
 });
 
 load_listgame = function(type){

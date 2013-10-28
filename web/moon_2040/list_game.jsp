@@ -43,16 +43,16 @@
         </div>
         <ul id="menu-games" class="nav nav-pills">
             <li class="active">
-                <a href="#" id="my" onclick="load_listgame('my')">Мои игры</a>
+                <a href="#" id="my">Мои игры</a>
             </li>
             <li>
-                <a href="#" id="curr" onclick="load_listgame('curr')">Текущие игры</a>
+                <a href="#" id="curr">Текущие игры</a>
             </li>
             <li>
-                <a href="#" id="new" onclick="load_listgame('new')">Будущие игры</a>
+                <a href="#" id="new">Будущие игры</a>
             </li>
             <li>
-                <a href="#" id="old" onclick="load_listgame('old')">Прошедшие игры</a>
+                <a href="#" id="old">Прошедшие игры</a>
             </li>
         </ul>
 

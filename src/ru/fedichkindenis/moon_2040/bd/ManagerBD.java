@@ -132,8 +132,10 @@ public class ManagerBD {
         JSONArray ja;
 
         try {
+            c = DbUtils.getConnect();
+
             if(SqlQuery.isQuery("get_goal_game")){
-                st = c.prepareStatement("get_goal_game");
+                st = c.prepareStatement(SqlQuery.getQuery("get_goal_game"));
                 st.setLong(1, id);
                 rs = st.executeQuery();
 
@@ -172,8 +174,10 @@ public class ManagerBD {
         JSONArray ja;
 
         try {
+            c = DbUtils.getConnect();
+
             if(SqlQuery.isQuery("get_user_game")){
-                st = c.prepareStatement("get_user_game");
+                st = c.prepareStatement(SqlQuery.getQuery("get_user_game"));
                 st.setLong(1, id);
                 rs = st.executeQuery();
 

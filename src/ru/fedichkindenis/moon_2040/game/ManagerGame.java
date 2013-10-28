@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import ru.fedichkindenis.moon_2040.bd.ManagerBD;
+import ru.fedichkindenis.moon_2040.users.ManagerUser;
+import ru.fedichkindenis.moon_2040.users.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -52,6 +54,29 @@ public class ManagerGame {
                         tmp.setCreditUser(jotmp.getInt("credit_user"));
                         tmp.setLifeOutFlat(jotmp.getInt("life_out_flat"));
                         tmp.setDescription(jotmp.getString("description"));
+
+                        JSONObject jgoal = ManagerBD.getGoalsGame(tmp.getId());
+                        if(jgoal != null){
+                            for (int j = 0;j < jgoal.getJSONArray("goals").length();j++){
+                                JSONObject gtmp = jgoal.getJSONArray("goals").getJSONObject(i);
+                                if(gtmp.getBoolean("win")){
+                                    tmp.setWin(gtmp.getString("resources"),
+                                            gtmp.getString("type_function"),
+                                            gtmp.getInt("value_func"));
+                                }
+                            }
+                        }
+
+                        JSONObject juser = ManagerBD.getUsersGame(tmp.getId());
+                        ArrayList<User> listuser = new ArrayList<User>();
+                        if(juser != null){
+                            for(int j = 0;j < juser.getJSONArray("users").length();j++){
+                                JSONObject utmp = juser.getJSONArray("users").getJSONObject(i);
+                                listuser.add(ManagerUser.getUser(utmp.getString("uid")));
+                            }
+                            tmp.setListUsers(listuser);
+                        }
+
                         listMyGame.add(tmp);
                     }
                 }

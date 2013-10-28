@@ -59,10 +59,11 @@ public class GetListGames extends javax.servlet.http.HttpServlet {
                     ja.put(tmp);
                 }
                 jo.put("games", ja);
-
-                jo.put("success", true);
-                writer.write(jo.toString());
             }
+
+            jo.put("success", true);
+            writer.write(jo.toString());
+
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (Exception e) {
