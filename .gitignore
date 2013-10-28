@@ -221,3 +221,4 @@ pip-log.txt
 workspace.xml
 tasks.xml
 out/
+.idea/

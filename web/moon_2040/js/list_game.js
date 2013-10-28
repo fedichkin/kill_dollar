@@ -13,9 +13,12 @@ load_listgame = function(){
     $.get('/GetListGames', function(data){
         if(data.success){
             for(var i = 0;i < data.games.length;i++){
-                var el = $('body').add('div').addClass('row-fluid').add('div').addClass('span12');
                 var game = data.games[i];
-                el.add('p').text = 'sdfsd';
+                var el = $('<div />',{class: 'span12'}).appendTo('<div />',{class: 'row-fluid'}).appendTo('body');
+                $('<p>Игра: ' + game.name + '</p>').appendTo(el);
+                $('<p>Максимальное количество игроков: ' + game.max_player + '</p>').appendTo(el);
+                $('<p>Дата и время начала: ' + game.start_date + '</p>').appendTo(el);
+                $('<p>Шаг игры в часах: ' + game.step + '</p>').appendTo(el);
             }
         }
     }, 'json');
