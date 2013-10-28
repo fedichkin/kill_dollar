@@ -123,4 +123,81 @@ public class ManagerBD {
 
         return jo;
     }
+
+    public static JSONObject getGoalsGame(long id){
+        Connection c = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        JSONObject jo = null;
+        JSONArray ja;
+
+        try {
+            if(SqlQuery.isQuery("get_goal_game")){
+                st = c.prepareStatement("get_goal_game");
+                st.setLong(1, id);
+                rs = st.executeQuery();
+
+                ja = new JSONArray();
+                while (rs.next()){
+                    JSONObject tmp = new JSONObject();
+                    tmp.put("resources", rs.getString("resources"));
+                    tmp.put("type_function", rs.getString("type_function"));
+                    tmp.put("value_func", rs.getInt("value_func"));
+                    tmp.put("win", rs.getInt("win") == 0 ? false : true);
+                    ja.put(tmp);
+                }
+
+                if(ja.length() > 0){
+                    jo = new JSONObject();
+                    jo.put("goals", ja);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.close(c, st, rs);
+        }
+
+        return jo;
+    }
+
+    public static JSONObject getUsersGame(long id){
+        Connection c = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        JSONObject jo = null;
+        JSONArray ja;
+
+        try {
+            if(SqlQuery.isQuery("get_user_game")){
+                st = c.prepareStatement("get_user_game");
+                st.setLong(1, id);
+                rs = st.executeQuery();
+
+                ja = new JSONArray();
+                while (rs.next()){
+                    JSONObject tmp = new JSONObject();
+                    tmp.put("uid", rs.getString("uid"));
+                    ja.put(tmp);
+                }
+
+                if(ja.length() > 0){
+                    jo = new JSONObject();
+                    jo.put("users", ja);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.close(c, st, rs);
+        }
+
+        return jo;
+    }
 }
