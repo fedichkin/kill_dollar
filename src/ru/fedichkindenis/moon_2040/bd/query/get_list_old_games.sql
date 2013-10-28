@@ -1,0 +1,1 @@
+select * from moon_2040.game where finish_date <= now() and finish_date <> '0000-00-00 00:00:00'

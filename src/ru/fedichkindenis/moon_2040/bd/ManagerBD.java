@@ -74,19 +74,20 @@ public class ManagerBD {
         return jo;
     }
 
-    public static JSONObject getListGames(){
+    public static JSONObject getListGames(String type){
         Connection c = null;
         PreparedStatement st = null;
         ResultSet rs = null;
         JSONObject jo = null;
-        JSONArray ja = null;
+        JSONArray ja;
+        String str_sql = "get_list_" + type + "_games";
 
         try {
 
             c = DbUtils.getConnect();
 
-            if(SqlQuery.isQuery("get_list_games")){
-                st = c.prepareStatement(SqlQuery.getQuery("get_list_games"));
+            if(SqlQuery.isQuery(str_sql)){
+                st = c.prepareStatement(SqlQuery.getQuery(str_sql));
                 rs = st.executeQuery();
 
                 ja = new JSONArray();

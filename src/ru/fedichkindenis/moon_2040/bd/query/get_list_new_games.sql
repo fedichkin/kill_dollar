@@ -1,0 +1,1 @@
+select * from moon_2040.game where start_date > now()

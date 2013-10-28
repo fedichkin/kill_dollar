@@ -178,4 +178,13 @@ public class Game {
     public int getLossValue(){
         return loss.getValue();
     }
+
+    public User getUser(String uid){
+        for(User user : listUsers){
+            if(user.getPerson_uid().equals(uid)){
+                return user;
+            }
+        }
+        return null;
+    }
 }

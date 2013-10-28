@@ -23,19 +23,20 @@ public class ManagerGame {
 
     private static final Logger log = Logger.getLogger(ManagerGame.class);
 
-    public static ArrayList<Game> getListMyGames(){
+    public static ArrayList<Game> getListGames(String type){
         ArrayList<Game> listMyGame = null;
+        String key_list = "list_" + type + "_games";
 
         try {
             JCS userCache = JCS.getInstance("OUR_REGION");
-            listMyGame = (ArrayList<Game>)userCache.get("list_my_games");
+            listMyGame = (ArrayList<Game>)userCache.get(key_list);
         } catch (CacheException e) {
             listMyGame = null;
         }
 
         try{
             if(listMyGame == null){
-                JSONObject jo = ManagerBD.getListGames();
+                JSONObject jo = ManagerBD.getListGames(type);
                 listMyGame = new ArrayList<Game>();
                 if(jo != null){
                     JSONArray ja = jo.getJSONArray("games");
