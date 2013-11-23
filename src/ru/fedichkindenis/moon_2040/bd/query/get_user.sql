@@ -1,1 +1,1 @@
-select person_uid, email, first_name, last_name from moon_2040.usr where person_uid = ?
+select id, person_uid, email, first_name, last_name from moon_2040.usr where person_uid = ?

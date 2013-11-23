@@ -1,2 +1,2 @@
-insert into moon_2040.usr (login, pswd, email)
-  values (?, MD5(?), ?)
+INSERT IGNORE INTO moon_2040.usr (person_uid, email, first_name, last_name)
+VALUES (?, ?, ?, ?)

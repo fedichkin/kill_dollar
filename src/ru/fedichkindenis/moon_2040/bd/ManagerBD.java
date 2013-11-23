@@ -5,10 +5,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import ru.fedichkindenis.bd.DbUtils;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -57,6 +55,7 @@ public class ManagerBD {
 
                 if(rs.next()){
                     jo = new JSONObject();
+                    jo.put("id", rs.getString("id"));
                     jo.put("person_uid", rs.getString("person_uid"));
                     jo.put("email", rs.getString("email"));
                     jo.put("first_name", rs.getString("first_name"));
@@ -203,5 +202,88 @@ public class ManagerBD {
         }
 
         return jo;
+    }
+
+    public static void add_state_resources(Long game, Date game_date, String usr, Long resources,
+                                           int count_res, int hide_res, int show_count){
+
+        Connection c = null;
+        PreparedStatement st = null;
+
+        try {
+            c = DbUtils.getConnect();
+            if (SqlQuery.isQuery("add_state_resources")){
+
+                st = c.prepareStatement(SqlQuery.getQuery("add_state_resources"));
+                st.setLong(1, game);
+                st.setDate(2, game_date);
+                st.setString(3, usr);
+                st.setLong(4, resources);
+                st.setInt(5, count_res);
+                st.setInt(6, hide_res);
+                st.setInt(7, show_count);
+                st.execute();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.close(c, st);
+        }
+    }
+
+    public static Long get_generate_res(Long game){
+
+        Connection c = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        Long res = null;
+
+        try {
+            c = DbUtils.getConnect();
+            if (SqlQuery.isQuery("get_generate_res")){
+
+                st = c.prepareStatement(SqlQuery.getQuery("get_generate_res"));
+                st.setLong(1, game);
+                rs = st.executeQuery();
+
+                if(rs.next()){
+                    res = rs.getLong("res");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.close(c, st, rs);
+        }
+
+        return res;
+    }
+
+    public static void add_state_resources_ppl(Long game, Date game_date, int id_ppl, int credit,
+                                           int pay_house, int salary, int parasit, int parasit_step){
+
+        Connection c = null;
+        PreparedStatement st = null;
+
+        try {
+            c = DbUtils.getConnect();
+            if (SqlQuery.isQuery("add_state_resources_ppl")){
+
+                st = c.prepareStatement(SqlQuery.getQuery("add_state_resources_ppl"));
+                st.setLong(1, game);
+                st.setDate(2, game_date);
+                st.setInt(3, id_ppl);
+                st.setInt(4, credit);
+                st.setInt(5, pay_house);
+                st.setInt(6, salary);
+                st.setInt(7, parasit);
+                st.setInt(8, parasit_step);
+                st.execute();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.close(c, st);
+        }
     }
 }

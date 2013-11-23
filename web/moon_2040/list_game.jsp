@@ -21,7 +21,7 @@
         <title>Луна 2040</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="css/list_game.css" rel="stylesheet" media="screen">
-        <link rel="stylesheet" type="text/css" href="//test.bizcontacts.net/app/widget/css/widget.css">
+        <link rel="stylesheet" type="text/css" href="//bizcontacts.net/app/widget/css/widget.css">
     </head>
     <body>
         <div id="info_user"  class="row-fluid">
@@ -60,6 +60,6 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/users.js"></script>
     <script src="js/list_game.js"></script>
-    <script async src="//test.bizcontacts.net/app/widget/widget.js"></script>
+    <script async src="//bizcontacts.net/app/widget/widget.js"></script>
     </body>
 </html>

@@ -12,7 +12,7 @@ $( document ).ready(function() {
 load_infouser = function(){
     $.get('/GetInfoUser', function(data){
         if(data.success){
-            $("#us img").attr("src", "http://test.bizcontacts.net/" + data.person_uid + "/picture");
+            $("#us img").attr("src", "http://bizcontacts.net/" + data.person_uid + "/picture");
         }
     }, 'json');
  }

@@ -54,7 +54,7 @@ public class Auth extends HttpServlet {
             is_config = this.getClass().getClassLoader().getResourceAsStream("bizcontacts.xml");
             String redirect_page = ConfUtils.getParamConfigXML(is_config, "redirect_page");
 
-            String urlPath = "http://test.bizcontacts.net/app/oauth2/access_token";
+            String urlPath = "http://bizcontacts.net/app/oauth2/access_token";
             String urlParam = "client_id=" + client_id + "&" +
                     "client_secret=" + client_secret + "&" +
                     "code=" + code + "&" +
@@ -79,7 +79,7 @@ public class Auth extends HttpServlet {
 
                 conn.disconnect();
 
-                urlPath = "http://test.bizcontacts.net/app/rest/1.0/" + person_uid + "/info";
+                urlPath = "http://bizcontacts.net/app/rest/1.0/" + person_uid + "/info";
                 urlParam = "?access_token=" + access_token;
 
                 url = new URL(urlPath + urlParam);
