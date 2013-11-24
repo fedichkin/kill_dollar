@@ -205,7 +205,7 @@ public class ManagerBD {
     }
 
     public static void add_state_resources(Long game, Date game_date, String usr, Long resources,
-                                           int count_res, int hide_res, int show_count){
+                                           Integer count_res, Integer hide_res, Integer show_count){
 
         Connection c = null;
         PreparedStatement st = null;
@@ -221,7 +221,7 @@ public class ManagerBD {
                 st.setLong(4, resources);
                 st.setInt(5, count_res);
                 st.setInt(6, hide_res);
-                st.setInt(7, show_count);
+                if(show_count != null) st.setInt(7, show_count); else st.setNull(7, Types.NULL);
                 st.execute();
             }
         } catch (SQLException e) {
@@ -259,8 +259,9 @@ public class ManagerBD {
         return res;
     }
 
-    public static void add_state_resources_ppl(Long game, Date game_date, int id_ppl, int credit,
-                                           int pay_house, int salary, int parasit, int parasit_step){
+    public static void add_state_resources_ppl(Long game, Date game_date, Integer id_ppl, Integer credit,
+                                               Integer pay_house, Integer salary, Integer parasit,
+                                               Integer parasit_step){
 
         Connection c = null;
         PreparedStatement st = null;
@@ -278,6 +279,77 @@ public class ManagerBD {
                 st.setInt(6, salary);
                 st.setInt(7, parasit);
                 st.setInt(8, parasit_step);
+                st.execute();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.close(c, st);
+        }
+    }
+
+    public static void add_state_ppl(Integer id, Long game, Integer days_capsule, Integer stat,
+                                     Date add_date, Date del_date){
+
+        Connection c = null;
+        PreparedStatement st = null;
+
+        try {
+            c = DbUtils.getConnect();
+            if (SqlQuery.isQuery("add_state_ppl")){
+
+                st = c.prepareStatement(SqlQuery.getQuery("add_state_ppl"));
+                st.setInt(1, id);
+                st.setLong(2, game);
+                st.setInt(3, days_capsule);
+                st.setInt(4, stat);
+                st.setDate(5, add_date);
+                if(del_date != null) st.setDate(6, del_date); else st.setNull(6, Types.NULL);
+                st.execute();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.close(c, st);
+        }
+    }
+
+    public static void add_game_statistics(Long game, Date game_date, Integer count_ppl,
+                                           Integer change_count_ppl ,Integer summ_max_ppl,
+                                           Integer summ_min_ppl ,Integer summ_avg_ppl ,
+                                           Integer workless_count ,Integer parazit_count ,
+                                           Integer flat_count ,Integer flat_count_empty,
+                                           Integer price_max_flat ,Integer price_min_flat,
+                                           Integer price_avg_flat ,Long res_statistics ,
+                                           Integer salary_max ,Integer salary_min ,
+                                           Integer salary_avg){
+
+        Connection c = null;
+        PreparedStatement st = null;
+
+        try {
+            c = DbUtils.getConnect();
+            if (SqlQuery.isQuery("add_state_ppl")){
+
+                st = c.prepareStatement(SqlQuery.getQuery("add_state_ppl"));
+                st.setLong(1, game);
+                st.setDate(2, game_date);
+                st.setInt(3, count_ppl);
+                st.setInt(3, change_count_ppl);
+                st.setInt(3, summ_max_ppl);
+                st.setInt(3, summ_min_ppl);
+                st.setInt(3, summ_avg_ppl);
+                st.setInt(3, workless_count);
+                st.setInt(3, parazit_count);
+                st.setInt(3, flat_count);
+                st.setInt(3, flat_count_empty);
+                st.setInt(3, price_max_flat);
+                st.setInt(3, price_min_flat);
+                st.setInt(3, price_avg_flat);
+                st.setLong(3, res_statistics);
+                st.setInt(3, salary_max);
+                st.setInt(3, salary_min);
+                st.setInt(3, salary_avg);
                 st.execute();
             }
         } catch (SQLException e) {

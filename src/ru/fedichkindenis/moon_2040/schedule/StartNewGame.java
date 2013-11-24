@@ -27,13 +27,16 @@ public class StartNewGame extends TimerTask {
 
         for(User user : game.getListUsers()){
             ManagerBD.add_state_resources(game.getId(), new java.sql.Date(game.getSd().getTime()),
-                    user.getPerson_uid(), ManagerBD.get_generate_res(game.getId()), 1, 1, Types.NULL);
+                    user.getPerson_uid(), ManagerBD.get_generate_res(game.getId()), 1, 1, null);
 
             ManagerBD.add_state_resources(game.getId(), new java.sql.Date(game.getSd().getTime()),
-                    user.getPerson_uid(), 2L, game.getCreditUser(), 1, Types.NULL);
+                    user.getPerson_uid(), 2L, game.getCreditUser(), 1, null);
         }
 
         for(int i = 0;i < game.getCountPpl();i++){
+            ManagerBD.add_state_ppl(i+1, game.getId(), 1, 0,
+                    new java.sql.Date(game.getSd().getTime()), null);
+
             ManagerBD.add_state_resources_ppl(game.getId(), new java.sql.Date(game.getSd().getTime()),
                     i+1, game.getCreditPpl(), 0, 0, 0, 0);
         }
