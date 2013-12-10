@@ -329,27 +329,27 @@ public class ManagerBD {
 
         try {
             c = DbUtils.getConnect();
-            if (SqlQuery.isQuery("add_state_ppl")){
+            if (SqlQuery.isQuery("add_game_statistics")){
 
-                st = c.prepareStatement(SqlQuery.getQuery("add_state_ppl"));
+                st = c.prepareStatement(SqlQuery.getQuery("add_game_statistics"));
                 st.setLong(1, game);
                 st.setDate(2, game_date);
                 st.setInt(3, count_ppl);
-                st.setInt(3, change_count_ppl);
-                st.setInt(3, summ_max_ppl);
-                st.setInt(3, summ_min_ppl);
-                st.setInt(3, summ_avg_ppl);
-                st.setInt(3, workless_count);
-                st.setInt(3, parazit_count);
-                st.setInt(3, flat_count);
-                st.setInt(3, flat_count_empty);
-                st.setInt(3, price_max_flat);
-                st.setInt(3, price_min_flat);
-                st.setInt(3, price_avg_flat);
-                st.setLong(3, res_statistics);
-                st.setInt(3, salary_max);
-                st.setInt(3, salary_min);
-                st.setInt(3, salary_avg);
+                st.setInt(4, change_count_ppl);
+                st.setInt(5, summ_max_ppl);
+                st.setInt(6, summ_min_ppl);
+                st.setInt(7, summ_avg_ppl);
+                st.setInt(8, workless_count);
+                st.setInt(9, parazit_count);
+                st.setInt(10, flat_count);
+                st.setInt(11, flat_count_empty);
+                st.setInt(12, price_max_flat);
+                st.setInt(13, price_min_flat);
+                st.setInt(14, price_avg_flat);
+                st.setLong(15, res_statistics);
+                st.setInt(16, salary_max);
+                st.setInt(17, salary_min);
+                st.setInt(18, salary_avg);
                 st.execute();
             }
         } catch (SQLException e) {
@@ -357,5 +357,59 @@ public class ManagerBD {
         } finally {
             DbUtils.close(c, st);
         }
+    }
+
+    public static void add_resources_statistics(Long id, Long resources, Integer count,
+                                                Integer add, Integer del,Integer price,
+                                                Integer price_change) {
+        Connection c = null;
+        PreparedStatement st = null;
+
+        try {
+            c = DbUtils.getConnect();
+            if (SqlQuery.isQuery("add_resources_statistics")){
+
+                st = c.prepareStatement(SqlQuery.getQuery("add_resources_statistics"));
+                st.setLong(1, id);
+                st.setLong(2, resources);
+                st.setInt(3, count);
+                st.setInt(4, add);
+                st.setInt(5, del);
+                st.setInt(6, price);
+                st.setInt(7, price_change);
+                st.execute();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.close(c, st);
+        }
+    }
+
+    public static Long get_next_id_resources_statistics(){
+
+        Connection c = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+
+        Long id = null;
+
+        try {
+            c = DbUtils.getConnect();
+            if(SqlQuery.isQuery("get_id_resources_statistics")){
+                st = c.prepareStatement(SqlQuery.getQuery("get_id_resources_statistics"));
+                rs = st.executeQuery();
+
+                if(rs.next()){
+                    id = rs.getLong("id");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.close(c, st);
+        }
+
+        return id;
     }
 }
