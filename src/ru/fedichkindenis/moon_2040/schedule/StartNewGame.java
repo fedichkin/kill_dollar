@@ -40,5 +40,12 @@ public class StartNewGame extends TimerTask {
             ManagerBD.add_state_resources_ppl(game.getId(), new java.sql.Date(game.getSd().getTime()),
                     i+1, game.getCreditPpl(), 0, 0, 0, 0);
         }
+
+        Long idStaticRes = ManagerBD.get_next_id_resources_statistics();
+        int flatCount = 0;
+
+        ManagerBD.add_game_statistics(game.getId(), new java.sql.Date(game.getSd().getTime()),
+                game.getCountPpl(), 0, game.getCreditPpl(), game.getCreditPpl(), game.getCreditPpl(),
+                game.getCountPpl(), 0, flatCount, flatCount, 0, 0, 0, idStaticRes, 0, 0, 0);
     }
 }
