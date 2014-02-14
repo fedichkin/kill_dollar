@@ -1,0 +1,1 @@
+SELECT SUM(sr.count_res) cnt FROM moon_2040.state_resources sr WHERE sr.game = ? AND sr.game_date = ? AND sr.resources = ?

@@ -31,6 +31,7 @@ public class ManagerBD {
                 st.setString(3, first_name);
                 st.setString(4, last_name);
                 st.execute();
+                c.commit();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -223,6 +224,7 @@ public class ManagerBD {
                 st.setInt(6, hide_res);
                 if(show_count != null) st.setInt(7, show_count); else st.setNull(7, Types.NULL);
                 st.execute();
+                c.commit();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -280,6 +282,7 @@ public class ManagerBD {
                 st.setInt(7, parasit);
                 st.setInt(8, parasit_step);
                 st.execute();
+                c.commit();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -306,6 +309,7 @@ public class ManagerBD {
                 st.setDate(5, add_date);
                 if(del_date != null) st.setDate(6, del_date); else st.setNull(6, Types.NULL);
                 st.execute();
+                c.commit();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -351,6 +355,7 @@ public class ManagerBD {
                 st.setInt(17, salary_min);
                 st.setInt(18, salary_avg);
                 st.execute();
+                c.commit();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -359,7 +364,7 @@ public class ManagerBD {
         }
     }
 
-    public static void add_resources_statistics(Long id, Long resources, Integer count,
+    public static void add_resources_statistics(Long id, Integer resources, Integer count,
                                                 Integer add, Integer del,Integer price,
                                                 Integer price_change) {
         Connection c = null;
@@ -371,13 +376,14 @@ public class ManagerBD {
 
                 st = c.prepareStatement(SqlQuery.getQuery("add_resources_statistics"));
                 st.setLong(1, id);
-                st.setLong(2, resources);
+                st.setInt(2, resources);
                 st.setInt(3, count);
                 st.setInt(4, add);
                 st.setInt(5, del);
                 st.setInt(6, price);
                 st.setInt(7, price_change);
                 st.execute();
+                c.commit();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -407,9 +413,40 @@ public class ManagerBD {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DbUtils.close(c, st);
+            DbUtils.close(c, st, rs);
         }
 
         return id;
+    }
+
+    public static Integer getCountResourcesByGameDate(Long gameId, Date gameDate, Integer resId){
+
+        Connection c = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+
+        Integer count = 0;
+
+        try {
+            c = DbUtils.getConnect();
+            if(SqlQuery.isQuery("get_count_resources_by_game_date")){
+                st = c.prepareStatement("get_count_resources_by_game_date");
+                st.setLong(1, gameId);
+                st.setDate(2, gameDate);
+                st.setInt(3, resId);
+
+                rs = st.executeQuery();
+
+                if(rs.next()){
+                    count = rs.getInt("cnt");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.close(c, st, rs);
+        }
+
+        return count;
     }
 }

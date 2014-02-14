@@ -1,6 +1,7 @@
 package ru.fedichkindenis.moon_2040.schedule;
 
 import ru.fedichkindenis.moon_2040.bd.ManagerBD;
+import ru.fedichkindenis.moon_2040.enums.Resources;
 import ru.fedichkindenis.moon_2040.game.Game;
 import ru.fedichkindenis.moon_2040.users.User;
 
@@ -47,5 +48,12 @@ public class StartNewGame extends TimerTask {
         ManagerBD.add_game_statistics(game.getId(), new java.sql.Date(game.getSd().getTime()),
                 game.getCountPpl(), 0, game.getCreditPpl(), game.getCreditPpl(), game.getCreditPpl(),
                 game.getCountPpl(), 0, flatCount, flatCount, 0, 0, 0, idStaticRes, 0, 0, 0);
+
+        for(Resources res : Resources.values()){
+            int count = ManagerBD.getCountResourcesByGameDate(game.getId(),
+                    new java.sql.Date(game.getSd().getTime()), res.getId());
+
+            ManagerBD.add_resources_statistics(idStaticRes, res.getId(), count, 0, 0, 0, 0);
+        }
     }
 }
