@@ -8,7 +8,7 @@ package ru.fedichkindenis.moon_2040.enums;
  * To change this template use File | Settings | File Templates.
  */
 public enum Resources {
-    CREDITS (1, "Колонисты"),
+    CREDITS (1, "Кредиты"),
     FOOD (2, "Еда"),
     OXYGEN (3, "Кислород"),
     HELIUM3 (4, "Гелий-3"),

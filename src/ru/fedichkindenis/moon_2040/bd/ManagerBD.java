@@ -184,7 +184,7 @@ public class ManagerBD {
                 ja = new JSONArray();
                 while (rs.next()){
                     JSONObject tmp = new JSONObject();
-                    tmp.put("uid", rs.getString("uid"));
+                    tmp.put("person_uid", rs.getString("person_uid"));
                     ja.put(tmp);
                 }
 
@@ -205,7 +205,7 @@ public class ManagerBD {
         return jo;
     }
 
-    public static void add_state_resources(Long game, Date game_date, String usr, Long resources,
+    public static void add_state_resources(Long game, Date game_date, String usr, Integer resources,
                                            Integer count_res, Integer hide_res, Integer show_count){
 
         Connection c = null;
@@ -219,7 +219,7 @@ public class ManagerBD {
                 st.setLong(1, game);
                 st.setDate(2, game_date);
                 st.setString(3, usr);
-                st.setLong(4, resources);
+                st.setInt(4, resources);
                 st.setInt(5, count_res);
                 st.setInt(6, hide_res);
                 if(show_count != null) st.setInt(7, show_count); else st.setNull(7, Types.NULL);
@@ -233,12 +233,12 @@ public class ManagerBD {
         }
     }
 
-    public static Long get_generate_res(Long game){
+    public static Integer get_generate_res(Long game){
 
         Connection c = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        Long res = null;
+        Integer res = null;
 
         try {
             c = DbUtils.getConnect();
@@ -249,7 +249,7 @@ public class ManagerBD {
                 rs = st.executeQuery();
 
                 if(rs.next()){
-                    res = rs.getLong("res");
+                    res = rs.getInt("res");
                 }
             }
         } catch (SQLException e) {
@@ -430,7 +430,7 @@ public class ManagerBD {
         try {
             c = DbUtils.getConnect();
             if(SqlQuery.isQuery("get_count_resources_by_game_date")){
-                st = c.prepareStatement("get_count_resources_by_game_date");
+                st = c.prepareStatement(SqlQuery.getQuery("get_count_resources_by_game_date"));
                 st.setLong(1, gameId);
                 st.setDate(2, gameDate);
                 st.setInt(3, resId);

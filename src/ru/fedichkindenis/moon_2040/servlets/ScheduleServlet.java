@@ -1,9 +1,16 @@
 package ru.fedichkindenis.moon_2040.servlets;
 
 import org.apache.log4j.Logger;
+import ru.fedichkindenis.moon_2040.game.Game;
+import ru.fedichkindenis.moon_2040.game.ManagerGame;
+import ru.fedichkindenis.moon_2040.schedule.StartNewGame;
 
 import javax.servlet.*;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Timer;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,6 +27,15 @@ public class ScheduleServlet implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         log.info("START SCHEDULE");
+        Timer timer = new Timer();
+        List<Game> gameList = ManagerGame.getListGames("curr");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.set(Calendar.MINUTE, 45);
+        for(Game game : gameList){
+            StartNewGame startNewGame = new StartNewGame(game);
+            timer.schedule(startNewGame, calendar.getTime());
+        }
     }
 
     @Override

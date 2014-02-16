@@ -1,1 +1,1 @@
-SELECT `get_res_queue`(?) AS res
+SELECT moon_2040.`get_res_queue`(?) AS res

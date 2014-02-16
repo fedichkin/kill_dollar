@@ -72,7 +72,7 @@ public class ManagerGame {
                         if(juser != null){
                             for(int j = 0;j < juser.getJSONArray("users").length();j++){
                                 JSONObject utmp = juser.getJSONArray("users").getJSONObject(i);
-                                listuser.add(ManagerUser.getUser(utmp.getString("uid")));
+                                listuser.add(ManagerUser.getUser(utmp.getString("person_uid")));
                             }
                             tmp.setListUsers(listuser);
                         }
