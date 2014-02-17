@@ -27,7 +27,7 @@ public class ScheduleServlet implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         log.info("START SCHEDULE");
-        Timer timer = new Timer();
+        /*Timer timer = new Timer();
         List<Game> gameList = ManagerGame.getListGames("curr");
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
@@ -35,7 +35,7 @@ public class ScheduleServlet implements ServletContextListener {
         for(Game game : gameList){
             StartNewGame startNewGame = new StartNewGame(game);
             timer.schedule(startNewGame, calendar.getTime());
-        }
+        }*/
     }
 
     @Override

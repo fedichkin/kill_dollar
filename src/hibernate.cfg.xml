@@ -24,8 +24,8 @@
         <property name="show_sql">true</property>
 
         <!-- Подключение объектов сущностей -->
-        <mapping package="hibernate.db"/>
-        <mapping class="hibernate.db.User"/>
+        <mapping package="ru.fedichkindenis.entity"/>
+        <mapping class="ru.fedichkindenis.entity.User"/>
 
     </session-factory>
 

@@ -1,5 +1,6 @@
 package ru.fedichkindenis.moon_2040.servlets;
 
+import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import ru.fedichkindenis.moon_2040.bd.ManagerBD;
 import ru.fedichkindenis.moon_2040.users.ManagerUser;
@@ -25,6 +26,8 @@ import java.net.URL;
  */
 @WebServlet("/Auth")
 public class Auth extends HttpServlet {
+
+    private static final Logger log = Logger.getLogger(Auth.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException{
 
@@ -91,7 +94,7 @@ public class Auth extends HttpServlet {
                 if(conn.getResponseCode() == 200){
                     res = readStreamToString(conn.getInputStream(), "UTF-8");
                     jo = new JSONObject(res);
-
+                    log.info("uid --- " + jo.getString("uid"));
                     if(ManagerUser.getUser(jo.getString("uid")) == null){
                         ManagerUser.setUser(jo.getString("uid"),
                                 jo.getString("email"),
