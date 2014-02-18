@@ -31,8 +31,6 @@ import java.sql.ResultSet;
 
 public class GetInfoUser extends HttpServlet {
 
-    private final SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         JSONObject jo = new JSONObject();
@@ -40,35 +38,17 @@ public class GetInfoUser extends HttpServlet {
         response.setContentType("text/x-json;charset=utf-8");
         Writer writer = response.getWriter();
 
-        Session session = null;
-        //Transaction tx = null;
-
         try {
-            session = sessionFactory.openSession();
-            //tx = session.beginTransaction();
+            String personUid = (String) request.getSession().getAttribute("person_uid");
 
-            String person_uid = (String) request.getSession().getAttribute("person_uid");
-            Query query = session.createQuery("from User u where u.personUID = :uid")
-                    .setString("uid", person_uid);
-
-            User user = (User) query.uniqueResult();
-
-            jo.put("person_uid", person_uid);
-            jo.put("first_name", user.getFirstName());
-            jo.put("last_name", user.getLastName());
+            jo.put("person_uid", personUid);
 
             jo.put("success", true);
             writer.write(jo.toString());
 
-            //tx.commit();
-
         } catch (Exception e) {
-            //tx.rollback();
             e.printStackTrace();
         } finally {
-            if(session != null){
-                session.close();
-            }
             writer.close();
         }
     }

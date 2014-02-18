@@ -14,11 +14,14 @@ import java.util.Date;
  */
 public class SlUtils {
 
-    public static String getStringParameter(HttpServletRequest request
+    public static String getStringParameter(
+            HttpServletRequest request
             , String paramName
             , String displayParametrName
             , String defaulValue
-            , boolean mayBeEmpty) throws Exception{
+            , boolean mayBeEmpty
+    ) throws Exception{
+
         if (displayParametrName.equals("")){
             displayParametrName = paramName;
         }
