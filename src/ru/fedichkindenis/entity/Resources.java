@@ -45,13 +45,13 @@ public class Resources {
     /**
      * Путь к иконке ресурса
      */
-    @Column(name = "img", nullable = false)
+    @Column(name = "img", nullable = true)
     private String img;
 
     /**
      * Путь к миниатюрной иконке ресурса
      */
-    @Column(name = "img_min", nullable = false)
+    @Column(name = "img_min", nullable = true)
     private String imgMin;
 
     /**********GETTERS AND SETTERS**********/

@@ -28,6 +28,7 @@
         <mapping class="ru.fedichkindenis.entity.User"/>
         <mapping class="ru.fedichkindenis.entity.Game"/>
         <mapping class="ru.fedichkindenis.entity.Resources"/>
+        <mapping class="ru.fedichkindenis.entity.LinkResources"/>
 
     </session-factory>
 
