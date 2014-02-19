@@ -19,7 +19,7 @@ public class User {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * Идентификатор пользователя в системе авторизации
@@ -45,7 +45,7 @@ public class User {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 

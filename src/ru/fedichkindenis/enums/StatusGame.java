@@ -1,4 +1,4 @@
-package ru.fedichkindenis.moon_2040.enums;
+package ru.fedichkindenis.enums;
 
 /**
  * Created with IntelliJ IDEA.
