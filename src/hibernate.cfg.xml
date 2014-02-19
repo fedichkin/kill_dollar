@@ -26,6 +26,8 @@
         <!-- Подключение объектов сущностей -->
         <mapping package="ru.fedichkindenis.entity"/>
         <mapping class="ru.fedichkindenis.entity.User"/>
+        <mapping class="ru.fedichkindenis.entity.Game"/>
+        <mapping class="ru.fedichkindenis.entity.Resources"/>
 
     </session-factory>
 

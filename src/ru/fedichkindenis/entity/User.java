@@ -45,6 +45,8 @@ public class User {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    /**********GETTERS AND SETTERS**********/
+
     public Long getId() {
         return id;
     }

@@ -92,4 +92,98 @@ public class Game {
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "status", nullable = false)
     private StatusGame status;
+
+    /**********GETTERS AND SETTERS**********/
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getMaxPlayer() {
+        return maxPlayer;
+    }
+
+    public void setMaxPlayer(Integer maxPlayer) {
+        this.maxPlayer = maxPlayer;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getFinishDate() {
+        return finishDate;
+    }
+
+    public void setFinishDate(Date finishDate) {
+        this.finishDate = finishDate;
+    }
+
+    public Date getStep() {
+        return step;
+    }
+
+    public void setStep(Date step) {
+        this.step = step;
+    }
+
+    public Integer getCountPpl() {
+        return countPpl;
+    }
+
+    public void setCountPpl(Integer countPpl) {
+        this.countPpl = countPpl;
+    }
+
+    public Integer getCreditPpl() {
+        return creditPpl;
+    }
+
+    public void setCreditPpl(Integer creditPpl) {
+        this.creditPpl = creditPpl;
+    }
+
+    public Integer getCreditUser() {
+        return creditUser;
+    }
+
+    public void setCreditUser(Integer creditUser) {
+        this.creditUser = creditUser;
+    }
+
+    public Integer getLifeOutFlat() {
+        return lifeOutFlat;
+    }
+
+    public void setLifeOutFlat(Integer lifeOutFlat) {
+        this.lifeOutFlat = lifeOutFlat;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public StatusGame getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusGame status) {
+        this.status = status;
+    }
 }
