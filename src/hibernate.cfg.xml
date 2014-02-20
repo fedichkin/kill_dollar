@@ -31,6 +31,7 @@
         <mapping class="ru.fedichkindenis.entity.LinkResources"/>
         <mapping class="ru.fedichkindenis.entity.QueueResources"/>
         <mapping class="ru.fedichkindenis.entity.ResourcesStatistics"/>
+        <mapping class="ru.fedichkindenis.entity.StatePpl"/>
 
     </session-factory>
 
