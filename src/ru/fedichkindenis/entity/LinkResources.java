@@ -17,7 +17,7 @@ public class LinkResources {
      * сылка на ресурс, родительский элемент
      */
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "parent", nullable = false)
     private Resources parent;
 
     /**
@@ -30,7 +30,7 @@ public class LinkResources {
      * сылка на ресурс, дочерний элемент
      */
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "child", nullable = false)
     private Resources child;
 
     /**

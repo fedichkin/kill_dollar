@@ -29,6 +29,8 @@
         <mapping class="ru.fedichkindenis.entity.Game"/>
         <mapping class="ru.fedichkindenis.entity.Resources"/>
         <mapping class="ru.fedichkindenis.entity.LinkResources"/>
+        <mapping class="ru.fedichkindenis.entity.QueueResources"/>
+        <mapping class="ru.fedichkindenis.entity.ResourcesStatistics"/>
 
     </session-factory>
 
