@@ -10,14 +10,14 @@ import java.util.Date;
  * User: Fedichkin.DY
  * Date: 20.02.14
  * Time: 23:12
- * To change this template use File | Settings | File Templates.
+ * Сущность содержит информацию о состоянии каждого колониста
  */
 @Entity
-@Table(name = "state_ppl")
-public class StatePpl {
+@Table(name = "ppl")
+public class Ppl {
 
     /**
-     * Идентификатор состояния колониста
+     * Идентификатор колониста
      */
     @Id
     @Column(name = "id")

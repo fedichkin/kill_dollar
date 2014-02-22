@@ -7,7 +7,7 @@ import javax.persistence.*;
  * User: Fedichkin.DY
  * Date: 16.02.14
  * Time: 23:34
- * To change this template use File | Settings | File Templates.
+ * Сущность содержит общую информацию об пользователе
  */
 @Entity
 @Table(name = "usr")

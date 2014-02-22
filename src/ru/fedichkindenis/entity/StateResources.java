@@ -8,11 +8,11 @@ import java.util.Date;
  * User: Fedichkin.DY
  * Date: 21.02.14
  * Time: 21:47
- * To change this template use File | Settings | File Templates.
+ * Сущность содержит состояние каждого ресурса, заполняется в конце каждого хода
  */
 @Entity
 @Table(name = "state_resources", uniqueConstraints =
-        {@UniqueConstraint(columnNames = {"game", "gameDate", "user", "resources"})})
+        {@UniqueConstraint(columnNames = {"game", "game_date", "user", "resources"})})
 public class StateResources {
 
     /**

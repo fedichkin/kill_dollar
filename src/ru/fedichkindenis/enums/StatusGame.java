@@ -5,7 +5,7 @@ package ru.fedichkindenis.enums;
  * User: Fedichkin.DY
  * Date: 16.02.14
  * Time: 16:44
- * To change this template use File | Settings | File Templates.
+ * Возможные статусы игры
  */
 public enum StatusGame {
 

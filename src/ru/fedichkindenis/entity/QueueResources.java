@@ -7,7 +7,8 @@ import javax.persistence.*;
  * User: Fedichkin.DY
  * Date: 20.02.14
  * Time: 21:46
- * To change this template use File | Settings | File Templates.
+ * В начале игры идёт распределниени ресурсов, чтобы ресурсы распределялись равномерно
+ * была создана эта сущность
  */
 @Entity
 @Table(name = "queue_resources")

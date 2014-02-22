@@ -7,7 +7,7 @@ import javax.persistence.*;
  * User: Fedichkin.DY
  * Date: 20.02.14
  * Time: 22:19
- * To change this template use File | Settings | File Templates.
+ * Сущность содержит статистику ресурсов, она заполняется в конце каждого хода
  */
 @Entity
 @Table(name = "resources_statistics")

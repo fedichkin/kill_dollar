@@ -7,7 +7,8 @@ import javax.persistence.*;
  * User: Fedichkin.DY
  * Date: 19.02.14
  * Time: 23:55
- * To change this template use File | Settings | File Templates.
+ * С помощью этой сущности можно определить как получить тот или иной ресурс,
+ * совокупность дочерних ресурсов даёт общий родительский ресурс
  */
 @Entity
 @Table(name = "link_resources")

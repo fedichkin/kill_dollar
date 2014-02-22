@@ -10,7 +10,7 @@ import java.util.Date;
  * User: Fedichkin.DY
  * Date: 19.02.14
  * Time: 21:30
- * To change this template use File | Settings | File Templates.
+ * Сущность для предоставления информации о игре
  */
 @Entity
 @Table(name = "game")

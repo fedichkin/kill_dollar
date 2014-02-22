@@ -5,7 +5,7 @@ package ru.fedichkindenis.enums;
  * User: Fedichkin.DY
  * Date: 19.02.14
  * Time: 22:58
- * To change this template use File | Settings | File Templates.
+ * Возможные типы ресурсов
  */
 public enum TypeResources {
     LIMIT(0, "иссекаемые"),

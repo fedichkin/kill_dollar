@@ -5,7 +5,7 @@ package ru.fedichkindenis.enums;
  * User: Fedichkin.DY
  * Date: 20.02.14
  * Time: 23:28
- * To change this template use File | Settings | File Templates.
+ * Возможные статусы колониста
  */
 public enum StatusPpl {
 

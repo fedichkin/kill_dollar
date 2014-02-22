@@ -10,7 +10,7 @@ import javax.persistence.*;
  * User: Fedichkin.DY
  * Date: 19.02.14
  * Time: 23:01
- * To change this template use File | Settings | File Templates.
+ * Сущность предоставляет информацию об ресурсах
  */
 @Entity
 @Table(name = "resources")
