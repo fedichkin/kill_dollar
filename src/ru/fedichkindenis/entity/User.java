@@ -10,7 +10,9 @@ import javax.persistence.*;
  * Сущность содержит общую информацию об пользователе
  */
 @Entity
-@Table(name = "usr")
+@Table(name = "usr", uniqueConstraints =
+        {@UniqueConstraint(columnNames = {"person_uid"}),
+         @UniqueConstraint(columnNames = {"email"})})
 public class User {
 
     /**

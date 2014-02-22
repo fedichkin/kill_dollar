@@ -15,6 +15,14 @@ import javax.persistence.*;
 public class QueueResources {
 
     /**
+     * Идентификатор
+     */
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    /**
      * Ссылка на игру
      */
     @ManyToOne
@@ -40,7 +48,12 @@ public class QueueResources {
     @Column(name = "queue", nullable = false)
     private Integer queue;
 
+
     /**********GETTERS AND SETTERS**********/
+
+    public Long getId() {
+        return id;
+    }
 
     public Game getGame() {
         return game;

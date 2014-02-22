@@ -11,8 +11,17 @@ import javax.persistence.*;
  * совокупность дочерних ресурсов даёт общий родительский ресурс
  */
 @Entity
-@Table(name = "link_resources")
+@Table(name = "link_resources", uniqueConstraints =
+        {@UniqueConstraint(columnNames = {"child", "parent"})})
 public class LinkResources {
+
+    /**
+     * Идентификатор
+     */
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     /**
      * сылка на ресурс, родительский элемент
@@ -24,7 +33,7 @@ public class LinkResources {
     /**
      * Количество родительского элемента
      */
-    @Column(name = "id", nullable = false)
+    @Column(name = "parent_count", nullable = false)
     private Integer parentCount;
 
     /**
@@ -37,10 +46,14 @@ public class LinkResources {
     /**
      * Количество дочернего элемента
      */
-    @Column(name = "id", nullable = false)
+    @Column(name = "child_count", nullable = false)
     private Integer childCount;
 
     /**********GETTERS AND SETTERS**********/
+
+    public Long getId() {
+        return id;
+    }
 
     public Resources getParent() {
         return parent;

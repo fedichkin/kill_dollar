@@ -34,6 +34,7 @@
         <mapping class="ru.fedichkindenis.entity.Ppl"/>
         <mapping class="ru.fedichkindenis.entity.StateResources"/>
         <mapping class="ru.fedichkindenis.entity.StateResourcesPpl"/>
+        <mapping class="ru.fedichkindenis.entity.UsrGame"/>
 
     </session-factory>
 
