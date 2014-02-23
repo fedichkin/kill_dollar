@@ -35,6 +35,9 @@
         <mapping class="ru.fedichkindenis.entity.StateResources"/>
         <mapping class="ru.fedichkindenis.entity.StateResourcesPpl"/>
         <mapping class="ru.fedichkindenis.entity.UsrGame"/>
+        <mapping class="ru.fedichkindenis.entity.GameResStat"/>
+        <mapping class="ru.fedichkindenis.entity.GameStatistics"/>
+        <mapping class="ru.fedichkindenis.entity.GoalGame"/>
 
     </session-factory>
 
