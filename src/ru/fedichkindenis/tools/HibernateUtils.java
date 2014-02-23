@@ -1,6 +1,8 @@
 package ru.fedichkindenis.tools;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -28,5 +30,15 @@ public class HibernateUtils {
 
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
+    }
+
+    public static void close(Session session){
+        if (session != null && session.isOpen() )
+            session.close() ;
+    }
+
+    public static void rollback(Transaction transaction){
+        if (transaction != null && transaction.isActive() )
+            transaction.rollback();
     }
 }

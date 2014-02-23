@@ -246,10 +246,10 @@ public class Auth extends HttpServlet {
             tx.commit();
 
         } catch (Exception e) {
-            tx.rollback();
+            HibernateUtils.rollback(tx);
             e.printStackTrace();
         } finally {
-            session.close();
+            HibernateUtils.close(session);
         }
     }
 }
