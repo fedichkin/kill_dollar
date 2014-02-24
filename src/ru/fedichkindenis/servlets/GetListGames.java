@@ -13,6 +13,7 @@ import ru.fedichkindenis.bd.DbUtils;
 import ru.fedichkindenis.bd.SqlQuery;
 import ru.fedichkindenis.entity.Game;
 import ru.fedichkindenis.entity.User;
+import ru.fedichkindenis.entity.UsrGame;
 import ru.fedichkindenis.enums.StatusGame;
 import ru.fedichkindenis.tools.HibernateUtils;
 import ru.fedichkindenis.tools.SessionUtils;
@@ -38,7 +39,6 @@ import java.util.List;
  * Time: 21:27
  * To change this template use File | Settings | File Templates.
  */
-@WebServlet("/GetListGames")
 public class GetListGames extends HttpServlet {
 
     private static final Logger LOG = Logger.getLogger(GetListGames.class);
@@ -71,18 +71,23 @@ public class GetListGames extends HttpServlet {
                 status = StatusGame.OLD_GAME;
             }
 
-            Criteria criteria = session.createCriteria(Game.class);
+            Query query = null;
 
             if(status != null){
-                criteria.add(Restrictions.eq("status", status));
+                query = session.createQuery("from Game g where g.status = :status")
+                        .setParameter("status", status);
             }
             else {
                 User user = SessionUtils.getUser(request);
-                criteria.createCriteria("UsrGame", "ug")
-                        .add(Restrictions.eq("user", user));
+                query = session.createQuery("select g from UsrGame ug join ug.game g where ug.user = :user")
+                        .setParameter("user", user);
             }
 
-            List<Game> games = criteria.list();
+            if(count > 0){
+                query.setMaxResults(count);
+            }
+
+            List<Game> games = query.list();
 
             for(Game game : games){
                 JSONObject tmp = new JSONObject();
@@ -102,12 +107,14 @@ public class GetListGames extends HttpServlet {
                 ja.put(tmp);
             }
             jo.put("success", true);
-            jo.put("data", ja);
+            jo.put("games", ja);
+            writer.write(jo.toString());
 
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             HibernateUtils.close(session);
+            writer.close();
         }
     }
 

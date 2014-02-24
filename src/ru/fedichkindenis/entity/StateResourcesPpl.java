@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "resources", uniqueConstraints =
-        {@UniqueConstraint(columnNames = {"game", "game_date", "id_ppl"})})
+        {@UniqueConstraint(columnNames = {"game", "game_date", "ppl"})})
 public class StateResourcesPpl {
 
     /**
@@ -42,7 +42,7 @@ public class StateResourcesPpl {
      */
     @ManyToOne
     @JoinColumn(name = "ppl", nullable = false)
-    private Integer ppl;
+    private Ppl ppl;
 
     /**
      * Кредиты колониста
@@ -96,11 +96,11 @@ public class StateResourcesPpl {
         this.gameDate = gameDate;
     }
 
-    public Integer getIdPpl() {
+    public Ppl getIdPpl() {
         return ppl;
     }
 
-    public void setIdPpl(Integer ppl) {
+    public void setIdPpl(Ppl ppl) {
         this.ppl = ppl;
     }
 

@@ -53,7 +53,8 @@ public class Game {
     /**
      * Длина хода
      */
-    @Column(name = "tep", nullable = false)
+    @Column(name = "step", nullable = false)
+    @Temporal(value = TemporalType.TIME)
     private Date step;
 
     /**

@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "state_resources", uniqueConstraints =
-        {@UniqueConstraint(columnNames = {"game", "game_date", "user", "resources"})})
+        {@UniqueConstraint(columnNames = {"game", "game_date", "usr", "resources"})})
 public class StateResources {
 
     /**

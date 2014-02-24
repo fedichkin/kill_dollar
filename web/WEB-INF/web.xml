@@ -45,7 +45,7 @@
 
     <servlet>
         <servlet-name>GetListGames</servlet-name>
-        <servlet-class>ru.fedichkindenis.moon_2040.servlets.GetListGames</servlet-class>
+        <servlet-class>ru.fedichkindenis.servlets.GetListGames</servlet-class>
     </servlet>
     
     <servlet-mapping>
