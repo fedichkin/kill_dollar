@@ -18,6 +18,8 @@
         <filter-class>ru.fedichkindenis.moon_2040.Filters.UserFilter</filter-class>
     </filter>
 
+    <!--#####################FILTER MAPPING#####################-->
+
     <filter-mapping>
         <filter-name>UserFilter</filter-name>
         <servlet-name>GetInfoUser</servlet-name>
@@ -32,6 +34,20 @@
         <filter-name>UserFilter</filter-name>
         <servlet-name>GetListGames</servlet-name>
     </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <servlet-name>ConnectToGame</servlet-name>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <servlet-name>DisconnectFromGame</servlet-name>
+    </filter-mapping>
+
+    <!--########################################################-->
+
+    <!--#########################SERVLET########################-->
 
     <servlet>
         <servlet-name>GetInfoUser</servlet-name>
@@ -47,6 +63,20 @@
         <servlet-name>GetListGames</servlet-name>
         <servlet-class>ru.fedichkindenis.servlets.GetListGames</servlet-class>
     </servlet>
+
+    <servlet>
+        <servlet-name>ConnectToGame</servlet-name>
+        <servlet-class>ru.fedichkindenis.servlets.ConnectToGame</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>DisconnectFromGame</servlet-name>
+        <servlet-class>ru.fedichkindenis.servlets.DisconnectFromGame</servlet-class>
+    </servlet>
+
+    <!--########################################################-->
+
+    <!--#####################SERVLET MAPPING####################-->
     
     <servlet-mapping>
         <servlet-name>GetInfoUser</servlet-name>
@@ -62,6 +92,18 @@
         <servlet-name>GetListGames</servlet-name>
         <url-pattern>/GetListGames</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ConnectToGame</servlet-name>
+        <url-pattern>/ConnectToGame</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DisconnectFromGame</servlet-name>
+        <url-pattern>/DisconnectFromGame</url-pattern>
+    </servlet-mapping>
+
+    <!--########################################################-->
 
     <login-config>
         <auth-method>FORM</auth-method>

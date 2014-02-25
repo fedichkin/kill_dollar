@@ -1,4 +1,4 @@
-package ru.fedichkindenis.moon_2040.servlets;
+package ru.fedichkindenis.servlets;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;

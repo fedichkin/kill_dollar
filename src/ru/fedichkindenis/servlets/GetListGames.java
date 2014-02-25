@@ -79,7 +79,8 @@ public class GetListGames extends HttpServlet {
             }
             else {
                 User user = SessionUtils.getUser(request);
-                query = session.createQuery("select g from UsrGame ug join ug.game g where ug.user = :user")
+                query = session.createQuery("select g from UsrGame ug join ug.game g where ug.user = :user " +
+                        "and ug.delDate is null")
                         .setParameter("user", user);
             }
 
@@ -103,6 +104,8 @@ public class GetListGames extends HttpServlet {
                 tmp.put("credit_user",   game.getCreditUser());
                 tmp.put("life_out_flat", game.getLifeOutFlat());
                 tmp.put("description",   game.getDescription());
+                tmp.put("status",        game.getStatus().name());
+                tmp.put("is_user_game",  SessionUtils.getUserGame(request, game) != null);
 
                 ja.put(tmp);
             }

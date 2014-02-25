@@ -5,7 +5,9 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import ru.fedichkindenis.entity.Game;
 import ru.fedichkindenis.entity.User;
+import ru.fedichkindenis.entity.UsrGame;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,5 +39,28 @@ public class SessionUtils {
         }
 
         return user;
+    }
+
+    public static UsrGame getUserGame(HttpServletRequest request, Game game){
+        UsrGame usrGame = null;
+        User user;
+        Session session = null;
+
+        try {
+            session = sessionFactory.openSession();
+            user = getUser(request);
+
+            Criteria criteria = session.createCriteria(UsrGame.class)
+                    .add(Restrictions.eq("user", user))
+                    .add(Restrictions.eq("game", game))
+                    .add(Restrictions.isNull("delDate"));
+
+            usrGame = (UsrGame) criteria.uniqueResult();
+
+        } finally {
+            HibernateUtils.close(session);
+        }
+
+        return usrGame;
     }
 }

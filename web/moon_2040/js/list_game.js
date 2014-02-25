@@ -26,7 +26,32 @@ load_listgame = function(type){
                 $('<p>Максимальное количество игроков: ' + game.max_player + '</p>').appendTo(el);
                 $('<p>Дата и время начала: ' + game.start_date + '</p>').appendTo(el);
                 $('<p>Шаг игры в часах: ' + game.step + '</p>').appendTo(el);
+
+                if(game.status == 'NEW_GAME' && !game.is_user_game){
+                    $('<a href="#" id="connect' + i + '">Присоедениться к игре</a>').appendTo(el);
+                    $('#connect' + i).click(function (e){connect_to_game(game.id)})
+                }
+                else if(game.status == 'NEW_GAME' && game.is_user_game){
+                    $('<a href="#" id="disconnect' + i + '">Покинуть игру</a>').appendTo(el);
+                    $('#disconnect' + i).click(function (e){disconnect_from_game(game.id)})
+                }
             }
+        }
+    }, 'json');
+}
+
+connect_to_game = function(game_id){
+    $.get('/ConnectToGame', {gameId: game_id}, function(data){
+        if(data.success){
+            $('.active a').click();
+        }
+    }, 'json');
+}
+
+disconnect_from_game = function(game_id){
+    $.get('/DisconnectFromGame', {gameId: game_id}, function(data){
+        if(data.success){
+            $('.active a').click();
         }
     }, 'json');
 }
