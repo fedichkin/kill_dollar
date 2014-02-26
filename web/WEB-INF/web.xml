@@ -10,7 +10,7 @@
     </welcome-file-list>
 
     <listener>
-        <listener-class>ru.fedichkindenis.moon_2040.servlets.ScheduleServlet</listener-class>
+        <listener-class>ru.fedichkindenis.servlets.ScheduleServlet</listener-class>
     </listener>
 
     <filter>

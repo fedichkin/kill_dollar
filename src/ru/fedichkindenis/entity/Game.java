@@ -46,7 +46,7 @@ public class Game {
     /**
      * Дата окончания игры
      */
-    @Column(name = "finish_date", nullable = false)
+    @Column(name = "finish_date", nullable = true)
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date finishDate;
 
