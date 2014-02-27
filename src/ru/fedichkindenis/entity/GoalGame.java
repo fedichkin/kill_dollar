@@ -1,6 +1,6 @@
 package ru.fedichkindenis.entity;
 
-import ru.fedichkindenis.enums.TypeFunction;
+import ru.fedichkindenis.enums.ElFunction;
 
 import javax.persistence.*;
 
@@ -43,13 +43,7 @@ public class GoalGame {
      */
     @Column(name = "type_function", nullable = false)
     @Enumerated(value = EnumType.ORDINAL)
-    private TypeFunction typeFunction;
-
-    /**
-     * Значение используемое функцией
-     */
-    @Column(name = "value_func", nullable = true)
-    private Integer valueFunc;
+    private ElFunction elFunction;
 
     /**
      * Победа (true) или поражение (false)
@@ -79,20 +73,12 @@ public class GoalGame {
         this.resources = resources;
     }
 
-    public TypeFunction getTypeFunction() {
-        return typeFunction;
+    public ElFunction getElFunction() {
+        return elFunction;
     }
 
-    public void setTypeFunction(TypeFunction typeFunction) {
-        this.typeFunction = typeFunction;
-    }
-
-    public Integer getValueFunc() {
-        return valueFunc;
-    }
-
-    public void setValueFunc(Integer valueFunc) {
-        this.valueFunc = valueFunc;
+    public void setElFunction(ElFunction elFunction) {
+        this.elFunction = elFunction;
     }
 
     public Boolean getWin() {

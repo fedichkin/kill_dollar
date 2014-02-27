@@ -7,14 +7,17 @@ package ru.fedichkindenis.enums;
  * Time: 22:09
  * Типы операций для расчёта исхода игры
  */
-public enum TypeFunction {
+public enum ElFunction {
 
-    EQ(0, "равенство");
+    ADDITION(0, "сложение"),
+    SUBTRACTION(1, "вычитание"),
+    MULTIPLICATION(2, "умножение"),
+    DIVISION(3, "деление");
 
     private Integer id;
     private String name;
 
-    private TypeFunction(Integer id, String name){
+    private ElFunction(Integer id, String name){
         this.id = id;
         this.name = name;
     }
