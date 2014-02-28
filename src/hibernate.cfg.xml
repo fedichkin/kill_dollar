@@ -38,6 +38,10 @@
         <mapping class="ru.fedichkindenis.entity.GameResStat"/>
         <mapping class="ru.fedichkindenis.entity.GameStatistics"/>
         <mapping class="ru.fedichkindenis.entity.GoalGame"/>
+        <mapping class="ru.fedichkindenis.entity.StartCostResources"/>
+        <mapping class="ru.fedichkindenis.entity.Function"/>
+        <mapping class="ru.fedichkindenis.entity.InitMarketEarth"/>
+        <mapping class="ru.fedichkindenis.entity.MarketEarth"/>
 
     </session-factory>
 

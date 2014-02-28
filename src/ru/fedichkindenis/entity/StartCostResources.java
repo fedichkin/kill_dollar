@@ -1,23 +1,20 @@
 package ru.fedichkindenis.entity;
 
-import ru.fedichkindenis.enums.ElFunction;
-
 import javax.persistence.*;
 
 /**
  * Created with IntelliJ IDEA.
  * User: Fedichkin.DY
- * Date: 23.02.14
- * Time: 17:38
- * Условия на победу и поражение в игре
+ * Date: 28.02.14
+ * Time: 20:39
+ * To change this template use File | Settings | File Templates.
  */
 @Entity
-@Table(name = "goal_game", uniqueConstraints =
-        {@UniqueConstraint(columnNames = {"game", "resources", "win"})})
-public class GoalGame {
+@Table(name = "start_cost_resources")
+public class StartCostResources {
 
     /**
-     * Идентификатор статистики ресурса
+     * Идентификатор
      */
     @Id
     @Column(name = "id")
@@ -39,17 +36,10 @@ public class GoalGame {
     private Resources resources;
 
     /**
-     * Ссылка на функцию
+     * Цена ресурса
      */
-    @ManyToOne
-    @JoinColumn(name = "function", nullable = false)
-    private Function function;
-
-    /**
-     * Победа (true) или поражение (false)
-     */
-    @Column(name = "win", nullable = false)
-    private Boolean win;
+    @Column(name = "cost", nullable = false)
+    private Integer cost;
 
     /**********GETTERS AND SETTERS**********/
 
@@ -73,19 +63,11 @@ public class GoalGame {
         this.resources = resources;
     }
 
-    public Function getFunction() {
-        return function;
+    public Integer getCost() {
+        return cost;
     }
 
-    public void setFunction(Function function) {
-        this.function = function;
-    }
-
-    public Boolean getWin() {
-        return win;
-    }
-
-    public void setWin(Boolean win) {
-        this.win = win;
+    public void setCost(Integer cost) {
+        this.cost = cost;
     }
 }

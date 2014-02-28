@@ -14,12 +14,24 @@
       </library>
     </libraries>
     <schema name="" catalog="moon_2040" />
+    <table name="el_function" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0K3Qu9C10LzQtdC90YIg0YTRg9C90LrRhtC40LggKNC/0LvRjtGBLCDQvNC40L3Rg9GBLCDQtNC10LvQtdC90LjQtSwg0YPQvNC90L7QttC10L3QuNC1Li4uKQ==">
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="name" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" remarks="0J3QsNC40LzQtdC90L7QstCw0L3QuNC1INGE0YPQvdC60YbQuNC4" />
+    </table>
+    <table name="function" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KTRg9C90LrRhtC40Y8sINC80L7QttC10YHRgiDQv9GA0LXQtNGB0YLQsNCy0LvRj9GC0Ywg0LrQsNC6INGE0L7RgNC80YPQu9GDINGC0LDQuiDQuCDRg9GB0LvQvtCy0LjQtQ==">
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="is_if" sqlType="BIT" length="1" precision="0" nullable="false" jdbcType="-7" />
+      <column name="type_if" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" />
+      <column name="el_function" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" />
+      <column name="operand" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" />
+      <column name="next_step" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" />
+    </table>
     <table name="game" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0JjQs9GA0Ys=">
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="name" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" remarks="0J3QsNC40LzQtdC90L7QstCw0L3QuNC1INC40LPRgNGL" />
       <column name="max_player" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" remarks="0JzQsNC60YHQuNC80LDQu9GM0L3QvtC1INC60L7Qu9C40YfQtdGB0YLQstC+INC40LPRgNC+0LrQvtCyICgtMSDQvtCz0YDQsNC90LjRh9C10L3QuNC5INC90LXRgik=" />
       <column name="start_date" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" remarks="0JTQsNGC0LAg0L3QsNGH0LDQu9CwINC40LPRgNGL" />
-      <column name="finish_date" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn" remarks="0JTQsNGC0LAg0L7QutC+0L3Rh9Cw0L3QuNGPINC40LPRgNGL" />
+      <column name="finish_date" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" remarks="0JTQsNGC0LAg0L7QutC+0L3Rh9Cw0L3QuNGPINC40LPRgNGL" />
       <column name="step" sqlType="TIME" length="8" precision="0" nullable="false" jdbcType="92" def="JzI0OjAwOjAwJw==" remarks="0KjQsNCzINC40LPRgNGL" />
       <column name="count_ppl" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0JrQvtC70LjRh9C10YHRgtCy0L4g0LrQvtC70L7QvdC40YHRgtC+0LIg0LIg0L3QsNGH0LDQu9C1INC40LPRgNGL" />
       <column name="credit_ppl" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0JrQvtC70LjRh9C10YHRgtCy0L4g0LTQtdC90LXQsyDRgyDQutC+0LvQvtC90LjRgdGC0L7QsiDQsiDQvdCw0YfQsNC70LUg0LjQs9GA0Ys=" />
@@ -27,6 +39,11 @@
       <column name="life_out_flat" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0JrQvtC70LjRh9C10YHRgtCy0L4g0YXQvtC00L7QsiDQutC+0YLQvtGA0YvQtSDQutC+0LvQvtC90LjRgdGC0Ysg0LzQvtCz0YPRgiDQv9GA0L7QttC40YLRjCDQsdC10Lcg0LbQuNC70YzRjyDQsiDQvdCw0YfQsNC70LUg0LjQs9GA0Ys=" />
       <column name="description" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="true" jdbcType="-1" remarks="0J7Qv9C40YHQsNC90LjQtSDQuNCz0YDRiw==" />
       <column name="status" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
+    </table>
+    <table name="game_res_stat" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KHQstGP0LfRjCDRgdGC0LDRgtC40YHRgtC40LrQuCDRgNC10YHRg9GA0YHQvtCyINGBINGB0YLQsNGC0LjRgdGC0LjQutC+0Lkg0LjQs9GA0Ys=">
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="game_stat" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" def="MA==" />
+      <column name="res_stat" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" def="MA==" />
     </table>
     <table name="game_statistics" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KHRgtCw0YLQuNGB0YLQuNC60LAg0LjQs9GA0Ysg0L/QviDQutCw0LbQtNC+0LzRgyDRhdC+0LTRgywg0LPQtdC90LXRgNC40YDRg9C10YLRgdGPINC/0LXRgNC10LQg0L3QsNGH0LDQu9C+0Lwg0L3QvtCy0L7Qs9C+INGF0L7QtNCw">
       <column name="game" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JjQtNC10L3RgtC40YTQuNC60LDRgtC+0YAg0LjQs9GA0Ys=" />
@@ -43,29 +60,57 @@
       <column name="price_max_flat" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MA==" remarks="0LzQsNC60YHQuNC80LDQu9GM0L3QsNGPINGG0LXQvdCwINC30LAg0LbQuNC70YzRkQ==" />
       <column name="price_min_flat" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MA==" remarks="0LzQuNC90LjQvNCw0LvRjNC90LDRjyDRhtC10L3QsCDQvdCwINC20LjQu9GM0ZE=" />
       <column name="price_avg_flat" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MA==" remarks="0YHRgNC10LTQvdGP0Y8g0YbQtdC90LAg0L3QsCDQttC40LvRjNGR" />
-      <column name="res_statistics" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" def="MA==" remarks="0YHRgdGL0LvQutCwINC90LAg0YHRgtCw0YLQuNGB0YLQuNC60YMg0YDQtdGB0YPRgNGB0L7Qsg==" />
       <column name="salary_max" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MA==" remarks="0LzQsNC60YHQuNC80LDQu9GM0L3QsNGPINC30LDRgNC/0LvQsNGC0LA=" />
       <column name="salary_min" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MA==" remarks="0LzQuNC90LjQvNCw0LvRjNC90LDRjyDQt9Cw0YDQv9C70LDRgtCw" />
       <column name="salary_avg" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MA==" remarks="0YHRgNC10LTQvdGP0Y8g0LfQsNGA0L/Qu9Cw0YLQsA==" />
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
     </table>
     <table name="goal_game" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KbQtdC70Ywg0LjQs9GA0YssINC60LDQutC40LUg0YDQtdGB0YPRgNGB0Ysg0Lgg0YfQtdC80YMg0LTQvtC70LbQvdGLINCx0YvRgtGMINGA0LDQstC90Ysg0LIg0YHQu9GD0YfQsNC1INC/0L7QsdC10LTRiyDQuCDQsiDRgdC70YPRh9Cw0LUg0L/QvtGA0LDQttC10L3QuNGP">
       <column name="game" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JjQvdC00LXQvdGC0LjRhNC40LrQsNGC0L7RgCDQuNCz0YDRiw==" />
       <column name="resources" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JjQvdC00LXQvdGC0LjRhNC40LrQsNGC0L7RgCDRgNC10YHRg9GA0YHQsA==" />
-      <column name="type_function" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0YLQuNC/INGE0YPQvdC60YbQuNC4" />
-      <column name="value_func" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" remarks="0JfQvdCw0YfQtdC90LjQtSDQuNGB0L/QvtC70YzQt9GD0LXQvNC+0LUg0YTRg9C90LrRhtC40LXQuQ==" />
-      <column name="win" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0KPRgdC70L7QstC40LUg0L3QsCDQv9C+0LHQtdC00YMgKDEpINC40LvQuCDQv9C+0YDQsNC20LXQvdC40LUgKDAp" />
+      <column name="function" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0YLQuNC/INGE0YPQvdC60YbQuNC4" />
+      <column name="win" sqlType="BIT" length="1" precision="0" nullable="false" jdbcType="-7" remarks="0KPRgdC70L7QstC40LUg0L3QsCDQv9C+0LHQtdC00YMgKDEpINC40LvQuCDQv9C+0YDQsNC20LXQvdC40LUgKDAp" />
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
     </table>
     <table name="group_resources" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0JPRgNGD0L/Qv9GLINGA0LXRgdGD0YDRgdC+0LIgKNGB0YvRgNGM0LUsINC/0YDQvtC40LfQstC+0LTRj9GJ0LjQtSDQuCDRgi7Qvy4p">
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="name" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" remarks="0J3QsNC40LzQtdC90L7QstCw0L3QuNC1INCz0YDRg9C/0L/RiyDRgNC10YHRg9GA0YHQvtCy" />
     </table>
+    <table name="init_market_earth" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0JTQsNC90L3Ri9C1INC00LvRjyDQuNC90LjRhtC40LDQu9C40LfQsNGG0LjQuCDRgNGL0L3QutCwINCX0LXQvNC70Lg=">
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="game" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
+      <column name="resources" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
+      <column name="start_cost" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0YHRgtCw0YDRgtC+0LLQsNGPINGG0LXQvdCw" />
+      <column name="const_value" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0LrQvtC90YHRgtCw0L3RgtCwINC60L7Qu9C40YfQtdGB0YLQstCw" />
+      <column name="start_value" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0YHRgtCw0YDRgtC+0LLQvtC1INC60L7Qu9C40YfQtdGB0YLQstC+" />
+      <column name="const_consum" sqlType="DECIMAL UNSIGNED" length="4" precision="2" nullable="false" jdbcType="3" remarks="0LrQvtC90YHRgtCw0L3RgtCwINC/0L7RgtGA0LXQsdC70LXQvdC40Y8=" />
+      <column name="multi_price_incr" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0LzRg9C70YzRgtC40L/Qu9C40LrQsNGC0L7RgCDRgNC+0YHRgtCwINGG0LXQvQ==" />
+    </table>
     <table name="link_resources" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KHQstGP0LfRjCDRgNC10YHRg9GA0YHQvtCyINCyINC/0YDQvtC40LfQstC+0LTRgdGC0LLQtSDQtNGA0YPQs9C40YUg0YDQtdGB0YPRgNGB0L7Qsg==">
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="parent" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0J/RgNC+0LjQt9Cy0L7QtNC40LzRi9C5INGA0LXRgdGD0YDRgQ==" />
       <column name="parent_count" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0JrQvtC70LjRh9C10YHRgtCy0L4g0L/RgNC+0LjQt9Cy0L7QtNC40LzQvtCz0L4g0YDQtdGB0YPRgNGB0LA=" />
       <column name="child" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0J/RgNC+0LjQt9Cy0L7QtNGP0YnQuNC5INGA0LXRgdGD0YDRgQ==" />
       <column name="child_count" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0JrQvtC70LjRh9C10YHRgtCy0L4g0L/RgNC+0LjQt9Cy0L7QtNGP0YnQtdCz0L4g0YDQtdGB0YPRgNGB0LA=" />
     </table>
+    <table name="market_earth" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KDRi9C90L7QuiDQl9C10LzQu9C4">
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="game" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
+      <column name="game_date" sqlType="DATE" length="10" precision="0" nullable="false" jdbcType="91" />
+      <column name="resources" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
+      <column name="sale_cost" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" />
+      <column name="function_sale" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
+      <column name="val" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" />
+      <column name="function_val" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
+      <column name="buy_cost" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" />
+      <column name="function_buy" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
+    </table>
+    <table name="operand" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0JLQvtC30LzQvtC20L3Ri9C1INC+0L/QtdGA0LDQvdC00Ysg0LTQu9GPINGD0YHQu9C+0LLQuNC5INC4INGE0L7RgNC80YPQuw==">
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="name" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" />
+    </table>
     <table name="operation_game" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0J7Qv9C10YDQsNGG0LjQuCDQv9GA0L7QuNC30LLQvtC00LjQvNGL0LUg0LIg0LjQs9GA0LU=">
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
       <column name="game" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JjQvdC00LXQvdGC0LjRhNC40LrQsNGC0L7RgCDQuNCz0YDRiw==" />
       <column name="game_date" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93" remarks="0JTQsNGC0LAg0LjQs9GA0Ys=" />
       <column name="usr" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JjQtNC10L3RgtC40YTQuNC60LDRgtC+0YAg0L/QvtC70YzQt9C+0LLQsNGC0LXQu9GP" />
@@ -78,8 +123,17 @@
       <column name="operation_time" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" remarks="0JLRgNC10LzRjyDRgdCy0LXRgNGI0LXQvdC40Y8g0L7Qv9C10YDQsNGG0LjQuCAo0YHQvNC10L3QsCDRgdGC0LDRgtGD0YHQsCk=" />
       <column name="status_operation" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0KLQtdC60YPRidC40Lkg0YHRgtCw0YLRg9GBINC+0L/QtdGA0LDRhtC40Lg=" />
     </table>
+    <table name="ppl" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0J7QsdGJ0LXQtSDRgdC+0YHRgtC+0Y/QvdC40LUg0LrQsNC20LTQvtCz0L4g0LrQvtC70L7QvdC40YHRgtCw">
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JjQtNC10L3RgtC40YTQuNC60LDRgtC+0YAg0LrQvtC70L7QvdC40YHRgtCw" />
+      <column name="game" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JjQtNC10L3RgtC40YTQuNC60LDRgtC+0YAg0LjQs9GA0Ys=" />
+      <column name="days_capsule" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0LrQvtC70LjRh9C10YHRgtCy0L4g0LTQvdC10Lkg0L/RgNC+0LLQtdC00ZHQvdGL0YUg0LIg0LrQsNC/0YHRg9C70LU=" />
+      <column name="stat" sqlType="BIT" length="1" precision="0" nullable="false" jdbcType="-7" remarks="0YHRgtCw0YLRg9GBICgwIC0g0LIg0LjQs9GA0LUsIDEgLSDRg9C80LXRgCwgMiAtINC/0L7QutC40L3Rg9C7INCb0YPQvdGDKQ==" />
+      <column name="add_date" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93" remarks="0LTQsNGC0LAg0L/RgNC40LvRkdGC0LAg0L3QsCDQm9GD0L3RgyAo0LTQtdC90Ywg0LjQs9GA0Ysp" />
+      <column name="del_date" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" remarks="0LTQsNGC0LAg0YHQvNC10YDRgtC4INC40LvQuCDQv9C+0LrQuNC00LDQvdC40Y8g0JvRg9C90YsgKNC00LXQvdGMINC40LPRgNGLKQ==" />
+    </table>
     <table name="queue_resources" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0J7Rh9C10YDQtdC00Ywg0YDQtdGB0YPRgNGBINC+0LIg0LTQu9GPINC60LDQttC00L7QuSDQuNCz0YDRiywg0LTQu9GPINC+0L/RgNC10LTQtdC70LXQvdC40Y8g0L/QvtGB0LvQtdC00L7QstCw0YLQtdC70YzQvdC+0YHRgtC4INGA0LDQt9C00LDRh9C4INGA0LXRgdGD0YDRgdC+0LIg0LjQs9GA0L7QutCw0LwuINCd0LAg0LTQsNC90L3Ri9C5INC80L7QvNC10L3RgiDRg9GH0LjRgtGL0LLQsNC10YLRgdGPINGH0YLQviDRgNCw0LfQtNCw0ZHRgtGB0Y8g0YLQvtC70YzQutC+INC+0LTQuNC9INGA0LXRgdGD0YDRgSAo0L3QtSDRgdGH0LjRgtCw0Y8g0LrRgNC10LTQuNGC0L7Qsiwg0L7QvdC4INGE0LjQutGB0LjRgNC+0LLQsNC90Ysp">
       <column name="game" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="sort_res" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" />
       <column name="resources" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
       <column name="queue" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MA==" />
@@ -105,13 +159,11 @@
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="name" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" />
     </table>
-    <table name="state_ppl" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0J7QsdGJ0LXQtSDRgdC+0YHRgtC+0Y/QvdC40LUg0LrQsNC20LTQvtCz0L4g0LrQvtC70L7QvdC40YHRgtCw">
-      <column name="id" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0JjQtNC10L3RgtC40YTQuNC60LDRgtC+0YAg0LrQvtC70L7QvdC40YHRgtCw" />
-      <column name="game" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JjQtNC10L3RgtC40YTQuNC60LDRgtC+0YAg0LjQs9GA0Ys=" />
-      <column name="days_capsule" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0LrQvtC70LjRh9C10YHRgtCy0L4g0LTQvdC10Lkg0L/RgNC+0LLQtdC00ZHQvdGL0YUg0LIg0LrQsNC/0YHRg9C70LU=" />
-      <column name="stat" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0YHRgtCw0YLRg9GBICgwIC0g0LIg0LjQs9GA0LUsIDEgLSDRg9C80LXRgCwgMiAtINC/0L7QutC40L3Rg9C7INCb0YPQvdGDKQ==" />
-      <column name="add_date" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93" remarks="0LTQsNGC0LAg0L/RgNC40LvRkdGC0LAg0L3QsCDQm9GD0L3RgyAo0LTQtdC90Ywg0LjQs9GA0Ysp" />
-      <column name="del_date" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" remarks="0LTQsNGC0LAg0YHQvNC10YDRgtC4INC40LvQuCDQv9C+0LrQuNC00LDQvdC40Y8g0JvRg9C90YsgKNC00LXQvdGMINC40LPRgNGLKQ==" />
+    <table name="start_cost_resources" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0JIg0L3QsNGH0LDQu9C1INC40LPRgNGLINC40LPRgNC+0LrRgyDQv9GA0LXQtNC+0YHRgtCw0LLQu9GP0LXRgtGB0Y8g0LLQvtC30LzQvtC20L3QvtGB0YLRjCDQvdCwINC40LzQtdGO0YnQuNC10YHRjyDQutGA0LXQtNC40YLRiyDQtdC00LjQvdC+0YDQsNC30L7QstC+INC30LDQutGD0L/QuNGC0Ywg0YDQtdGB0YPRgNGB0YssINCyINGN0YLQvtC5INGC0LDQsdC70LjRhtC1INC/0YDQtdC00YHRgtCw0LLQu9C10L3RiyDRhtC10L3RiyDQvdCwINGA0LXRgdGD0YDRgdGLINC00LvRjyDRgdGC0LDRgNGC0LAg0LjQs9GA0Ys=">
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="game" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
+      <column name="resources" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
+      <column name="cost" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" />
     </table>
     <table name="state_resources" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KHQvtGB0YLQvtGP0L3QuNC1INGA0LXRgdGD0YDRgdC+0LIg0L3QsCDQuNCz0YDQvtCy0L7QuSDQtNC10L3RjCDQv9C+INC40LPRgNC+0LrQsNC8">
       <column name="game" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JjQtNC10L3RgtC40YTQuNC60LDRgtC+0YAg0LjQs9GA0Ys=" />
@@ -121,24 +173,26 @@
       <column name="count_res" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MA==" remarks="0JrQvtC70LjRh9C10YHRgtCy0L4g0YDQtdGB0YPRgNGB0L7QsiDRgyDQv9C+0LvRjNC30L7QstCw0YLQtdC70Y8=" />
       <column name="hide_res" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MQ==" remarks="0JrQu9GO0YcsINC/0L7Qt9Cy0L7Qu9GP0LXRgiDRgdC60YDRi9Cy0LDRgtGMINGA0LXRgdGD0YDRgdGLINC+0YIg0LTRgNGD0LPQuNGFINC/0L7Qu9GM0LfQvtCy0LDRgtC10LvQtdC5ICgxIC0g0YHQutGA0YvRgtC+LCAwIC0g0LLQuNC00L3Qvik=" />
       <column name="show_count" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" remarks="0JXRgdC70Lgg0YDQtdGB0YPRgNGB0Ysg0LLQuNC00L3RiyDRgtC+INGA0LDQstC90L4g0LrQvtC70LjRh9C10YHRgtCy0YMg0YDQtdGB0YPRgNGB0L7Qsiwg0LXRgdC70Lgg0YHQutGA0YvRgtGLINGC0L4g0Y3RgtC+INC30L3QsNGH0LXQvdC40LUg0LfQsNC00LDRkdGCINC/0L7Qu9GM0LfQvtCy0LDRgtC10LvRjA==" />
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
     </table>
     <table name="state_resources_ppl" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KHQvtGB0YLQvtGP0L3QuNC1INC60L7Qu9C+0L3QuNGB0YLQvtCyINC90LAg0LrQsNC20LTQvtC8INGF0L7QtNC1INC40LPRgNGL">
       <column name="game" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JjQtNC10L3RgtC40YTQuNC60LDRgtC+0YAg0LjQs9GA0Ys=" />
       <column name="game_date" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93" remarks="0JTQtdC90Ywg0LjQs9GA0Ys=" />
-      <column name="id_ppl" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0JrQvtC70LvQvtC90LjRgdGC" />
+      <column name="ppl" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JrQvtC70LvQvtC90LjRgdGC" />
       <column name="credit" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MA==" remarks="0JrRgNC10LTQuNGC0Ys=" />
       <column name="pay_house" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MA==" remarks="0J/Qu9Cw0YLQsCDQt9CwINC20LjQu9GM0ZE=" />
       <column name="salary" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MA==" remarks="0JfQsNGA0L/Qu9Cw0YLQsA==" />
-      <column name="parasit" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MA==" remarks="0KLRg9C90LXRj9C00LXRhiAoMCAtINC90LXRgiwgMSAtINC00LAp" />
+      <column name="parasit" sqlType="BIT" length="1" precision="0" nullable="false" jdbcType="-7" def="YicwJw==" remarks="0KLRg9C90LXRj9C00LXRhiAoMCAtINC90LXRgiwgMSAtINC00LAp" />
       <column name="parasit_step" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MA==" remarks="0KjQsNCzINGC0YPQvdC10Y/QtNGG0LAgKNC90LUg0LzQtdC90YzRiNC1INC00LLRg9GFKQ==" />
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
     </table>
     <table name="status_operation" schema="" catalog="moon_2040" type="BASE TABLE">
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="name" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" remarks="0J3QsNC40LzQtdC90L7QstCw0L3QuNC1INGB0YLQsNGC0YPRgdCwINC+0L/QtdGA0LDRhtC40Lg=" />
     </table>
-    <table name="type_function" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KLQuNC/INGE0YPQvdC60YbQuNC4ICjQsdC+0LvRjNGI0LUsINC80LXQvdGM0YjQtSwg0YDQsNCy0L3QviDQuCDRgi7Qvy4p">
+    <table name="type_if" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0YLQuNC/INGD0YHQu9C+0LLQuNGPICjQsdC+0LvRjNGI0LUsINC80LXQvdGM0YjQtSwg0YDQsNCy0L3Qvi4uLik=">
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
-      <column name="name" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" remarks="0J3QsNC40LzQtdC90L7QstCw0L3QuNC1INGE0YPQvdC60YbQuNC4" />
+      <column name="name" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" />
     </table>
     <table name="type_operation" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KLQuNC/INC/0YDQvtC40LfQstC+0LTQuNC80YvRhSDQvtC/0LXRgNCw0YbQuNC5">
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
@@ -159,7 +213,8 @@
       <column name="game" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JjQvdC00LXQvdGC0LjRhNC40LrQsNGC0L7RgCDQuNCz0YDRiw==" />
       <column name="usr" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JjQtNC10L3RgtC40YTQuNC60LDRgtC+0YAg0L/QvtC70YzQt9C+0LLQsNGC0LXQu9GP" />
       <column name="reg_date" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" remarks="0JTQsNGC0LAg0Lgg0LLRgNC10LzRjyDRgNC10LPQuNGB0YDQsNGG0LjQuCDQv9C+0LvRjNC30L7QstCw0YLQtdC70Y8g0LIg0LjQs9GA0LU=" />
-      <column name="del_date" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn" remarks="0JLRgNC10LzRjyDQuCDQtNCw0YLQsCDRg9C00LDQu9C10L3QuNGPINC/0L7Qu9GM0LfQvtCy0LDRgtC10LvRjyDQuNC3INC40LPRgNGL" />
+      <column name="del_date" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" remarks="0JLRgNC10LzRjyDQuCDQtNCw0YLQsCDRg9C00LDQu9C10L3QuNGPINC/0L7Qu9GM0LfQvtCy0LDRgtC10LvRjyDQuNC3INC40LPRgNGL" />
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
     </table>
     <table name="usr_role" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KHQstGP0LfRjCDQv9C+0LvRjNC30L7QstCw0YLQtdC70LXQuSDQuCDRgNC+0LvQtdC5">
       <column name="usr" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
