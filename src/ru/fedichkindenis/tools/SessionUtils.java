@@ -10,6 +10,7 @@ import ru.fedichkindenis.entity.User;
 import ru.fedichkindenis.entity.UsrGame;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -62,5 +63,18 @@ public class SessionUtils {
         }
 
         return usrGame;
+    }
+
+    public static <T> T getEntityObject(Class<T> objClass, Serializable id){
+        Object result = null;
+        Session session = null;
+
+        try {
+            session = sessionFactory.openSession();
+            result = session.get(objClass, id);
+        } finally {
+            HibernateUtils.close(session);
+        }
+        return (T)result;
     }
 }

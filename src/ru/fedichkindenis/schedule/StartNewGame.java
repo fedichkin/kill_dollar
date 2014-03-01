@@ -5,10 +5,16 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.type.StringType;
 import ru.fedichkindenis.entity.Game;
+import ru.fedichkindenis.entity.Resources;
+import ru.fedichkindenis.entity.StateResources;
 import ru.fedichkindenis.entity.User;
+import ru.fedichkindenis.enums.InitResources;
 import ru.fedichkindenis.tools.HibernateUtils;
+import ru.fedichkindenis.tools.SessionUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.TimerTask;
 
@@ -38,7 +44,7 @@ public class StartNewGame extends TimerTask {
                     user.getPerson_uid(), ManagerBD.get_generate_res(game.getId()), 1, 1, null);
 
             ManagerBD.add_state_resources(game.getId(), new java.sql.Date(game.getSd().getTime()),
-                    user.getPerson_uid(), Resources.CREDITS.getId(), game.getCreditUser(), 1, null);
+                    user.getPerson_uid(), InitResources.CREDITS.getId(), game.getCreditUser(), 1, null);
         }
 
         log.info("INIT STATE_PPL AND STATE_RESOURCES_PPL");
@@ -55,7 +61,7 @@ public class StartNewGame extends TimerTask {
         int flatCount = 0;
 
         log.info("INIT RESOURCES_STATISTICS");
-        for(Resources res : Resources.values()){
+        for(InitResources res : InitResources.values()){
             int count = ManagerBD.getCountResourcesByGameDate(game.getId(),
                     new java.sql.Date(game.getSd().getTime()), res.getId());
 
@@ -80,6 +86,27 @@ public class StartNewGame extends TimerTask {
 
             if(!users.isEmpty()){
 
+                for(User user : users){
+
+                    StateResources stateResources1 = new StateResources();
+                    stateResources1.setGame(game);
+                    stateResources1.setGameDate(new Date());
+                    stateResources1.setUser(user);
+                    stateResources1.setResources(getGenerateResources());
+                    stateResources1.setCountRes(1);
+                    stateResources1.setHideRes(true);
+                    session.save(stateResources1);
+
+                    StateResources stateResources2 = new StateResources();
+                    stateResources2.setGame(game);
+                    stateResources2.setGameDate(new Date());
+                    stateResources2.setUser(user);
+                    stateResources2.setResources(SessionUtils.getEntityObject(Resources.class,
+                            new Long(InitResources.CREDITS.getId())));
+                    stateResources2.setCountRes(game.getCreditUser());
+                    stateResources2.setHideRes(true);
+                    session.save(stateResources2);
+                }
             }
 
             tx.commit();
@@ -90,5 +117,25 @@ public class StartNewGame extends TimerTask {
         } finally {
             HibernateUtils.close(session);
         }
+    }
+
+    private Resources getGenerateResources(){
+        Resources res = null;
+        Session session = null;
+
+        try {
+            session = sessionFactory.openSession();
+            Query query = session.createSQLQuery("SELECT moon_2040.`get_res_queue`(:game) AS res")
+                    .setParameter("game", game);
+
+            Long resId = (Long) query.uniqueResult();
+
+            res = (Resources) session.get(Resources.class, resId);
+
+        } finally {
+            HibernateUtils.close(session);
+        }
+
+        return res;
     }
 }
