@@ -96,11 +96,11 @@ public class StateResourcesPpl {
         this.gameDate = gameDate;
     }
 
-    public Ppl getIdPpl() {
+    public Ppl getPpl() {
         return ppl;
     }
 
-    public void setIdPpl(Ppl ppl) {
+    public void setPpl(Ppl ppl) {
         this.ppl = ppl;
     }
 

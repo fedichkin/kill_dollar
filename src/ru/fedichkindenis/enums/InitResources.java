@@ -16,15 +16,14 @@ public enum InitResources {
     ILMENITE (6, "Ильменит"),
     BUILDING_MATERIALS (7, "Строительные материалы"),
     ENERGY (8, "Энергия"),
-    STRUCTURE (9, "Строение"),
-    FARM (10, "Ферма"),
-    GREENHOUSE (11, "Оранжерея"),
-    POWERHOUSE (12, "Электростанция"),
-    MINING_STATION (13, "Добывающая станция"),
-    MINING_COMPLEX (14, "Горнодобывающий комплекс"),
-    METALLURGICAL_COMPLEX (15, "Металлургический комплекс"),
-    CONSTRUCTION_GANG (16, "Строительная артель"),
-    RESIDENTIAL_COMPLEX (17, "Жилой комплекс");
+    FARM (9, "Ферма"),
+    GREENHOUSE (10, "Оранжерея"),
+    POWERHOUSE (11, "Электростанция"),
+    MINING_STATION (12, "Добывающая станция"),
+    MINING_COMPLEX (13, "Горнодобывающий комплекс"),
+    METALLURGICAL_COMPLEX (14, "Металлургический комплекс"),
+    CONSTRUCTION_GANG (15, "Строительная артель"),
+    RESIDENTIAL_COMPLEX (16, "Жилой комплекс");
 
     private final Integer id;
     private final String name;

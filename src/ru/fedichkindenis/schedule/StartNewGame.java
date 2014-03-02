@@ -5,12 +5,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.type.StringType;
-import ru.fedichkindenis.entity.Game;
-import ru.fedichkindenis.entity.Resources;
-import ru.fedichkindenis.entity.StateResources;
-import ru.fedichkindenis.entity.User;
+import ru.fedichkindenis.entity.*;
 import ru.fedichkindenis.enums.InitResources;
+import ru.fedichkindenis.enums.StatusPpl;
 import ru.fedichkindenis.tools.HibernateUtils;
 import ru.fedichkindenis.tools.SessionUtils;
 
@@ -23,7 +20,7 @@ import java.util.TimerTask;
  * User: Fedichkin.DY
  * Date: 23.11.13
  * Time: 13:31
- * To change this template use File | Settings | File Templates.
+ * Инициализация перед началом игры
  */
 public class StartNewGame extends TimerTask {
 
@@ -84,29 +81,26 @@ public class StartNewGame extends TimerTask {
 
             List<User> users = query.list();
 
+            Date gameDate = new Date();
+
             if(!users.isEmpty()){
 
                 for(User user : users){
 
-                    StateResources stateResources1 = new StateResources();
-                    stateResources1.setGame(game);
-                    stateResources1.setGameDate(new Date());
-                    stateResources1.setUser(user);
-                    stateResources1.setResources(getGenerateResources());
-                    stateResources1.setCountRes(1);
-                    stateResources1.setHideRes(true);
-                    session.save(stateResources1);
-
-                    StateResources stateResources2 = new StateResources();
-                    stateResources2.setGame(game);
-                    stateResources2.setGameDate(new Date());
-                    stateResources2.setUser(user);
-                    stateResources2.setResources(SessionUtils.getEntityObject(Resources.class,
-                            new Long(InitResources.CREDITS.getId())));
-                    stateResources2.setCountRes(game.getCreditUser());
-                    stateResources2.setHideRes(true);
-                    session.save(stateResources2);
+                    saveStateResources(game, gameDate, user, getGenerateResources(), 1, true, session);
+                    saveStateResources(game, gameDate, user,
+                            SessionUtils.getEntityObject(Resources.class, new Long(InitResources.CREDITS.getId())),
+                            game.getCreditUser(), true, session);
                 }
+
+                for(int i = 0;i < game.getCountPpl();i++){
+                    Ppl ppl = savePpl(game, 1, StatusPpl.IN_GAME, gameDate, session);
+                    saveStateResourcesPpl(game, gameDate, ppl, game.getCreditPpl(), 0, 0, false, 0, session);
+                }
+
+                tx.commit();
+                session.clear();
+                tx.begin();
             }
 
             tx.commit();
@@ -137,5 +131,57 @@ public class StartNewGame extends TimerTask {
         }
 
         return res;
+    }
+
+    private void saveStateResources(Game g, Date gameDate, User user, Resources res,
+                                    Integer val, Boolean hide, Session s){
+
+        StateResources stateResources = new StateResources();
+        stateResources.setGame(g);
+        stateResources.setGameDate(gameDate);
+        stateResources.setUser(user);
+        stateResources.setResources(res);
+        stateResources.setCountRes(val);
+        stateResources.setHideRes(hide);
+        s.save(stateResources);
+    }
+
+    private Ppl savePpl(Game g, Integer dayCaps, StatusPpl stat, Date addDate, Session s){
+        Ppl ppl = new Ppl();
+        ppl.setGame(g);
+        ppl.setDaysCapsule(dayCaps);
+        ppl.setStat(stat);
+        ppl.setAddDate(addDate);
+        s.save(ppl);
+
+        return ppl;
+    }
+
+    private void saveStateResourcesPpl(Game g, Date gameDate, Ppl ppl, Integer credit, Integer payHouse,
+                                       Integer salary, Boolean parasit, Integer parasitStep, Session s){
+
+        StateResourcesPpl stateResourcesPpl = new StateResourcesPpl();
+        stateResourcesPpl.setGame(g);
+        stateResourcesPpl.setGameDate(gameDate);
+        stateResourcesPpl.setPpl(ppl);
+        stateResourcesPpl.setCredit(credit);
+        stateResourcesPpl.setPayHouse(payHouse);
+        stateResourcesPpl.setSalary(salary);
+        stateResourcesPpl.setParasit(parasit);
+        stateResourcesPpl.setParasitStep(parasitStep);
+        s.save(stateResourcesPpl);
+    }
+
+    private Integer getCountResourcesByGameDate(Resources res, Game g, Date gameDate, Session s){
+
+        Query query = s.createQuery("select count(sr.id) from StateResources sr where sr.resources = :res " +
+                "and sr.game = :game and sr.gameDate = :date")
+                .setParameter("res", res)
+                .setDate("date", gameDate)
+                .setParameter("game", g);
+
+        Integer count = ((Long) query.uniqueResult()).intValue();
+
+        return count;
     }
 }
