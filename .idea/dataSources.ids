@@ -40,6 +40,12 @@
       <column name="description" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="true" jdbcType="-1" remarks="0J7Qv9C40YHQsNC90LjQtSDQuNCz0YDRiw==" />
       <column name="status" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
     </table>
+    <table name="game_functions" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KTRg9C90LrRhtC40Lgg0LjRgdC/0L7Qu9GM0LfRg9C10LzRi9C1INCyINC40LPRgNC1INC00LvRjyDRgNCw0YHRh9GR0YLQsA==">
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="game" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
+      <column name="name" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" />
+      <column name="function" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
+    </table>
     <table name="game_res_stat" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KHQstGP0LfRjCDRgdGC0LDRgtC40YHRgtC40LrQuCDRgNC10YHRg9GA0YHQvtCyINGBINGB0YLQsNGC0LjRgdGC0LjQutC+0Lkg0LjQs9GA0Ys=">
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="game_stat" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" def="MA==" />
@@ -99,11 +105,8 @@
       <column name="game_date" sqlType="DATE" length="10" precision="0" nullable="false" jdbcType="91" />
       <column name="resources" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
       <column name="sale_cost" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" />
-      <column name="function_sale" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
       <column name="val" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" />
-      <column name="function_val" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
       <column name="buy_cost" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" />
-      <column name="function_buy" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
     </table>
     <table name="operand" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0JLQvtC30LzQvtC20L3Ri9C1INC+0L/QtdGA0LDQvdC00Ysg0LTQu9GPINGD0YHQu9C+0LLQuNC5INC4INGE0L7RgNC80YPQuw==">
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
@@ -152,8 +155,10 @@
       <column name="count" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MA==" remarks="0YHRg9C80LDRgNC90L7QtSDQutC+0LvQuNGH0LXRgdGC0LLQviDQutC+0L3QutGA0LXRgtC90L7Qs9C+INGA0LXRgdGD0YDRgdCw" />
       <column name="add" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MA==" remarks="0LTQvtCx0YvRgtC+INGA0LXRgdGD0YDRgdC+0LIg0LfQsCDQv9C+0YHQu9C10LTQvdC40Lkg0YXQvtC0" />
       <column name="del" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MA==" remarks="0L/QvtGC0YDQsNGH0LXQvdC+INGA0LXRgdGD0YDRgdC+0LIg0LfQsCDQv9C+0YHQu9C10LTQvdC40Lkg0YXQvtC0" />
-      <column name="price" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MA==" remarks="0YbQtdC90LAg0L3QsCDRgNC10YHRg9GA0YEg0L3QsCDQl9C10LzQu9C1" />
-      <column name="price_change" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" def="MA==" remarks="0LjQt9C80LXQvdC10L3QuNC1INGG0LXQvdGLINC90LAg0YDQtdGB0YPRgNGB" />
+      <column name="sale_price" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MA==" remarks="0YbQtdC90LAg0L3QsCDRgNC10YHRg9GA0YEg0L3QsCDQl9C10LzQu9C1ICjQv9GA0L7QtNCw0LbQsCk=" />
+      <column name="sale_price_change" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" def="MA==" remarks="0LjQt9C80LXQvdC10L3QuNC1INGG0LXQvdGLINC90LAg0YDQtdGB0YPRgNGBICjQv9GA0L7QtNCw0LbQsCk=" />
+      <column name="buy_price" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" def="MA==" remarks="0YbQtdC90LAg0L3QsCDRgNC10YHRg9GA0YEg0L3QsCDQl9C10LzQu9C1ICjQv9C+0LrRg9C/0LrQsCk=" />
+      <column name="buy_price_change" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" def="MA==" remarks="0LjQt9C80LXQvdC10L3QuNC1INGG0LXQvdGLINC90LAg0YDQtdGB0YPRgNGBICjQv9C+0LrRg9C/0LrQsCk=" />
     </table>
     <table name="role" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KDQvtC70Lg=">
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />

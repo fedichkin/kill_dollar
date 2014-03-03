@@ -50,14 +50,26 @@ public class ResourcesStatistics {
     /**
      * Цена ресурса на Земле
      */
-    @Column(name = "price", nullable = false)
-    private Integer price;
+    @Column(name = "sale_price", nullable = false)
+    private Integer salePrice;
 
     /**
      * Изменение цены ресурса
      */
-    @Column(name = "price_сhange", nullable = false)
-    private Integer priceChange;
+    @Column(name = "sale_price_change", nullable = false)
+    private Integer salePriceChange;
+
+    /**
+     * Цена ресурса на Земле
+     */
+    @Column(name = "buy_price", nullable = false)
+    private Integer buyPrice;
+
+    /**
+     * Изменение цены ресурса
+     */
+    @Column(name = "buy_price_change", nullable = false)
+    private Integer buyPriceChange;
 
     /**********GETTERS AND SETTERS**********/
 
@@ -97,19 +109,35 @@ public class ResourcesStatistics {
         this.del = del;
     }
 
-    public Integer getPrice() {
-        return price;
+    public Integer getSalePrice() {
+        return salePrice;
     }
 
-    public void setPrice(Integer price) {
-        this.price = price;
+    public void setSalePrice(Integer salePrice) {
+        this.salePrice = salePrice;
     }
 
-    public Integer getPriceChange() {
-        return priceChange;
+    public Integer getSalePriceChange() {
+        return salePriceChange;
     }
 
-    public void setPriceChange(Integer priceChange) {
-        this.priceChange = priceChange;
+    public void setSalePriceChange(Integer salePriceChange) {
+        this.salePriceChange = salePriceChange;
+    }
+
+    public Integer getBuyPrice() {
+        return buyPrice;
+    }
+
+    public void setBuyPrice(Integer buyPrice) {
+        this.buyPrice = buyPrice;
+    }
+
+    public Integer getBuyPriceChange() {
+        return buyPriceChange;
+    }
+
+    public void setBuyPriceChange(Integer buyPriceChange) {
+        this.buyPriceChange = buyPriceChange;
     }
 }

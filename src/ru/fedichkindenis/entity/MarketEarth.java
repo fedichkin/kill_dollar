@@ -50,37 +50,16 @@ public class MarketEarth {
     private Integer saleCost;
 
     /**
-     * Формула расчёта текущей цены продажи ресурсов
-     */
-    @ManyToOne
-    @JoinColumn(name = "function_sale", nullable = false)
-    private Function functionSale;
-
-    /**
      * Количество ресурсов на складе
      */
     @Column(name = "val", nullable = false)
     private Integer val;
 
     /**
-     * Формула расчёта текущего количества
-     */
-    @ManyToOne
-    @JoinColumn(name = "function_val", nullable = false)
-    private Function functionVal;
-
-    /**
      * Цена покупки ресурса
      */
     @Column(name = "buy_cost", nullable = false)
     private Integer buyCost;
-
-    /**
-     * Формула расчёта текущей цены покупки ресурсов
-     */
-    @ManyToOne
-    @JoinColumn(name = "function_buy", nullable = false)
-    private Function functionBuy;
 
     /**********GETTERS AND SETTERS**********/
 
@@ -120,14 +99,6 @@ public class MarketEarth {
         this.saleCost = saleCost;
     }
 
-    public Function getFunctionSale() {
-        return functionSale;
-    }
-
-    public void setFunctionSale(Function functionSale) {
-        this.functionSale = functionSale;
-    }
-
     public Integer getVal() {
         return val;
     }
@@ -136,27 +107,11 @@ public class MarketEarth {
         this.val = val;
     }
 
-    public Function getFunctionVal() {
-        return functionVal;
-    }
-
-    public void setFunctionVal(Function functionVal) {
-        this.functionVal = functionVal;
-    }
-
     public Integer getBuyCost() {
         return buyCost;
     }
 
     public void setBuyCost(Integer buyCost) {
         this.buyCost = buyCost;
-    }
-
-    public Function getFunctionBuy() {
-        return functionBuy;
-    }
-
-    public void setFunctionBuy(Function functionBuy) {
-        this.functionBuy = functionBuy;
     }
 }

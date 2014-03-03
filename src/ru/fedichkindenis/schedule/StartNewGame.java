@@ -11,9 +11,8 @@ import ru.fedichkindenis.enums.StatusPpl;
 import ru.fedichkindenis.tools.HibernateUtils;
 import ru.fedichkindenis.tools.SessionUtils;
 
-import java.util.Date;
-import java.util.List;
-import java.util.TimerTask;
+import javax.management.monitor.StringMonitor;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -172,7 +171,18 @@ public class StartNewGame extends TimerTask {
         s.save(stateResourcesPpl);
     }
 
-    private Integer getCountResourcesByGameDate(Resources res, Game g, Date gameDate, Session s){
+    private void firstSaveMarketEarth(Game g, Date gameDate, Session s){
+
+        Query query = s.createQuery("select new map(ime.resources as res, ime.startCost) from InitMarketEarth ime");
+
+        MarketEarth marketEarth = new MarketEarth();
+        marketEarth.setGame(g);
+        marketEarth.setGameDate(gameDate);
+    }
+
+    private Map<String, Object> getInfoResourcesByGameDate(Resources res, Game g, Date gameDate, Session s){
+
+        Map<String, Object> result = new HashMap<String, Object>();
 
         Query query = s.createQuery("select count(sr.id) from StateResources sr where sr.resources = :res " +
                 "and sr.game = :game and sr.gameDate = :date")
@@ -180,8 +190,35 @@ public class StartNewGame extends TimerTask {
                 .setDate("date", gameDate)
                 .setParameter("game", g);
 
-        Integer count = ((Long) query.uniqueResult()).intValue();
+        result.put("count", ((Long) query.uniqueResult()).intValue());
 
-        return count;
+        query = s.createQuery("select me.saleCost, me.buyCost from MarketEarth me where me.game = :game " +
+                " and me.gameDate = :date and me.resources = :res")
+                .setParameter("game", g)
+                .setTimestamp("date", gameDate)
+                .setParameter("res", res);
+
+        List<Object[]> objects = query.list();
+
+        result.put("sale_price", objects.get(0)[0]);
+        result.put("buy_price", objects.get(0)[1]);
+
+        return result;
+    }
+
+    private void saveResourcesStatistics(Resources res, Integer count, Integer add, Integer del,
+                                         Integer salePrice, Integer salePriceChange,
+                                         Integer buyPrice, Integer buyPriceChange, Session session){
+
+        ResourcesStatistics resourcesStatistics = new ResourcesStatistics();
+        resourcesStatistics.setResources(res);
+        resourcesStatistics.setCount(count);
+        resourcesStatistics.setAdd(add);
+        resourcesStatistics.setDel(del);
+        resourcesStatistics.setSalePrice(salePrice);
+        resourcesStatistics.setSalePrice(salePriceChange);
+        resourcesStatistics.setBuyPrice(buyPrice);
+        resourcesStatistics.setBuyPriceChange(buyPriceChange);
+        session.save(resourcesStatistics);
     }
 }
