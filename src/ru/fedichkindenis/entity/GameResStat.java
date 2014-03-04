@@ -25,15 +25,15 @@ public class GameResStat {
      * Ссылка на игру
      */
     @ManyToOne
-    @JoinColumn(name = "game", nullable = false)
-    private Game game;
+    @JoinColumn(name = "game_stat", nullable = false)
+    private GameStatistics gameStat;
 
     /**
      * Ссылка на ресурс
      */
     @ManyToOne
-    @JoinColumn(name = "resources", nullable = false)
-    private Resources resources;
+    @JoinColumn(name = "res_stat", nullable = false)
+    private ResourcesStatistics resStat;
 
     /**********GETTERS AND SETTERS**********/
 
@@ -41,19 +41,19 @@ public class GameResStat {
         return id;
     }
 
-    public Game getGame() {
-        return game;
+    public GameStatistics getGameStat() {
+        return gameStat;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    public void setGameStat(GameStatistics gameStat) {
+        this.gameStat = gameStat;
     }
 
-    public Resources getResources() {
-        return resources;
+    public ResourcesStatistics getResStat() {
+        return resStat;
     }
 
-    public void setResources(Resources resources) {
-        this.resources = resources;
+    public void setResStat(ResourcesStatistics resStat) {
+        this.resStat = resStat;
     }
 }
