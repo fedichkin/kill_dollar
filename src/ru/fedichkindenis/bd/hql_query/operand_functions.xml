@@ -6,58 +6,118 @@
 
 	<query name="operand.start_cost_earth"
 	       comment="Получаем стартовую цену Земли">
-	        select startCost 
-	        from InitMarketEarth ime 
-	        where ime.resources = :resources and ime.game = :game
+        select startCost
+
+        from InitMarketEarth ime
+
+        where ime.resources = :resources
+            and ime.game = :game
 	</query>
 
 	<query 	name="operand.const_value_earth"
 		   	comment="Константа количества ресурсов Земли">
-			select constValue 
-			from InitMarketEarth ime 
-			where ime.resources = :resources and ime.game = :game	
+        select constValue
+
+        from InitMarketEarth ime
+
+        where ime.resources = :resources
+            and ime.game = :game
 	</query>
 
 	<query	name="operand.start_value_earth"
 			comment="Стартовое количество на Земле">
-			select startValue 
-			from InitMarketEarth ime 
-			where ime.resources = :resources and ime.game = :game
+        select startValue
+
+        from InitMarketEarth ime
+
+        where ime.resources = :resources
+            and ime.game = :game
 	</query>
 
 	<query	name="operand.start_consum_earth"
 			comment="Константа потребления Земли">
-			select constConsum 
-			from InitMarketEarth ime 
-			where ime.resources = :resources and ime.game = :game
+        select constConsum
+
+        from InitMarketEarth ime
+
+        where ime.resources = :resources
+            and ime.game = :game
 	</query>
 
 	<query	name="operand.multi_price_incr_earth"
 			comment="Мультипликатор роста цен Земли">
-			select multiPriceIncr 
-			from InitMarketEarth ime 
-			where ime.resources = :resources and ime.game = :game
+        select multiPriceIncr
+
+        from InitMarketEarth ime
+
+        where ime.resources = :resources
+            and ime.game = :game
 	</query>
 
 	<query	name="operand.curr_sale_cost_earth"
 			comment="Текущая цена продажи на Земле">
-			select saleCost 
-			from MarketEarth me 
-			where me.resources = :resources and me.game = :game and me.gameDate = :gameDate
+        select saleCost
+
+        from MarketEarth me
+
+        where me.resources = :resources
+            and me.game = :game
+            and me.gameDate = :gameDate
 	</query>
 
 	<query	name="operand.curr_buy_cost_earth"
 			comment="Текущая цена покупки на Земле">
-			select buyCost 
-			from MarketEarth me 
-			where me.resources = :resources and me.game = :game and me.gameDate = :gameDate
+        select buyCost
+
+        from MarketEarth me
+
+        where me.resources = :resources
+            and me.game = :game
+            and me.gameDate = :gameDate
 	</query>
 
 	<query	name="operand.curr_value_earth"
 			comment="Текущее количество на Земле">
-			select val 
-			from MarketEarth me 
-			where me.resources = :resources and me.game = :game and me.gameDate = :gameDate
+        select val
+
+        from MarketEarth me
+
+        where me.resources = :resources
+            and me.game = :game
+            and me.gameDate = :gameDate
 	</query>
+
+    <query  name="operand.sum_all_credit_player"
+            comment="Общее количество кредитов у игроков">
+        select rs.count
+
+        from GameResStat grs
+            join grs.gameStat gs
+            join grs.resStat rs
+
+        where gs.game = :game
+            and gs.gameDate = :gameDate
+            and rs.resources = ru.fedichkindenis.enums.InitResources.CREDITS
+    </query>
+
+    <query  name="operand.count_player"
+            comment="Общее количество игроков" >
+        select count(ug.user)
+
+        from UsrGame ug
+
+        where ug.game = :game
+            and ug.delDate is null
+    </query>
+
+    <query  name="operand.count_ppl"
+            comment="Общее количество колонистов" >
+        select count(p.id)
+
+        from Ppl p
+
+        where p.game = :game
+            and p.stat = ru.fedichkindenis.enums.StatusPpl.IN_GAME
+    </query>
 
 </hibernate-mapping>

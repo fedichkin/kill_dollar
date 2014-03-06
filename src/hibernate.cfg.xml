@@ -43,6 +43,9 @@
         <mapping class="ru.fedichkindenis.entity.InitMarketEarth"/>
         <mapping class="ru.fedichkindenis.entity.MarketEarth"/>
 
+        <!-- HQL QUERY -->
+        <mapping resource="ru/fedichkindenis/bd/hql_query/operand_functions.xml"/>
+
     </session-factory>
 
 </hibernate-configuration>
