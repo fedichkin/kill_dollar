@@ -2,12 +2,14 @@ package ru.fedichkindenis.tools;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import ru.fedichkindenis.entity.Game;
 import ru.fedichkindenis.entity.User;
 import ru.fedichkindenis.entity.UsrGame;
+import ru.fedichkindenis.enums.Operand;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
@@ -76,5 +78,20 @@ public class SessionUtils {
             HibernateUtils.close(session);
         }
         return (T)result;
+    }
+
+    public static Object getValueOperand(Operand operand){
+        Object result = null;
+        Session session = null;
+
+        try {
+            Query query = session.getNamedQuery(operand.getQuery());
+            result = query.uniqueResult();
+
+        } finally {
+            HibernateUtils.close(session);
+        }
+
+        return result;
     }
 }

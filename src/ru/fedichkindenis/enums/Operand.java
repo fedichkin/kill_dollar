@@ -71,4 +71,8 @@ public enum Operand {
         this.name = name;
         this.query = query;
     }
+
+    public String getQuery(){
+        return query;
+    }
 }
