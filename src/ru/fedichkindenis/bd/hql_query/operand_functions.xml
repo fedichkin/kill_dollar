@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<query name="operand.start_cost_earth"
+	       comment="Получаем стартовую цену Земли">
+	        select startCost 
+	        from InitMarketEarth ime 
+	        where ime.resources = :resources and ime.game = :game
+	</query>
+
+	<query 	name="operand.const_value_earth"
+		   	comment="Константа количества ресурсов Земли">
+			select constValue 
+			from InitMarketEarth ime 
+			where ime.resources = :resources and ime.game = :game	
+	</query>
+
+	<query	name="operand.start_value_earth"
+			comment="Стартовое количество на Земле">
+			select startValue 
+			from InitMarketEarth ime 
+			where ime.resources = :resources and ime.game = :game
+	</query>
+
+	<query	name="operand.start_consum_earth"
+			comment="Константа потребления Земли">
+			select constConsum 
+			from InitMarketEarth ime 
+			where ime.resources = :resources and ime.game = :game
+	</query>
+
+	<query	name="operand.multi_price_incr_earth"
+			comment="Мультипликатор роста цен Земли">
+			select multiPriceIncr 
+			from InitMarketEarth ime 
+			where ime.resources = :resources and ime.game = :game
+	</query>
+
+	<query	name="operand.curr_sale_cost_earth"
+			comment="Текущая цена продажи на Земле">
+			select saleCost 
+			from MarketEarth me 
+			where me.resources = :resources and me.game = :game and me.gameDate = :gameDate
+	</query>
+
+	<query	name="operand.curr_buy_cost_earth"
+			comment="Текущая цена покупки на Земле">
+			select buyCost 
+			from MarketEarth me 
+			where me.resources = :resources and me.game = :game and me.gameDate = :gameDate
+	</query>
+
+	<query	name="operand.curr_value_earth"
+			comment="Текущее количество на Земле">
+			select val 
+			from MarketEarth me 
+			where me.resources = :resources and me.game = :game and me.gameDate = :gameDate
+	</query>
+
+</hibernate-mapping>
