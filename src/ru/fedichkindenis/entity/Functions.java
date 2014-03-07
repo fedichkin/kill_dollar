@@ -15,7 +15,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "function")
-public class Function {
+public class Functions {
 
     /**
      * Идентификатор
@@ -57,7 +57,7 @@ public class Function {
      */
     @ManyToOne
     @JoinColumn(name = "next_step", nullable = true)
-    private Function nextStep;
+    private Functions nextStep;
 
     /**********GETTERS AND SETTERS**********/
 
@@ -97,11 +97,11 @@ public class Function {
         this.operand = operand;
     }
 
-    public Function getNextStep() {
+    public Functions getNextStep() {
         return nextStep;
     }
 
-    public void setNextStep(Function nextStep) {
+    public void setNextStep(Functions nextStep) {
         this.nextStep = nextStep;
     }
 }

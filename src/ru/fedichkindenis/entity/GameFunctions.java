@@ -39,7 +39,7 @@ public class GameFunctions {
      */
     @ManyToOne
     @JoinColumn(name = "function", nullable = false)
-    private Function function;
+    private Functions functions;
 
     /**********GETTERS AND SETTERS**********/
 
@@ -63,11 +63,11 @@ public class GameFunctions {
         this.name = name;
     }
 
-    public Function getFunction() {
-        return function;
+    public Functions getFunctions() {
+        return functions;
     }
 
-    public void setFunction(Function function) {
-        this.function = function;
+    public void setFunctions(Functions functions) {
+        this.functions = functions;
     }
 }

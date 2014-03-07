@@ -11,8 +11,8 @@
         from InitMarketEarth ime
 
         where ime.resources = :resources
-            and ime.game = :game
-	</query>
+        and ime.game = :game
+    </query>
 
 	<query 	name="operand.const_value_earth"
 		   	comment="Константа количества ресурсов Земли">
@@ -21,8 +21,8 @@
         from InitMarketEarth ime
 
         where ime.resources = :resources
-            and ime.game = :game
-	</query>
+        and ime.game = :game
+    </query>
 
 	<query	name="operand.start_value_earth"
 			comment="Стартовое количество на Земле">
@@ -31,8 +31,8 @@
         from InitMarketEarth ime
 
         where ime.resources = :resources
-            and ime.game = :game
-	</query>
+        and ime.game = :game
+    </query>
 
 	<query	name="operand.start_consum_earth"
 			comment="Константа потребления Земли">
@@ -41,8 +41,8 @@
         from InitMarketEarth ime
 
         where ime.resources = :resources
-            and ime.game = :game
-	</query>
+        and ime.game = :game
+    </query>
 
 	<query	name="operand.multi_price_incr_earth"
 			comment="Мультипликатор роста цен Земли">
@@ -51,8 +51,8 @@
         from InitMarketEarth ime
 
         where ime.resources = :resources
-            and ime.game = :game
-	</query>
+        and ime.game = :game
+    </query>
 
 	<query	name="operand.curr_sale_cost_earth"
 			comment="Текущая цена продажи на Земле">
