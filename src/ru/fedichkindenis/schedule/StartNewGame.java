@@ -7,7 +7,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import ru.fedichkindenis.entity.*;
 import ru.fedichkindenis.enums.InitResources;
+import ru.fedichkindenis.enums.PurposeOfFunctions;
 import ru.fedichkindenis.enums.StatusPpl;
+import ru.fedichkindenis.tools.FormulaUtils;
 import ru.fedichkindenis.tools.HibernateUtils;
 import ru.fedichkindenis.tools.SessionUtils;
 
@@ -173,11 +175,30 @@ public class StartNewGame extends TimerTask {
 
     private void firstSaveMarketEarth(Game g, Date gameDate, Session s){
 
-        Query query = s.createQuery("select new map(ime.resources as res, ime.startCost) from InitMarketEarth ime");
+        Query query = s.createQuery("select " +
+                " new map(ime.resources as res, ime.startCost as cost, " +
+                " ime.startValue as val) " +
+                " from InitMarketEarth ime");
 
-        MarketEarth marketEarth = new MarketEarth();
-        marketEarth.setGame(g);
-        marketEarth.setGameDate(gameDate);
+        List<Map<String, Object>> objectList = query.list();
+
+        for(Map<String, Object> obj : objectList){
+            MarketEarth marketEarth = new MarketEarth();
+            marketEarth.setGame(g);
+            marketEarth.setGameDate(gameDate);
+            marketEarth.setResources((Resources)obj.get("res"));
+            marketEarth.setSaleCost((Integer)obj.get("cost"));
+            marketEarth.setVal((Integer)obj.get("val"));
+
+            query = s.createQuery("select gf.functions.id from GameFunctions gf " +
+                    " where gf.game = :game and gf.nameFunc = :func ")
+                    .setParameter("game", g)
+                    .setParameter("func", PurposeOfFunctions.BUY_COST_EARTH);
+
+            Long fId = (Long) query.uniqueResult();
+
+            marketEarth.setBuyCost((Integer) FormulaUtils.getResultFormula(fId));
+        }
     }
 
     private Map<String, Object> getInfoResourcesByGameDate(Resources res, Game g, Date gameDate, Session s){

@@ -43,7 +43,7 @@
     <table name="game_functions" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KTRg9C90LrRhtC40Lgg0LjRgdC/0L7Qu9GM0LfRg9C10LzRi9C1INCyINC40LPRgNC1INC00LvRjyDRgNCw0YHRh9GR0YLQsA==">
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="game" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
-      <column name="name" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" />
+      <column name="name_func" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" />
       <column name="function" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
     </table>
     <table name="game_res_stat" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KHQstGP0LfRjCDRgdGC0LDRgtC40YHRgtC40LrQuCDRgNC10YHRg9GA0YHQvtCyINGBINGB0YLQsNGC0LjRgdGC0LjQutC+0Lkg0LjQs9GA0Ys=">

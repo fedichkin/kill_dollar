@@ -1,5 +1,7 @@
 package ru.fedichkindenis.entity;
 
+import ru.fedichkindenis.enums.PurposeOfFunctions;
+
 import javax.persistence.*;
 
 /**
@@ -31,8 +33,9 @@ public class GameFunctions {
     /**
      * Наименование функции
      */
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "name_func", nullable = false)
+    @Enumerated(value = EnumType.ORDINAL)
+    private PurposeOfFunctions nameFunc;
 
     /**
      * Ссылка на функцию
@@ -55,12 +58,12 @@ public class GameFunctions {
         this.game = game;
     }
 
-    public String getName() {
-        return name;
+    public PurposeOfFunctions getName() {
+        return nameFunc;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(PurposeOfFunctions nameFunc) {
+        this.nameFunc = nameFunc;
     }
 
     public Functions getFunctions() {
