@@ -36,40 +36,6 @@ public class StartNewGame extends TimerTask {
     @Override
     public void run() {
 
-        /*log.info("INIT STATE_RESOURCES");
-        for(User user : game.getListUsers()){
-            ManagerBD.add_state_resources(game.getId(), new java.sql.Date(game.getSd().getTime()),
-                    user.getPerson_uid(), ManagerBD.get_generate_res(game.getId()), 1, 1, null);
-
-            ManagerBD.add_state_resources(game.getId(), new java.sql.Date(game.getSd().getTime()),
-                    user.getPerson_uid(), InitResources.CREDITS.getId(), game.getCreditUser(), 1, null);
-        }
-
-        log.info("INIT STATE_PPL AND STATE_RESOURCES_PPL");
-        for(int i = 0;i < game.getCountPpl();i++){
-            ManagerBD.add_state_ppl(i+1, game.getId(), 1, 0,
-                    new java.sql.Date(game.getSd().getTime()), null);
-
-            ManagerBD.add_state_resources_ppl(game.getId(), new java.sql.Date(game.getSd().getTime()),
-                    i+1, game.getCreditPpl(), 0, 0, 0, 0);
-        }
-
-        log.info("GET ID RESOURCES_STATISTICS");
-        Long idStaticRes = ManagerBD.get_next_id_resources_statistics();
-        int flatCount = 0;
-
-        log.info("INIT RESOURCES_STATISTICS");
-        for(InitResources res : InitResources.values()){
-            int count = ManagerBD.getCountResourcesByGameDate(game.getId(),
-                    new java.sql.Date(game.getSd().getTime()), res.getId());
-
-            ManagerBD.add_resources_statistics(idStaticRes, res.getId(), count, 0, 0, 0, 0);
-        }
-
-        log.info("INIT GAME_STATISTICS");
-        ManagerBD.add_game_statistics(game.getId(), new java.sql.Date(game.getSd().getTime()),
-                game.getCountPpl(), 0, game.getCreditPpl(), game.getCreditPpl(), game.getCreditPpl(),
-                game.getCountPpl(), 0, flatCount, flatCount, 0, 0, 0, idStaticRes, 0, 0, 0);*/
         Session session = null;
         Transaction tx = null;
 
@@ -99,9 +65,31 @@ public class StartNewGame extends TimerTask {
                     saveStateResourcesPpl(game, gameDate, ppl, game.getCreditPpl(), 0, 0, false, 0, session);
                 }
 
+                firstSaveMarketEarth(game, gameDate, session);
+
                 tx.commit();
                 session.clear();
                 tx.begin();
+
+                Integer countFlat = getCountFlat(game, gameDate, session);
+
+                GameStatistics gs = saveGameStatistics(game, gameDate, game.getCountPpl(), 0, game.getCreditPpl(), game.getCreditPpl(),
+                        game.getCreditPpl(), game.getCountPpl(), 0, countFlat, countFlat, 0, 0, 0, 0,0, 0, session);
+
+                for(InitResources inRes : InitResources.values()){
+                    Resources res = SessionUtils.getEntityObject(Resources.class, new Long(inRes.getId()));
+                    Map<String, Object> info = getInfoResourcesByGameDate(res, game, gameDate, session);
+
+                    ResourcesStatistics rs = saveResourcesStatistics(res, (Integer)info.get("count"), 0, 0, (Integer)info.get("sale_price"),
+                            0, (Integer)info.get("buy_price"), 0, session);
+
+                    GameResStat gameResStat = new GameResStat();
+
+                    gameResStat.setGameStat(gs);
+                    gameResStat.setResStat(rs);
+
+                    session.save(gameResStat);
+                }
             }
 
             tx.commit();
@@ -198,6 +186,8 @@ public class StartNewGame extends TimerTask {
             Long fId = (Long) query.uniqueResult();
 
             marketEarth.setBuyCost((Integer) FormulaUtils.getResultFormula(fId));
+
+            s.save(marketEarth);
         }
     }
 
@@ -227,7 +217,7 @@ public class StartNewGame extends TimerTask {
         return result;
     }
 
-    private void saveResourcesStatistics(Resources res, Integer count, Integer add, Integer del,
+    private ResourcesStatistics saveResourcesStatistics(Resources res, Integer count, Integer add, Integer del,
                                          Integer salePrice, Integer salePriceChange,
                                          Integer buyPrice, Integer buyPriceChange, Session session){
 
@@ -240,6 +230,52 @@ public class StartNewGame extends TimerTask {
         resourcesStatistics.setSalePrice(salePriceChange);
         resourcesStatistics.setBuyPrice(buyPrice);
         resourcesStatistics.setBuyPriceChange(buyPriceChange);
+
         session.save(resourcesStatistics);
+
+        return resourcesStatistics;
+    }
+
+    private GameStatistics saveGameStatistics(Game g, Date gameDate, Integer countPpl, Integer changeCountPpl,
+                                    Integer summMaxPpl, Integer summMinPpl, Integer summAvgPpl, Integer worklessCount,
+                                    Integer parazitCount, Integer flatCount, Integer flatCountEmpty,
+                                    Integer priceMaxFalt, Integer priceMinFlat, Integer priceAvgFlat,
+                                    Integer salaryMax, Integer salaryMin, Integer salaryAvg, Session s){
+
+        GameStatistics gameStatistics = new GameStatistics();
+        gameStatistics.setGame(g);
+        gameStatistics.setGameDate(gameDate);
+        gameStatistics.setCountPpl(countPpl);
+        gameStatistics.setChangeCountPpl(changeCountPpl);
+        gameStatistics.setSummMaxPpl(summMaxPpl);
+        gameStatistics.setSummMinPpl(summMinPpl);
+        gameStatistics.setSummAvgPpl(summAvgPpl);
+        gameStatistics.setWorklessCount(worklessCount);
+        gameStatistics.setParazitCount(parazitCount);
+        gameStatistics.setFlatCount(flatCount);
+        gameStatistics.setFlatCountEmpty(flatCountEmpty);
+        gameStatistics.setPriceMaxFlat(priceMaxFalt);
+        gameStatistics.setPriceMinFlat(priceMinFlat);
+        gameStatistics.setPriceAvgFlat(priceAvgFlat);
+        gameStatistics.setSalaryMax(salaryMax);
+        gameStatistics.setSalaryMin(salaryMin);
+        gameStatistics.setSalaryAvg(salaryAvg);
+
+        s.save(gameStatistics);
+
+        return gameStatistics;
+    }
+
+    private Integer getCountFlat(Game g, Date gameDate, Session s){
+
+        Integer count = 0;
+
+        Map<String, Object> info = getInfoResourcesByGameDate(SessionUtils.getEntityObject(Resources.class,
+                new Long(InitResources.RESIDENTIAL_COMPLEX.getId())), g, gameDate, s);
+        Integer countComplex = (Integer)info.get("count");
+
+        count = countComplex * 10;
+
+        return count;
     }
 }
