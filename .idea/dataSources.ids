@@ -21,9 +21,10 @@
     <table name="function" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KTRg9C90LrRhtC40Y8sINC80L7QttC10YHRgiDQv9GA0LXQtNGB0YLQsNCy0LvRj9GC0Ywg0LrQsNC6INGE0L7RgNC80YPQu9GDINGC0LDQuiDQuCDRg9GB0LvQvtCy0LjQtQ==">
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="is_if" sqlType="BIT" length="1" precision="0" nullable="false" jdbcType="-7" />
-      <column name="type_if" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" />
+      <column name="type_if" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
       <column name="el_function" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" />
       <column name="operand" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" />
+      <column name="const_operand" sqlType="DECIMAL UNSIGNED" length="10" precision="2" nullable="true" jdbcType="3" />
       <column name="next_step" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" />
     </table>
     <table name="game" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0JjQs9GA0Ys=">

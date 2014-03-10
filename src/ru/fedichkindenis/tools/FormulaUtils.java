@@ -58,6 +58,10 @@ public class FormulaUtils {
                     Integer op = (Integer) SessionUtils.getValueOperand(functions.getOperand());
                     operands.push(op);
                 }
+                else if(functions.getConstOperand() != null){
+                    Integer op = functions.getConstOperand().intValue();
+                    operands.push(op);
+                }
             }
 
         }while (functions.getNextStep() != null);

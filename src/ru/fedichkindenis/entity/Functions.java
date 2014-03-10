@@ -5,6 +5,7 @@ import ru.fedichkindenis.enums.Operand;
 import ru.fedichkindenis.enums.TypeIf;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 /**
  * Created with IntelliJ IDEA.
@@ -46,11 +47,17 @@ public class Functions {
     private ElFunction elFunction;
 
     /**
-     * Операнд
+     * Операнд (числовой элемент из игры)
      */
     @Column(name = "operand", nullable = true)
     @Enumerated(value = EnumType.ORDINAL)
     private Operand operand;
+
+    /**
+     * Операнд (константа, просто число)
+     */
+    @Column(name = "const_operand", nullable = true)
+    private BigDecimal constOperand;
 
     /**
      * Ссылка на на следующий шаг функции
@@ -103,5 +110,13 @@ public class Functions {
 
     public void setNextStep(Functions nextStep) {
         this.nextStep = nextStep;
+    }
+
+    public BigDecimal getConstOperand() {
+        return constOperand;
+    }
+
+    public void setConstOperand(BigDecimal constOperand) {
+        this.constOperand = constOperand;
     }
 }
