@@ -7,6 +7,7 @@ import ru.fedichkindenis.enums.ElFunction;
 import ru.fedichkindenis.entity.Functions;
 import ru.fedichkindenis.servlets.GetListGames;
 
+import java.math.BigDecimal;
 import java.util.Stack;
 
 /**
@@ -21,9 +22,9 @@ public class FormulaUtils {
     private static final Logger LOG = Logger.getLogger(GetListGames.class);
     private static final SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
 
-    public static Object getResultFormula(Long idFunc){
+    public static BigDecimal getResultFormula(Long idFunc){
 
-        Stack<Integer> operands = new Stack<Integer>();
+        Stack<BigDecimal> operands = new Stack<BigDecimal>();
         Stack<ElFunction> elements = new Stack<ElFunction>();
 
         Functions functions = null;
@@ -55,11 +56,15 @@ public class FormulaUtils {
                     }
                 }
                 else if(functions.getOperand() != null){
-                    Integer op = (Integer) SessionUtils.getValueOperand(functions.getOperand());
-                    operands.push(op);
+                    Object op = SessionUtils.getValueOperand(functions.getOperand());
+                    try {
+                        operands.push(NumberUtils.parseBigDecimal(op.toString(), "Не число"));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 else if(functions.getConstOperand() != null){
-                    Integer op = functions.getConstOperand().intValue();
+                    BigDecimal op = functions.getConstOperand();
                     operands.push(op);
                 }
             }
@@ -73,23 +78,29 @@ public class FormulaUtils {
         return operands.get(0);
     }
 
-    private static void processOperator(Stack<Integer> operands, ElFunction el){
+    private static void processOperator(Stack<BigDecimal> operands, ElFunction el){
 
-        Integer first = operands.pop();
-        Integer second = operands.pop();
+        BigDecimal first = null;
+        BigDecimal second = null;
+        try {
+            first = NumberUtils.parseBigDecimal(operands.pop().toString(), "Не число!");
+            second = NumberUtils.parseBigDecimal(operands.pop().toString(), "Не число!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         switch (el){
             case ADDITION:
-                operands.push(first + second);
+                operands.push((BigDecimal)NumberUtils.addition(first, second));
                 break;
             case SUBTRACTION:
-                operands.push(first - second);
+                operands.push((BigDecimal)NumberUtils.subtraction(first, second));
                 break;
             case MULTIPLICATION:
-                operands.push(first * second);
+                operands.push((BigDecimal)NumberUtils.multiplication(first, second));
                 break;
             case DIVISION:
-                operands.push(first / second);
+                operands.push((BigDecimal)NumberUtils.division(first, second));
                 break;
         }
     }
