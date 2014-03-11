@@ -185,7 +185,7 @@ public class StartNewGame extends TimerTask {
 
             Long fId = (Long) query.uniqueResult();
 
-            marketEarth.setBuyCost((Integer) FormulaUtils.getResultFormula(fId));
+            marketEarth.setBuyCost(FormulaUtils.getResultFormula(fId).intValue());
 
             s.save(marketEarth);
         }

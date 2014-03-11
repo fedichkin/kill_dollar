@@ -41,4 +41,13 @@ public class HibernateUtils {
         if (transaction != null && transaction.isActive() )
             transaction.rollback();
     }
+
+    public static void commit(Transaction tx, Session session){
+        if(tx != null && session != null){
+
+            tx.commit();
+            session.clear();
+            tx.begin();
+        }
+    }
 }
