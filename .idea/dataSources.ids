@@ -25,6 +25,7 @@
       <column name="el_function" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" />
       <column name="operand" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" />
       <column name="const_operand" sqlType="DECIMAL UNSIGNED" length="10" precision="2" nullable="true" jdbcType="3" />
+      <column name="func_operand" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" />
       <column name="next_step" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" />
     </table>
     <table name="game" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0JjQs9GA0Ys=">

@@ -67,6 +67,9 @@ public class FormulaUtils {
                     BigDecimal op = functions.getConstOperand();
                     operands.push(op);
                 }
+                else if(functions.getFuncOperand() != null){
+                    operands.push(getResultFormula(functions.getFuncOperand().getId()));
+                }
             }
 
         }while (functions.getNextStep() != null);

@@ -59,6 +59,10 @@ public class Functions {
     @Column(name = "const_operand", nullable = true)
     private BigDecimal constOperand;
 
+    @ManyToOne
+    @JoinColumn(name = "func_operand", nullable = true)
+    private Functions funcOperand;
+
     /**
      * Ссылка на на следующий шаг функции
      */
@@ -118,5 +122,13 @@ public class Functions {
 
     public void setConstOperand(BigDecimal constOperand) {
         this.constOperand = constOperand;
+    }
+
+    public Functions getFuncOperand() {
+        return funcOperand;
+    }
+
+    public void setFuncOperand(Functions funcOperand) {
+        this.funcOperand = funcOperand;
     }
 }

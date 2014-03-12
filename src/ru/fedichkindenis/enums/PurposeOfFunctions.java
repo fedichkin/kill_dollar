@@ -9,7 +9,9 @@ package ru.fedichkindenis.enums;
  */
 public enum PurposeOfFunctions {
 
-    BUY_COST_EARTH(1, "Цена покупки ресурсов с Земли");
+    BUY_COST_EARTH(1, "Цена покупки ресурсов с Земли"),
+    SALE_COST_EARTH(2, "Цена продажи ресурсов на Землю"),
+    VALUE_RES_EARTH(3, "Количество ресурсов на складах Земли");
 
     Integer id;
     String name;
