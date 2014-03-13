@@ -43,7 +43,7 @@ public class GoalGame {
      */
     @ManyToOne
     @JoinColumn(name = "function", nullable = false)
-    private Function function;
+    private Functions functions;
 
     /**
      * Победа (true) или поражение (false)
@@ -73,12 +73,12 @@ public class GoalGame {
         this.resources = resources;
     }
 
-    public Function getFunction() {
-        return function;
+    public Functions getFunction() {
+        return functions;
     }
 
-    public void setFunction(Function function) {
-        this.function = function;
+    public void setFunction(Functions functions) {
+        this.functions = functions;
     }
 
     public Boolean getWin() {
