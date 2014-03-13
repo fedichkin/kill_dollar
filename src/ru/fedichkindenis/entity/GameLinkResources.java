@@ -5,13 +5,13 @@ import javax.persistence.*;
 /**
  * Created with IntelliJ IDEA.
  * User: Fedichkin.DY
- * Date: 19.02.14
- * Time: 23:55
- * Эта сущность представляет собой цепочку ресурсов для создания нового
+ * Date: 14.03.14
+ * Time: 0:01
+ * Сущность представляет собой связь игры, ресурса и ссылки на цепочку составных ресурсов для даного
  */
 @Entity
-@Table(name = "link_resources")
-public class LinkResources {
+@Table(name = "game_link_resources")
+public class GameLinkResources {
 
     /**
      * Идентификатор
@@ -22,7 +22,14 @@ public class LinkResources {
     private Long id;
 
     /**
-     * ссылка на ресурс
+     * Ссылка на игру
+     */
+    @ManyToOne
+    @JoinColumn(name = "game", nullable = false)
+    private Game game;
+
+    /**
+     * Ссылка на ресурс
      */
     @ManyToOne
     @JoinColumn(name = "resources", nullable = false)
@@ -35,16 +42,24 @@ public class LinkResources {
     private Integer countRes;
 
     /**
-     * ссылка на следующий элемент
+     * ссылка на цепочку составных ресурсов
      */
     @ManyToOne
-    @JoinColumn(name = "next", nullable = true)
-    private LinkResources next;
+    @JoinColumn(name = "link_resources", nullable = true)
+    private LinkResources linkResources;
 
     /**********GETTERS AND SETTERS**********/
 
     public Long getId() {
         return id;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public Resources getResources() {
@@ -63,11 +78,11 @@ public class LinkResources {
         this.countRes = countRes;
     }
 
-    public LinkResources getNext() {
-        return next;
+    public LinkResources getLinkResources() {
+        return linkResources;
     }
 
-    public void setNext(LinkResources next) {
-        this.next = next;
+    public void setLinkResources(LinkResources linkResources) {
+        this.linkResources = linkResources;
     }
 }

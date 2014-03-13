@@ -48,6 +48,13 @@
       <column name="name_func" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" />
       <column name="function" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
     </table>
+    <table name="game_link_resources" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KHQstGP0LfRjCDQuNCz0YDRiyDQuCDRhNC+0YDQvNGD0Lsg0LTQu9GPINGA0LXRgdGD0YDRgdC+0LI=">
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="game" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
+      <column name="resources" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
+      <column name="count_res" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" />
+      <column name="link_resources" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
+    </table>
     <table name="game_res_stat" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KHQstGP0LfRjCDRgdGC0LDRgtC40YHRgtC40LrQuCDRgNC10YHRg9GA0YHQvtCyINGBINGB0YLQsNGC0LjRgdGC0LjQutC+0Lkg0LjQs9GA0Ys=">
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="game_stat" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" def="MA==" />
@@ -96,10 +103,9 @@
     </table>
     <table name="link_resources" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KHQstGP0LfRjCDRgNC10YHRg9GA0YHQvtCyINCyINC/0YDQvtC40LfQstC+0LTRgdGC0LLQtSDQtNGA0YPQs9C40YUg0YDQtdGB0YPRgNGB0L7Qsg==">
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
-      <column name="parent" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0J/RgNC+0LjQt9Cy0L7QtNC40LzRi9C5INGA0LXRgdGD0YDRgQ==" />
-      <column name="parent_count" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0JrQvtC70LjRh9C10YHRgtCy0L4g0L/RgNC+0LjQt9Cy0L7QtNC40LzQvtCz0L4g0YDQtdGB0YPRgNGB0LA=" />
-      <column name="child" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0J/RgNC+0LjQt9Cy0L7QtNGP0YnQuNC5INGA0LXRgdGD0YDRgQ==" />
-      <column name="child_count" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0JrQvtC70LjRh9C10YHRgtCy0L4g0L/RgNC+0LjQt9Cy0L7QtNGP0YnQtdCz0L4g0YDQtdGB0YPRgNGB0LA=" />
+      <column name="resources" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0J/RgNC+0LjQt9Cy0L7QtNC40LzRi9C5INGA0LXRgdGD0YDRgQ==" />
+      <column name="count_res" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0JrQvtC70LjRh9C10YHRgtCy0L4g0L/RgNC+0LjQt9Cy0L7QtNC40LzQvtCz0L4g0YDQtdGB0YPRgNGB0LA=" />
+      <column name="next" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0J/RgNC+0LjQt9Cy0L7QtNGP0YnQuNC5INGA0LXRgdGD0YDRgQ==" />
     </table>
     <table name="market_earth" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KDRi9C90L7QuiDQl9C10LzQu9C4">
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
