@@ -55,8 +55,7 @@ public class StartNewGame extends TimerTask {
                 for(User user : users){
 
                     saveStateResources(game, gameDate, user, getGenerateResources(), 1, true, session);
-                    saveStateResources(game, gameDate, user,
-                            SessionUtils.getEntityObject(Resources.class, new Long(InitResources.CREDITS.getId())),
+                    saveStateResources(game, gameDate, user, SessionUtils.getResources(InitResources.CREDITS),
                             game.getCreditUser(), true, session);
                 }
 
@@ -77,7 +76,7 @@ public class StartNewGame extends TimerTask {
                         game.getCreditPpl(), game.getCountPpl(), 0, countFlat, countFlat, 0, 0, 0, 0,0, 0, session);
 
                 for(InitResources inRes : InitResources.values()){
-                    Resources res = SessionUtils.getEntityObject(Resources.class, new Long(inRes.getId()));
+                    Resources res = SessionUtils.getResources(inRes);
                     Map<String, Object> info = getInfoResourcesByGameDate(res, game, gameDate, session);
 
                     ResourcesStatistics rs = saveResourcesStatistics(res, (Integer)info.get("count"), 0, 0, (Integer)info.get("sale_price"),
@@ -113,7 +112,7 @@ public class StartNewGame extends TimerTask {
 
             Long resId = (Long) query.uniqueResult();
 
-            res = (Resources) session.get(Resources.class, resId);
+            res = SessionUtils.getEntityObject(Resources.class, resId);
 
         } finally {
             HibernateUtils.close(session);
@@ -270,8 +269,9 @@ public class StartNewGame extends TimerTask {
 
         Integer count = 0;
 
-        Map<String, Object> info = getInfoResourcesByGameDate(SessionUtils.getEntityObject(Resources.class,
-                new Long(InitResources.RESIDENTIAL_COMPLEX.getId())), g, gameDate, s);
+        Map<String, Object> info =
+                getInfoResourcesByGameDate(SessionUtils.getResources(InitResources.RESIDENTIAL_COMPLEX),
+                        g, gameDate, s);
         Integer countComplex = (Integer)info.get("count");
 
         count = countComplex * 10;

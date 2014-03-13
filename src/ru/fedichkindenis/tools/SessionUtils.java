@@ -7,8 +7,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import ru.fedichkindenis.entity.Game;
+import ru.fedichkindenis.entity.Resources;
 import ru.fedichkindenis.entity.User;
 import ru.fedichkindenis.entity.UsrGame;
+import ru.fedichkindenis.enums.InitResources;
 import ru.fedichkindenis.enums.Operand;
 
 import javax.servlet.http.HttpServletRequest;
@@ -93,5 +95,11 @@ public class SessionUtils {
         }
 
         return result;
+    }
+
+    public static Resources getResources(InitResources initResources){
+        Long idRes = new Long(initResources.getId());
+
+        return getEntityObject(Resources.class, idRes);
     }
 }

@@ -105,10 +105,44 @@ public class CreateNewGame extends HttpServlet {
             /**
              * Создание целей игры на поражение и победу
              */
-            addGoalGame(game, SessionUtils.getEntityObject(Resources.class, new Long(InitResources.PPL.getId())),
+            addGoalGame(game, SessionUtils.getResources(InitResources.PPL),
                     ifWin, true, session);
-            addGoalGame(game, SessionUtils.getEntityObject(Resources.class, new Long(InitResources.PPL.getId())),
+            addGoalGame(game, SessionUtils.getResources(InitResources.PPL),
                     ifNotWin, false, session);
+
+            /**
+             * Инициализация настроек рынка Земли
+             */
+            addInitMarketEarth(game, SessionUtils.getResources(InitResources.FOOD), 20, 1000, 3000,
+                    new BigDecimal(0.2), 3, session);
+            addInitMarketEarth(game, SessionUtils.getResources(InitResources.OXYGEN), 20, 1000, 7000,
+                    new BigDecimal(0.15), 3, session);
+            addInitMarketEarth(game, SessionUtils.getResources(InitResources.ENERGY), 20, 500, 2500,
+                    new BigDecimal(0.18), 5, session);
+            addInitMarketEarth(game, SessionUtils.getResources(InitResources.HELIUM3), 20, 300, 100,
+                    new BigDecimal(0.05), 5, session);
+            addInitMarketEarth(game, SessionUtils.getResources(InitResources.ILMENITE), 20, 300, 100,
+                    new BigDecimal(0.05), 4, session);
+            addInitMarketEarth(game, SessionUtils.getResources(InitResources.BUILDING_MATERIALS), 20, 750, 1200,
+                    new BigDecimal(0.15), 4, session);
+
+            /**
+             * Добавление цен на ресурсы для первоначальной закупки при старте игры
+             */
+            addStartCostResources(game, SessionUtils.getResources(InitResources.FOOD), 15, session);
+            addStartCostResources(game, SessionUtils.getResources(InitResources.OXYGEN), 10, session);
+            addStartCostResources(game, SessionUtils.getResources(InitResources.ENERGY), 25, session);
+            addStartCostResources(game, SessionUtils.getResources(InitResources.HELIUM3), 150, session);
+            addStartCostResources(game, SessionUtils.getResources(InitResources.ILMENITE), 150, session);
+            addStartCostResources(game, SessionUtils.getResources(InitResources.BUILDING_MATERIALS), 30, session);
+            addStartCostResources(game, SessionUtils.getResources(InitResources.FARM), 150, session);
+            addStartCostResources(game, SessionUtils.getResources(InitResources.GREENHOUSE), 150, session);
+            addStartCostResources(game, SessionUtils.getResources(InitResources.POWERHOUSE), 150, session);
+            addStartCostResources(game, SessionUtils.getResources(InitResources.MINING_STATION), 150, session);
+            addStartCostResources(game, SessionUtils.getResources(InitResources.MINING_COMPLEX), 150, session);
+            addStartCostResources(game, SessionUtils.getResources(InitResources.METALLURGICAL_COMPLEX), 150, session);
+            addStartCostResources(game, SessionUtils.getResources(InitResources.CONSTRUCTION_GANG), 150, session);
+            addStartCostResources(game, SessionUtils.getResources(InitResources.RESIDENTIAL_COMPLEX), 150, session);
 
             tx.commit();
         } catch (Exception e){
@@ -125,6 +159,21 @@ public class CreateNewGame extends HttpServlet {
         doPost(request, response);
     }
 
+    /**
+     * Метод для создания новой игры
+     * @param name          - наименование игры
+     * @param maxPlayer     - максимальное количество игроков (-1 не ограничено)
+     * @param startDate     - дата начала игры
+     * @param step          - длительность игрового дня
+     * @param countPpl      - стартовое количество колонистов
+     * @param creditPpl     - стартовое количество кредитов у колонистов
+     * @param creditUser    - стартовое количество кредитов у игроков
+     * @param lifeOutFlat   - количество дней на которые расчитаны капсулы
+     * @param description   - описание игры
+     * @param status        - статус игры
+     * @param session       - текущая сессия соединения с БД
+     * @return
+     */
     private Game createGame(String name, Integer maxPlayer, Date startDate, Date step,
                             Integer countPpl, Integer creditPpl, Integer creditUser,
                             Integer lifeOutFlat, String description, StatusGame status, Session session){
@@ -147,6 +196,17 @@ public class CreateNewGame extends HttpServlet {
         return game;
     }
 
+    /**
+     * Метод для создания функций (формул и условий)
+     * @param typeIf        - знак условия
+     * @param el            - оператор
+     * @param op            - операнд
+     * @param constOp       - фиксированый операнд
+     * @param funcOperand   - операнд вычисляемый через функцию
+     * @param next          - следующий элемент функции
+     * @param session       - текущая сессия соединения с БД
+     * @return
+     */
     private Functions createFunction(TypeIf typeIf, ElFunction el, Operand op, BigDecimal constOp,
                                      Functions funcOperand, Functions next, Session session){
 
@@ -180,6 +240,13 @@ public class CreateNewGame extends HttpServlet {
         return functions;
     }
 
+    /**
+     * Метод добавляет функции в игру
+     * @param game          - игра
+     * @param name          - наименование функции
+     * @param functions     - функция
+     * @param session       - текущая сессия соединения с БД
+     */
     private void addFuncToGame(Game game, PurposeOfFunctions name, Functions functions,
                                Session session){
 
@@ -192,6 +259,14 @@ public class CreateNewGame extends HttpServlet {
         session.flush();
     }
 
+    /**
+     * Метод добавления целей игры
+     * @param game          - игра
+     * @param resources     - ресурс
+     * @param functions     - условие
+     * @param win           - победа? (победа: true, поражение: false)
+     * @param session       - текущая сессия соединения с БД
+     */
     private void addGoalGame(Game game, Resources resources, Functions functions, Boolean win,
                              Session session){
 
@@ -204,4 +279,52 @@ public class CreateNewGame extends HttpServlet {
         session.save(goalGame);
         session.flush();
     }
+
+    /**
+     * Метод инициализирует настройки рынка Земли для каждого ресурса
+     * @param game              - игра
+     * @param resources         - ресурс
+     * @param startCost         - стартовая цена
+     * @param constValue        - константа количества
+     * @param startValue        - стартовое количество ресурсов
+     * @param constConsum       - константа потребления
+     * @param multiPriceIncr    - мультипликатор роста цен
+     * @param session           - текущая сессия соединения с БД
+     */
+    private void addInitMarketEarth(Game game, Resources resources, Integer startCost, Integer constValue,
+                                       Integer startValue, BigDecimal constConsum, Integer multiPriceIncr,
+                                       Session session){
+
+        InitMarketEarth initMarketEarth = new InitMarketEarth();
+        initMarketEarth.setGame(game);
+        initMarketEarth.setResources(resources);
+        initMarketEarth.setStartCost(startCost);
+        initMarketEarth.setConstValue(constValue);
+        initMarketEarth.setStartValue(startValue);
+        initMarketEarth.setConstConsum(constConsum);
+        initMarketEarth.setMultiPriceIncr(multiPriceIncr);
+
+        session.save(initMarketEarth);
+        session.flush();
+    }
+
+    /**
+     * Метод задаёт цены на ресурсы используемые при старте игры для первичной закупки
+     * @param game          - игра
+     * @param resources     - ресурс
+     * @param cost          - цена на ресурс
+     * @param session       - текущая сессия соединения с БД
+     */
+    private void addStartCostResources(Game game, Resources resources, Integer cost, Session session){
+
+        StartCostResources startCostResources = new StartCostResources();
+        startCostResources.setGame(game);
+        startCostResources.setResources(resources);
+        startCostResources.setCost(cost);
+
+        session.save(startCostResources);
+        session.flush();
+    }
+
+    //private void addLinkResources()
 }
