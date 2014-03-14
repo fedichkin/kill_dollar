@@ -23,7 +23,8 @@ public enum InitResources {
     MINING_COMPLEX (13, "Горнодобывающий комплекс"),
     METALLURGICAL_COMPLEX (14, "Металлургический комплекс"),
     CONSTRUCTION_GANG (15, "Строительная артель"),
-    RESIDENTIAL_COMPLEX (16, "Жилой комплекс");
+    RESIDENTIAL_COMPLEX (16, "Жилой комплекс"),
+    FLAT(17, "Квартира");
 
     private final Integer id;
     private final String name;

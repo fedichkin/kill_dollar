@@ -144,6 +144,153 @@ public class CreateNewGame extends HttpServlet {
             addStartCostResources(game, SessionUtils.getResources(InitResources.CONSTRUCTION_GANG), 150, session);
             addStartCostResources(game, SessionUtils.getResources(InitResources.RESIDENTIAL_COMPLEX), 150, session);
 
+            /**
+             * Цепочка ресурсов для производства еды
+             */
+            LinkResources food;
+            food = addLinkResources(SessionUtils.getResources(InitResources.FARM), 1, null, session);
+            food = addLinkResources(SessionUtils.getResources(InitResources.ENERGY), 1, food, session);
+            food = addLinkResources(SessionUtils.getResources(InitResources.PPL), 1, food, session);
+            food = addLinkResources(SessionUtils.getResources(InitResources.CREDITS), null, food, session);
+
+            /**
+             * Цепочка ресурсов для производства кислорода
+             */
+            LinkResources oxygen;
+            oxygen = addLinkResources(SessionUtils.getResources(InitResources.GREENHOUSE), 1, null, session);
+            oxygen = addLinkResources(SessionUtils.getResources(InitResources.ENERGY), 1, oxygen, session);
+            oxygen = addLinkResources(SessionUtils.getResources(InitResources.PPL), 1, oxygen, session);
+            oxygen = addLinkResources(SessionUtils.getResources(InitResources.CREDITS), null, oxygen, session);
+
+            /**
+             * Цепочка ресурсов для производства энергии
+             */
+            LinkResources energy;
+            energy = addLinkResources(SessionUtils.getResources(InitResources.POWERHOUSE), 1, null, session);
+            energy = addLinkResources(SessionUtils.getResources(InitResources.HELIUM3), 2, energy, session);
+            energy = addLinkResources(SessionUtils.getResources(InitResources.PPL), 1, energy, session);
+            energy = addLinkResources(SessionUtils.getResources(InitResources.CREDITS), null, energy, session);
+
+            /**
+             * Цепочка ресурсов для производства гелия-3
+             */
+            LinkResources helium3;
+            helium3 = addLinkResources(SessionUtils.getResources(InitResources.MINING_STATION), 1, null, session);
+            helium3 = addLinkResources(SessionUtils.getResources(InitResources.ENERGY), 1, helium3, session);
+            helium3 = addLinkResources(SessionUtils.getResources(InitResources.PPL), 2, helium3, session);
+            helium3 = addLinkResources(SessionUtils.getResources(InitResources.CREDITS), null, helium3, session);
+
+            /**
+             * Цепочка ресурсов для производства ильменита
+             */
+            LinkResources ilmenite;
+            ilmenite = addLinkResources(SessionUtils.getResources(InitResources.MINING_COMPLEX), 1, null, session);
+            ilmenite = addLinkResources(SessionUtils.getResources(InitResources.ENERGY), 2, ilmenite, session);
+            ilmenite = addLinkResources(SessionUtils.getResources(InitResources.PPL), 2, ilmenite, session);
+            ilmenite = addLinkResources(SessionUtils.getResources(InitResources.CREDITS), null, ilmenite, session);
+
+            /**
+             * Цепочка ресурсов для производства 1 единицы строительных материалов
+             */
+            LinkResources buildingMaterials1;
+            buildingMaterials1 = addLinkResources(SessionUtils.getResources(InitResources.METALLURGICAL_COMPLEX),
+                    1, null, session);
+            buildingMaterials1 = addLinkResources(SessionUtils.getResources(InitResources.ENERGY),
+                    1, buildingMaterials1, session);
+            buildingMaterials1 = addLinkResources(SessionUtils.getResources(InitResources.ILMENITE),
+                    1, buildingMaterials1, session);
+            buildingMaterials1 = addLinkResources(SessionUtils.getResources(InitResources.PPL),
+                    2, buildingMaterials1, session);
+            buildingMaterials1 = addLinkResources(SessionUtils.getResources(InitResources.CREDITS),
+                    null, buildingMaterials1, session);
+
+            /**
+             * Цепочка ресурсов для производства 2 единиц строительных материалов
+             */
+            LinkResources buildingMaterials2;
+            buildingMaterials2 = addLinkResources(SessionUtils.getResources(InitResources.METALLURGICAL_COMPLEX),
+                    1, null, session);
+            buildingMaterials2 = addLinkResources(SessionUtils.getResources(InitResources.ENERGY),
+                    1, buildingMaterials2, session);
+            buildingMaterials2 = addLinkResources(SessionUtils.getResources(InitResources.ILMENITE),
+                    2, buildingMaterials2, session);
+            buildingMaterials2 = addLinkResources(SessionUtils.getResources(InitResources.PPL),
+                    2, buildingMaterials2, session);
+            buildingMaterials2 = addLinkResources(SessionUtils.getResources(InitResources.CREDITS),
+                    null, buildingMaterials2, session);
+
+            /**
+             * Цепочка ресурсов для производства 3 единиц строительных материалов
+             */
+            LinkResources buildingMaterials3;
+            buildingMaterials3 = addLinkResources(SessionUtils.getResources(InitResources.METALLURGICAL_COMPLEX),
+                    1, null, session);
+            buildingMaterials3 = addLinkResources(SessionUtils.getResources(InitResources.ENERGY),
+                    1, buildingMaterials3, session);
+            buildingMaterials3 = addLinkResources(SessionUtils.getResources(InitResources.ILMENITE),
+                    3, buildingMaterials3, session);
+            buildingMaterials3 = addLinkResources(SessionUtils.getResources(InitResources.PPL),
+                    2, buildingMaterials3, session);
+            buildingMaterials3 = addLinkResources(SessionUtils.getResources(InitResources.CREDITS),
+                    null, buildingMaterials3, session);
+
+            /**
+             * Цепочка ресурсов для производства 4 единиц строительных материалов
+             */
+            LinkResources buildingMaterials4;
+            buildingMaterials4 = addLinkResources(SessionUtils.getResources(InitResources.METALLURGICAL_COMPLEX),
+                    1, null, session);
+            buildingMaterials4 = addLinkResources(SessionUtils.getResources(InitResources.ENERGY),
+                    1, buildingMaterials4, session);
+            buildingMaterials4 = addLinkResources(SessionUtils.getResources(InitResources.ILMENITE),
+                    4, buildingMaterials4, session);
+            buildingMaterials4 = addLinkResources(SessionUtils.getResources(InitResources.PPL),
+                    2, buildingMaterials4, session);
+            buildingMaterials4 = addLinkResources(SessionUtils.getResources(InitResources.CREDITS),
+                    null, buildingMaterials4, session);
+
+            /**
+             * Цепочка ресурсов для производства 5 единиц строительных материалов
+             */
+            LinkResources buildingMaterials5;
+            buildingMaterials5 = addLinkResources(SessionUtils.getResources(InitResources.METALLURGICAL_COMPLEX),
+                    1, null, session);
+            buildingMaterials5 = addLinkResources(SessionUtils.getResources(InitResources.ENERGY),
+                    1, buildingMaterials5, session);
+            buildingMaterials5 = addLinkResources(SessionUtils.getResources(InitResources.ILMENITE),
+                    5, buildingMaterials5, session);
+            buildingMaterials5 = addLinkResources(SessionUtils.getResources(InitResources.PPL),
+                    2, buildingMaterials5, session);
+            buildingMaterials5 = addLinkResources(SessionUtils.getResources(InitResources.CREDITS),
+                    null, buildingMaterials5, session);
+
+            /**
+             * Цепочка ресурсов для производства любого строения
+             */
+            LinkResources building;
+            building = addLinkResources(SessionUtils.getResources(InitResources.CONSTRUCTION_GANG), 1, null, session);
+            building = addLinkResources(SessionUtils.getResources(InitResources.ENERGY), 1, building, session);
+            building = addLinkResources(SessionUtils.getResources(InitResources.BUILDING_MATERIALS), 2, building, session);
+            building = addLinkResources(SessionUtils.getResources(InitResources.PPL), 2, building, session);
+            building = addLinkResources(SessionUtils.getResources(InitResources.CREDITS), null, building, session);
+
+            /**
+             * Цепочка ресурсов для получения жилых квартир
+             * TODO Особый случай, производится мгновенно, надо придумать как обойти костыль
+             */
+            LinkResources flat;
+            flat = addLinkResources(SessionUtils.getResources(InitResources.RESIDENTIAL_COMPLEX), 1, null, session);
+            flat = addLinkResources(SessionUtils.getResources(InitResources.ENERGY), 1, flat, session);
+
+            /**
+             * Цепочка ресурсов для получения кредитов
+             */
+            LinkResources credit;
+            credit = addLinkResources(SessionUtils.getResources(InitResources.FLAT), 1, null, session);
+            credit = addLinkResources(SessionUtils.getResources(InitResources.OXYGEN), 1, credit, session);
+            credit = addLinkResources(SessionUtils.getResources(InitResources.FOOD), 1, credit, session);
+            credit = addLinkResources(SessionUtils.getResources(InitResources.PPL), 1, credit, session);
+
             tx.commit();
         } catch (Exception e){
             HibernateUtils.rollback(tx);
@@ -326,5 +473,48 @@ public class CreateNewGame extends HttpServlet {
         session.flush();
     }
 
-    //private void addLinkResources()
+    /**
+     * Метод добавляет элемент в цепочку элементов для создания ресурсов
+     * @param resources     - ресурс
+     * @param countRes      - количество ресурсов
+     * @param next          - ссылка на следующий элемент цепочки
+     * @param session       - текущая сессия соединения с БД
+     * @return
+     */
+    private LinkResources addLinkResources(Resources resources, Integer countRes, LinkResources next,
+                                           Session session){
+
+        LinkResources linkResources = new LinkResources();
+        linkResources.setResources(resources);
+        linkResources.setCountRes(countRes);
+        linkResources.setNext(next);
+
+        session.save(linkResources);
+        session.flush();
+
+        return linkResources;
+    }
+
+    /**
+     * Метод добавляет свЯзь между цепочкой производящих ресурсов, игрой и производимым ресурсом
+     * @param game              - игра
+     * @param resources         - ресурс
+     * @param countUp           - количество ресурсов (верхняя граница)
+     * @param countDown         - количество ресурсов (нижняя граница)
+     * @param linkResources     - ссылка на цепочку ресурсов
+     * @param session           - текущая сессия соединения с БД
+     */
+    private void addGameLinkResources(Game game, Resources resources, Integer countUp, Integer countDown,
+                                      LinkResources linkResources, Session session){
+
+        GameLinkResources gameLinkResources = new GameLinkResources();
+        gameLinkResources.setGame(game);
+        gameLinkResources.setResources(resources);
+        gameLinkResources.setCountUp(countUp);
+        gameLinkResources.setCountDown(countDown);
+        gameLinkResources.setLinkResources(linkResources);
+
+        session.save(gameLinkResources);
+        session.flush();
+    }
 }

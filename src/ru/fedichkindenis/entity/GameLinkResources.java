@@ -36,10 +36,16 @@ public class GameLinkResources {
     private Resources resources;
 
     /**
-     * количество ресурсов
+     * количество ресурсов (верхняя граница)
      */
-    @Column(name = "count_res", nullable = false)
-    private Integer countRes;
+    @Column(name = "count_up", nullable = true)
+    private Integer countUp;
+
+    /**
+     * количество ресурсов (нижняя граница)
+     */
+    @Column(name = "count_down", nullable = true)
+    private Integer countDown;
 
     /**
      * ссылка на цепочку составных ресурсов
@@ -70,19 +76,27 @@ public class GameLinkResources {
         this.resources = resources;
     }
 
-    public Integer getCountRes() {
-        return countRes;
-    }
-
-    public void setCountRes(Integer countRes) {
-        this.countRes = countRes;
-    }
-
     public LinkResources getLinkResources() {
         return linkResources;
     }
 
     public void setLinkResources(LinkResources linkResources) {
         this.linkResources = linkResources;
+    }
+
+    public Integer getCountUp() {
+        return countUp;
+    }
+
+    public void setCountUp(Integer countUp) {
+        this.countUp = countUp;
+    }
+
+    public Integer getCountDown() {
+        return countDown;
+    }
+
+    public void setCountDown(Integer countDown) {
+        this.countDown = countDown;
     }
 }

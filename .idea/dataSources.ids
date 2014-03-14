@@ -52,7 +52,8 @@
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="game" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
       <column name="resources" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
-      <column name="count_res" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" />
+      <column name="count_up" sqlType="INT UNSIGNED" length="10" precision="0" nullable="true" jdbcType="-5" />
+      <column name="count_down" sqlType="INT UNSIGNED" length="10" precision="0" nullable="true" jdbcType="-5" />
       <column name="link_resources" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
     </table>
     <table name="game_res_stat" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KHQstGP0LfRjCDRgdGC0LDRgtC40YHRgtC40LrQuCDRgNC10YHRg9GA0YHQvtCyINGBINGB0YLQsNGC0LjRgdGC0LjQutC+0Lkg0LjQs9GA0Ys=">
@@ -105,7 +106,7 @@
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="resources" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0J/RgNC+0LjQt9Cy0L7QtNC40LzRi9C5INGA0LXRgdGD0YDRgQ==" />
       <column name="count_res" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0JrQvtC70LjRh9C10YHRgtCy0L4g0L/RgNC+0LjQt9Cy0L7QtNC40LzQvtCz0L4g0YDQtdGB0YPRgNGB0LA=" />
-      <column name="next" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0J/RgNC+0LjQt9Cy0L7QtNGP0YnQuNC5INGA0LXRgdGD0YDRgQ==" />
+      <column name="next" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" remarks="0J/RgNC+0LjQt9Cy0L7QtNGP0YnQuNC5INGA0LXRgdGD0YDRgQ==" />
     </table>
     <table name="market_earth" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KDRi9C90L7QuiDQl9C10LzQu9C4">
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
