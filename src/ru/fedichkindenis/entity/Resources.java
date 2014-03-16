@@ -1,6 +1,7 @@
 package ru.fedichkindenis.entity;
 
 import ru.fedichkindenis.enums.GroupResources;
+import ru.fedichkindenis.enums.InitResources;
 import ru.fedichkindenis.enums.TypeResources;
 
 import javax.persistence.*;
@@ -23,6 +24,10 @@ public class Resources {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(name = "id_enum", nullable = false)
+    @Enumerated(value = EnumType.ORDINAL)
+    private InitResources idEnum;
 
     /**
      * Наименование ресурса

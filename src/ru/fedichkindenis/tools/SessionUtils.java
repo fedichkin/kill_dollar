@@ -98,8 +98,22 @@ public class SessionUtils {
     }
 
     public static Resources getResources(InitResources initResources){
-        Long idRes = new Long(initResources.getId());
 
-        return getEntityObject(Resources.class, idRes);
+        Session session = null;
+        Resources resources = null;
+
+        try {
+            session = sessionFactory.openSession();
+
+            Query query = session.createQuery("from Resources r where r.idEnum = :res")
+                    .setParameter("res", initResources);
+
+            resources = (Resources) query.uniqueResult();
+
+        } finally {
+            HibernateUtils.close(session);
+        }
+
+        return resources;
     }
 }

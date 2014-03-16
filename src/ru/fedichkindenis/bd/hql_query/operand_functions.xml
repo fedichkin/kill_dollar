@@ -97,7 +97,7 @@
 
         where gs.game = :game
             and gs.gameDate = :gameDate
-            and rs.resources = ru.fedichkindenis.enums.InitResources.CREDITS
+            and rs.resources.idEnum = ru.fedichkindenis.enums.InitResources.CREDITS
     </query>
 
     <query  name="operand.count_player"

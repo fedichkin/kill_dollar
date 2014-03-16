@@ -10,6 +10,7 @@ import ru.fedichkindenis.tools.HibernateUtils;
 import ru.fedichkindenis.tools.SessionUtils;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,7 @@ import java.util.Date;
  * Time: 22:39
  * To change this template use File | Settings | File Templates.
  */
+@WebServlet("/CreateNewGame")
 public class CreateNewGame extends HttpServlet {
 
     private static final Logger LOG = Logger.getLogger(GetListGames.class);

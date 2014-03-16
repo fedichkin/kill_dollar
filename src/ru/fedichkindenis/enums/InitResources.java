@@ -8,23 +8,23 @@ package ru.fedichkindenis.enums;
  * To change this template use File | Settings | File Templates.
  */
 public enum InitResources {
-    PPL(1, "колонисты"),
-    CREDITS (2, "Кредиты"),
-    FOOD (3, "Еда"),
-    OXYGEN (4, "Кислород"),
-    HELIUM3 (5, "Гелий-3"),
-    ILMENITE (6, "Ильменит"),
-    BUILDING_MATERIALS (7, "Строительные материалы"),
-    ENERGY (8, "Энергия"),
-    FARM (9, "Ферма"),
-    GREENHOUSE (10, "Оранжерея"),
-    POWERHOUSE (11, "Электростанция"),
-    MINING_STATION (12, "Добывающая станция"),
-    MINING_COMPLEX (13, "Горнодобывающий комплекс"),
-    METALLURGICAL_COMPLEX (14, "Металлургический комплекс"),
-    CONSTRUCTION_GANG (15, "Строительная артель"),
-    RESIDENTIAL_COMPLEX (16, "Жилой комплекс"),
-    FLAT(17, "Квартира");
+    PPL(0, "колонисты"),
+    CREDITS (1, "Кредиты"),
+    FOOD (2, "Еда"),
+    OXYGEN (3, "Кислород"),
+    HELIUM3 (4, "Гелий-3"),
+    ILMENITE (5, "Ильменит"),
+    BUILDING_MATERIALS (6, "Строительные материалы"),
+    ENERGY (7, "Энергия"),
+    FARM (8, "Ферма"),
+    GREENHOUSE (9, "Оранжерея"),
+    POWERHOUSE (10, "Электростанция"),
+    MINING_STATION (11, "Добывающая станция"),
+    MINING_COMPLEX (12, "Горнодобывающий комплекс"),
+    METALLURGICAL_COMPLEX (13, "Металлургический комплекс"),
+    CONSTRUCTION_GANG (14, "Строительная артель"),
+    RESIDENTIAL_COMPLEX (15, "Жилой комплекс"),
+    FLAT(16, "Квартира");
 
     private final Integer id;
     private final String name;
