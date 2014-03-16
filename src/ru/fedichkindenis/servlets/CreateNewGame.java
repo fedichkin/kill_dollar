@@ -291,6 +291,46 @@ public class CreateNewGame extends HttpServlet {
             credit = addLinkResources(SessionUtils.getResources(InitResources.FOOD), 1, credit, session);
             credit = addLinkResources(SessionUtils.getResources(InitResources.PPL), 1, credit, session);
 
+            /**
+             * Связь производимых ресурсов, игры и цпеочки производящих ресурсов
+             */
+            addGameLinkResources(game, SessionUtils.getResources(InitResources.FOOD), 8, 12, food, session);
+            addGameLinkResources(game, SessionUtils.getResources(InitResources.OXYGEN), 8, 12, oxygen, session);
+            addGameLinkResources(game, SessionUtils.getResources(InitResources.ENERGY), 8, 12, energy, session);
+            addGameLinkResources(game, SessionUtils.getResources(InitResources.HELIUM3), 4, 6, helium3, session);
+            addGameLinkResources(game, SessionUtils.getResources(InitResources.BUILDING_MATERIALS), 1, 1,
+                    buildingMaterials1, session);
+            addGameLinkResources(game, SessionUtils.getResources(InitResources.BUILDING_MATERIALS), 2, 2,
+                    buildingMaterials2, session);
+            addGameLinkResources(game, SessionUtils.getResources(InitResources.BUILDING_MATERIALS), 3, 3,
+                    buildingMaterials3, session);
+            addGameLinkResources(game, SessionUtils.getResources(InitResources.BUILDING_MATERIALS), 4, 4,
+                    buildingMaterials4, session);
+            addGameLinkResources(game, SessionUtils.getResources(InitResources.BUILDING_MATERIALS), 5, 5,
+                    buildingMaterials5, session);
+            addGameLinkResources(game, SessionUtils.getResources(InitResources.FARM), 1, 1, building, session);
+            addGameLinkResources(game, SessionUtils.getResources(InitResources.GREENHOUSE), 1, 1, building, session);
+            addGameLinkResources(game, SessionUtils.getResources(InitResources.POWERHOUSE), 1, 1, building, session);
+            addGameLinkResources(game, SessionUtils.getResources(InitResources.MINING_STATION), 1, 1, building, session);
+            addGameLinkResources(game, SessionUtils.getResources(InitResources.MINING_COMPLEX), 1, 1, building, session);
+            addGameLinkResources(game, SessionUtils.getResources(InitResources.METALLURGICAL_COMPLEX), 1, 1, building, session);
+            addGameLinkResources(game, SessionUtils.getResources(InitResources.CONSTRUCTION_GANG), 1, 1, building, session);
+            addGameLinkResources(game, SessionUtils.getResources(InitResources.RESIDENTIAL_COMPLEX), 1, 1, building, session);
+            addGameLinkResources(game, SessionUtils.getResources(InitResources.FLAT), 10, 10, flat, session);
+            addGameLinkResources(game, SessionUtils.getResources(InitResources.CREDITS), null, null, credit, session);
+
+            /**
+             * Создание очереди ресурсов которые раздаются по очереди игрокам
+             */
+            addQueueResources(game, 1, SessionUtils.getResources(InitResources.CONSTRUCTION_GANG), 0, session);
+            addQueueResources(game, 2, SessionUtils.getResources(InitResources.RESIDENTIAL_COMPLEX), 0, session);
+            addQueueResources(game, 3, SessionUtils.getResources(InitResources.FARM), 0, session);
+            addQueueResources(game, 4, SessionUtils.getResources(InitResources.GREENHOUSE), 0, session);
+            addQueueResources(game, 5, SessionUtils.getResources(InitResources.POWERHOUSE), 0, session);
+            addQueueResources(game, 6, SessionUtils.getResources(InitResources.MINING_STATION), 0, session);
+            addQueueResources(game, 7, SessionUtils.getResources(InitResources.MINING_COMPLEX), 0, session);
+            addQueueResources(game, 8, SessionUtils.getResources(InitResources.METALLURGICAL_COMPLEX), 0, session);
+
             tx.commit();
         } catch (Exception e){
             HibernateUtils.rollback(tx);
@@ -496,7 +536,7 @@ public class CreateNewGame extends HttpServlet {
     }
 
     /**
-     * Метод добавляет свЯзь между цепочкой производящих ресурсов, игрой и производимым ресурсом
+     * Метод добавляет связь между цепочкой производящих ресурсов, игрой и производимым ресурсом
      * @param game              - игра
      * @param resources         - ресурс
      * @param countUp           - количество ресурсов (верхняя граница)
@@ -515,6 +555,26 @@ public class CreateNewGame extends HttpServlet {
         gameLinkResources.setLinkResources(linkResources);
 
         session.save(gameLinkResources);
+        session.flush();
+    }
+
+    /**
+     * Метод добавляет элемент очереди в таблицу из которой распределяются ресурсы
+     * @param game          - игра
+     * @param sortRes       - номер сортировки ресурса
+     * @param resources     - ресурс
+     * @param queue         - ключ показывающий что выбрано и сколько раз
+     * @param session       - текущая сессия соединения с БД
+     */
+    private  void addQueueResources(Game game, Integer sortRes, Resources resources, Integer queue, Session session){
+
+        QueueResources queueResources = new QueueResources();
+        queueResources.setGame(game);
+        queueResources.setSortRes(sortRes);
+        queueResources.setResources(resources);
+        queueResources.setQueue(queue);
+
+        session.save(queueResources);
         session.flush();
     }
 }
