@@ -56,7 +56,7 @@ public class StartNewGame extends TimerTask {
 
                 for(User user : users){
 
-                    saveStateResources(game, gameDate, user, getGenerateResources(), 1, true, session);
+                    saveStateResources(game, gameDate, user, getGenerateResources(session), 1, true, session);
                     saveStateResources(game, gameDate, user, SessionUtils.getResources(InitResources.CREDITS),
                             game.getCreditUser(), true, session);
                 }
@@ -106,22 +106,15 @@ public class StartNewGame extends TimerTask {
         }
     }
 
-    private Resources getGenerateResources(){
+    private Resources getGenerateResources(Session session){
         Resources res = null;
-        Session session = null;
 
-        try {
-            session = sessionFactory.openSession();
-            Query query = session.createSQLQuery("SELECT moon_2040.`get_res_queue`(:game) AS res")
-                    .setParameter("game", game);
+        Query query = session.createSQLQuery("SELECT moon_2040.`get_res_queue`(:game) AS res")
+                .setParameter("game", game);
 
-            Long resId = ((BigInteger) query.uniqueResult()).longValue();
+        Long resId = ((BigInteger) query.uniqueResult()).longValue();
 
-            res = SessionUtils.getEntityObject(Resources.class, resId);
-
-        } finally {
-            HibernateUtils.close(session);
-        }
+        res = SessionUtils.getEntityObject(Resources.class, resId);
 
         return res;
     }

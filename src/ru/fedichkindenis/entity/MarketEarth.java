@@ -1,5 +1,8 @@
 package ru.fedichkindenis.entity;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Cache;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,6 +15,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "market_earth")
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class MarketEarth {
 
     /**

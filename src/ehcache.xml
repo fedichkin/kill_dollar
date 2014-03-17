@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+    <terracottaConfig url="localhost:9510" />
+    <cache
+            name="com.somecompany.someproject.domain.Country"
+            maxElementsInMemory="10000"
+            eternal="false"
+            timeToIdleSeconds="300"
+            timeToLiveSeconds="600"
+            overflowToDisk="true">
+        <terracotta/>
+    </cache>
+</ehcache>
