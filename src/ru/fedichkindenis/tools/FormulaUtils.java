@@ -3,11 +3,15 @@ package ru.fedichkindenis.tools;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import ru.fedichkindenis.entity.Game;
+import ru.fedichkindenis.entity.Resources;
 import ru.fedichkindenis.enums.ElFunction;
 import ru.fedichkindenis.entity.Functions;
 import ru.fedichkindenis.servlets.GetListGames;
 
+import java.awt.dnd.DropTargetEvent;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Stack;
 
 /**
@@ -22,7 +26,8 @@ public class FormulaUtils {
     private static final Logger LOG = Logger.getLogger(GetListGames.class);
     private static final SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
 
-    public static BigDecimal getResultFormula(Long idFunc){
+    public static BigDecimal getResultFormula(Long idFunc, Game game,
+                                              Date gameDate, Resources resources){
 
         Stack<BigDecimal> operands = new Stack<BigDecimal>();
         Stack<ElFunction> elements = new Stack<ElFunction>();
@@ -56,7 +61,7 @@ public class FormulaUtils {
                     }
                 }
                 else if(functions.getOperand() != null){
-                    Object op = SessionUtils.getValueOperand(functions.getOperand());
+                    Object op = SessionUtils.getValueOperand(functions.getOperand(), game, gameDate, resources);
                     try {
                         operands.push(NumberUtils.parseBigDecimal(op.toString(), "Не число"));
                     } catch (Exception e) {
@@ -68,7 +73,7 @@ public class FormulaUtils {
                     operands.push(op);
                 }
                 else if(functions.getFuncOperand() != null){
-                    operands.push(getResultFormula(functions.getFuncOperand().getId()));
+                    operands.push(getResultFormula(functions.getFuncOperand().getId(), game, gameDate, resources));
                 }
             }
 

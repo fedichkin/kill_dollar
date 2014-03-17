@@ -17,7 +17,7 @@
     <table name="function" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KTRg9C90LrRhtC40Y8sINC80L7QttC10YHRgiDQv9GA0LXQtNGB0YLQsNCy0LvRj9GC0Ywg0LrQsNC6INGE0L7RgNC80YPQu9GDINGC0LDQuiDQuCDRg9GB0LvQvtCy0LjQtQ==">
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="is_if" sqlType="BIT" length="1" precision="0" nullable="false" jdbcType="-7" />
-      <column name="type_if" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" />
+      <column name="type_if" sqlType="INT UNSIGNED" length="10" precision="0" nullable="true" jdbcType="-5" />
       <column name="el_function" sqlType="INT UNSIGNED" length="10" precision="0" nullable="true" jdbcType="-5" />
       <column name="operand" sqlType="INT UNSIGNED" length="10" precision="0" nullable="true" jdbcType="-5" />
       <column name="const_operand" sqlType="DECIMAL UNSIGNED" length="10" precision="2" nullable="true" jdbcType="3" />
@@ -124,7 +124,7 @@
       <column name="status_operation" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0KLQtdC60YPRidC40Lkg0YHRgtCw0YLRg9GBINC+0L/QtdGA0LDRhtC40Lg=" />
     </table>
     <table name="ppl" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0J7QsdGJ0LXQtSDRgdC+0YHRgtC+0Y/QvdC40LUg0LrQsNC20LTQvtCz0L4g0LrQvtC70L7QvdC40YHRgtCw">
-      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JjQtNC10L3RgtC40YTQuNC60LDRgtC+0YAg0LrQvtC70L7QvdC40YHRgtCw" />
+      <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JjQtNC10L3RgtC40YTQuNC60LDRgtC+0YAg0LrQvtC70L7QvdC40YHRgtCw" autoIncrement="true" />
       <column name="game" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JjQtNC10L3RgtC40YTQuNC60LDRgtC+0YAg0LjQs9GA0Ys=" />
       <column name="days_capsule" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0LrQvtC70LjRh9C10YHRgtCy0L4g0LTQvdC10Lkg0L/RgNC+0LLQtdC00ZHQvdGL0YUg0LIg0LrQsNC/0YHRg9C70LU=" />
       <column name="stat" sqlType="BIT" length="1" precision="0" nullable="false" jdbcType="-7" remarks="0YHRgtCw0YLRg9GBICgwIC0g0LIg0LjQs9GA0LUsIDEgLSDRg9C80LXRgCwgMiAtINC/0L7QutC40L3Rg9C7INCb0YPQvdGDKQ==" />

@@ -8,12 +8,14 @@ import org.hibernate.Transaction;
 import ru.fedichkindenis.entity.*;
 import ru.fedichkindenis.enums.InitResources;
 import ru.fedichkindenis.enums.PurposeOfFunctions;
+import ru.fedichkindenis.enums.StatusGame;
 import ru.fedichkindenis.enums.StatusPpl;
 import ru.fedichkindenis.tools.FormulaUtils;
 import ru.fedichkindenis.tools.HibernateUtils;
 import ru.fedichkindenis.tools.SessionUtils;
 
 import javax.management.monitor.StringMonitor;
+import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -66,16 +68,12 @@ public class StartNewGame extends TimerTask {
 
                 firstSaveMarketEarth(game, gameDate, session);
 
-                tx.commit();
-                session.clear();
-                tx.begin();
-
                 Integer countFlat = getCountFlat(game, gameDate, session);
 
                 GameStatistics gs = saveGameStatistics(game, gameDate, game.getCountPpl(), 0, game.getCreditPpl(), game.getCreditPpl(),
                         game.getCreditPpl(), game.getCountPpl(), 0, countFlat, countFlat, 0, 0, 0, 0,0, 0, session);
 
-                for(InitResources inRes : InitResources.values()){
+                /*for(InitResources inRes : InitResources.values()){
                     Resources res = SessionUtils.getResources(inRes);
                     Map<String, Object> info = getInfoResourcesByGameDate(res, game, gameDate, session);
 
@@ -88,10 +86,17 @@ public class StartNewGame extends TimerTask {
                     gameResStat.setResStat(rs);
 
                     session.save(gameResStat);
-                }
-            }
+                    session.flush();
 
-            tx.commit();
+                    game.setStatus(StatusGame.CURRENT_GAME);
+                    game.setStartDate(new Date());
+
+                    session.update(game);
+                    session.flush();
+                }*/
+            }
+            HibernateUtils.rollback(tx);
+           // tx.commit();
 
         } catch (Exception e){
             HibernateUtils.rollback(tx);
@@ -110,7 +115,7 @@ public class StartNewGame extends TimerTask {
             Query query = session.createSQLQuery("SELECT moon_2040.`get_res_queue`(:game) AS res")
                     .setParameter("game", game);
 
-            Long resId = (Long) query.uniqueResult();
+            Long resId = ((BigInteger) query.uniqueResult()).longValue();
 
             res = SessionUtils.getEntityObject(Resources.class, resId);
 
@@ -132,6 +137,7 @@ public class StartNewGame extends TimerTask {
         stateResources.setCountRes(val);
         stateResources.setHideRes(hide);
         s.save(stateResources);
+        s.flush();
     }
 
     private Ppl savePpl(Game g, Integer dayCaps, StatusPpl stat, Date addDate, Session s){
@@ -141,6 +147,7 @@ public class StartNewGame extends TimerTask {
         ppl.setStat(stat);
         ppl.setAddDate(addDate);
         s.save(ppl);
+        s.flush();
 
         return ppl;
     }
@@ -158,6 +165,7 @@ public class StartNewGame extends TimerTask {
         stateResourcesPpl.setParasit(parasit);
         stateResourcesPpl.setParasitStep(parasitStep);
         s.save(stateResourcesPpl);
+        s.flush();
     }
 
     private void firstSaveMarketEarth(Game g, Date gameDate, Session s){
@@ -177,16 +185,18 @@ public class StartNewGame extends TimerTask {
             marketEarth.setSaleCost((Integer)obj.get("cost"));
             marketEarth.setVal((Integer)obj.get("val"));
 
-            query = s.createQuery("select gf.functions.id from GameFunctions gf " +
+/*            query = s.createQuery("select gf.functions.id from GameFunctions gf " +
                     " where gf.game = :game and gf.nameFunc = :func ")
                     .setParameter("game", g)
                     .setParameter("func", PurposeOfFunctions.BUY_COST_EARTH);
 
             Long fId = (Long) query.uniqueResult();
 
-            marketEarth.setBuyCost(FormulaUtils.getResultFormula(fId).intValue());
+            marketEarth.setBuyCost(FormulaUtils.getResultFormula(fId,
+                    game, gameDate, (Resources)obj.get("res")).intValue());*/
 
             s.save(marketEarth);
+            s.flush();
         }
     }
 
@@ -231,6 +241,7 @@ public class StartNewGame extends TimerTask {
         resourcesStatistics.setBuyPriceChange(buyPriceChange);
 
         session.save(resourcesStatistics);
+        session.flush();
 
         return resourcesStatistics;
     }
@@ -261,6 +272,7 @@ public class StartNewGame extends TimerTask {
         gameStatistics.setSalaryAvg(salaryAvg);
 
         s.save(gameStatistics);
+        s.flush();
 
         return gameStatistics;
     }

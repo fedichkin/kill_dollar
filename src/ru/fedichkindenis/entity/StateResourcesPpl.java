@@ -11,7 +11,7 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-@Table(name = "resources", uniqueConstraints =
+@Table(name = "state_resources_ppl", uniqueConstraints =
         {@UniqueConstraint(columnNames = {"game", "game_date", "ppl"})})
 public class StateResourcesPpl {
 

@@ -58,7 +58,7 @@ public class MarketEarth {
     /**
      * Цена покупки ресурса
      */
-    @Column(name = "buy_cost", nullable = false)
+    @Column(name = "buy_cost", nullable = true)
     private Integer buyCost;
 
     /**********GETTERS AND SETTERS**********/

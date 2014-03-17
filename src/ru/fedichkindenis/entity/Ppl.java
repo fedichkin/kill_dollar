@@ -34,7 +34,7 @@ public class Ppl {
     /**
      * Количество дней проведеных в капсуле
      */
-    @Column(name = "day_capsule", nullable = false)
+    @Column(name = "days_capsule", nullable = false)
     private Integer daysCapsule;
 
     /**

@@ -15,6 +15,7 @@ import ru.fedichkindenis.enums.Operand;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -82,12 +83,29 @@ public class SessionUtils {
         return (T)result;
     }
 
-    public static Object getValueOperand(Operand operand){
+    public static Object getValueOperand(Operand operand, Game game, Date gameDate, Resources resources){
         Object result = null;
         Session session = null;
 
         try {
+            session = sessionFactory.openSession();
+
             Query query = session.getNamedQuery(operand.getQuery());
+
+            String queryString = query.getQueryString();
+
+            if(queryString.indexOf(":game") > -1){
+                query.setParameter("game", game);
+            }
+
+            if(queryString.indexOf(":gameDate") > -1){
+                query.setTimestamp("gameDate", gameDate);
+            }
+
+            if(queryString.indexOf(":resources") > -1){
+                query.setParameter("resources", resources);
+            }
+
             result = query.uniqueResult();
 
         } finally {
