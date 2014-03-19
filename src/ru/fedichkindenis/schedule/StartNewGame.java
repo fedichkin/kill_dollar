@@ -6,10 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import ru.fedichkindenis.entity.*;
-import ru.fedichkindenis.enums.InitResources;
-import ru.fedichkindenis.enums.PurposeOfFunctions;
-import ru.fedichkindenis.enums.StatusGame;
-import ru.fedichkindenis.enums.StatusPpl;
+import ru.fedichkindenis.enums.*;
 import ru.fedichkindenis.tools.FormulaUtils;
 import ru.fedichkindenis.tools.HibernateUtils;
 import ru.fedichkindenis.tools.SessionUtils;
@@ -178,7 +175,10 @@ public class StartNewGame extends TimerTask {
             marketEarth.setSaleCost((Integer)obj.get("cost"));
             marketEarth.setVal((Integer)obj.get("val"));
 
-/*            query = s.createQuery("select gf.functions.id from GameFunctions gf " +
+            s.save(marketEarth);
+            s.flush();
+
+            query = s.createQuery("select gf.functions.id from GameFunctions gf " +
                     " where gf.game = :game and gf.nameFunc = :func ")
                     .setParameter("game", g)
                     .setParameter("func", PurposeOfFunctions.BUY_COST_EARTH);
@@ -186,9 +186,9 @@ public class StartNewGame extends TimerTask {
             Long fId = (Long) query.uniqueResult();
 
             marketEarth.setBuyCost(FormulaUtils.getResultFormula(fId,
-                    game, gameDate, (Resources)obj.get("res")).intValue());*/
+                    game, gameDate, (Resources)obj.get("res")).intValue());
 
-            s.save(marketEarth);
+            s.update(marketEarth);
             s.flush();
         }
     }

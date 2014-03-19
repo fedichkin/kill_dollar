@@ -24,7 +24,7 @@ import java.util.Stack;
 public class FormulaUtils {
 
     private static final Logger LOG = Logger.getLogger(GetListGames.class);
-    private static final SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
+    //private static final SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
 
     public static BigDecimal getResultFormula(Long idFunc, Game game,
                                               Date gameDate, Resources resources){

@@ -56,7 +56,7 @@
 
 	<query	name="operand.curr_sale_cost_earth"
 			comment="Текущая цена продажи на Земле">
-        select saleCost
+        select me.saleCost
 
         from MarketEarth me
 

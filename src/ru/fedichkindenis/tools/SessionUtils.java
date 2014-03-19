@@ -99,7 +99,7 @@ public class SessionUtils {
             }
 
             if(queryString.indexOf(":gameDate") > -1){
-                query.setTimestamp("gameDate", gameDate);
+                query.setDate("gameDate", gameDate);
             }
 
             if(queryString.indexOf(":resources") > -1){

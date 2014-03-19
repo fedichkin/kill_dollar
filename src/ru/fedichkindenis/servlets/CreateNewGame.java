@@ -63,7 +63,7 @@ public class CreateNewGame extends HttpServlet {
             next = createFunction(null, ElFunction.ADDITION, null, null, null, next, session);
             next = createFunction(null, null, null, new BigDecimal(0.4), null, next, session);
             next = createFunction(null, ElFunction.MULTIPLICATION, null, null, null, next, session);
-            Functions buyCostEarth = createFunction(null, null, Operand.CURR_BUY_COST_EARTH, null, null, next, session);
+            Functions buyCostEarth = createFunction(null, null, Operand.CURR_SALE_COST_EARTH, null, null, next, session);
 
             /**
              * Функция расчёта следующего количества ресурса на складах Земли

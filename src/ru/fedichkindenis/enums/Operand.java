@@ -40,25 +40,25 @@ public enum Operand {
             "operand.curr_sale_cost_earth"),
 
     CURR_BUY_COST_EARTH(
-            5,
+            6,
             "текущая цена покупки на Земле",
             "operand.curr_buy_cost_earth"),
 
     CURR_VALUE_EARTH(
-            6,
+            7,
             "текущее количество на Земле",
             "operand.curr_value_earth"),
 
     SUM_ALL_CREDIT(
-            7,
+            8,
             "общее количество кредитов в игре",
             "operand.sum_all_credit_player"),
     COUNT_PLAYER(
-            8,
+            9,
             "общее количество игроков",
             "operand.count_player"),
 
-    COUNT_PPL(9,
+    COUNT_PPL(10,
             "общее количество колонистов",
             "operand.count_ppl");
 
