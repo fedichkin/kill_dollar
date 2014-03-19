@@ -213,8 +213,10 @@ public class StartNewGame extends TimerTask {
 
         List<Object[]> objects = query.list();
 
-        result.put("sale_price", objects.get(0)[0]);
-        result.put("buy_price", objects.get(0)[1]);
+        if(objects != null && !objects.isEmpty()){
+            result.put("sale_price", objects.get(0)[0]);
+            result.put("buy_price", objects.get(0)[1]);
+        }
 
         return result;
     }

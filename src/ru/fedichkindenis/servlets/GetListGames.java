@@ -1,35 +1,24 @@
 package ru.fedichkindenis.servlets;
 
 import org.apache.log4j.Logger;
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-import ru.fedichkindenis.bd.DbUtils;
-import ru.fedichkindenis.bd.SqlQuery;
 import ru.fedichkindenis.entity.Game;
 import ru.fedichkindenis.entity.User;
-import ru.fedichkindenis.entity.UsrGame;
 import ru.fedichkindenis.enums.StatusGame;
 import ru.fedichkindenis.tools.HibernateUtils;
 import ru.fedichkindenis.tools.SessionUtils;
 import ru.fedichkindenis.tools.SlUtils;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Writer;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 /**

@@ -15,7 +15,6 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "market_earth")
-@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class MarketEarth {
 
     /**
