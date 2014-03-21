@@ -31,44 +31,44 @@ public class ResourcesStatistics {
     /**
      * Сумарное количество ресурса
      */
-    @Column(name = "count", nullable = false)
+    @Column(name = "count_r", nullable = false)
     private Integer count;
 
     /**
      * Добыто ресурсов за последний ход
      */
-    @Column(name = "add", nullable = false)
+    @Column(name = "add_r", nullable = false)
     private Integer add;
 
     /**
      * Потрачено ресурсов за последний ход
      */
-    @Column(name = "del", nullable = false)
+    @Column(name = "del_r", nullable = false)
     private Integer del;
 
 
     /**
      * Цена ресурса на Земле
      */
-    @Column(name = "sale_price", nullable = false)
+    @Column(name = "sale_price", nullable = true)
     private Integer salePrice;
 
     /**
      * Изменение цены ресурса
      */
-    @Column(name = "sale_price_change", nullable = false)
+    @Column(name = "sale_price_change", nullable = true)
     private Integer salePriceChange;
 
     /**
      * Цена ресурса на Земле
      */
-    @Column(name = "buy_price", nullable = false)
+    @Column(name = "buy_price", nullable = true)
     private Integer buyPrice;
 
     /**
      * Изменение цены ресурса
      */
-    @Column(name = "buy_price_change", nullable = false)
+    @Column(name = "buy_price_change", nullable = true)
     private Integer buyPriceChange;
 
     /**********GETTERS AND SETTERS**********/

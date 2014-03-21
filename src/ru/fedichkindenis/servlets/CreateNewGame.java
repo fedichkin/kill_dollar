@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import ru.fedichkindenis.entity.*;
 import ru.fedichkindenis.enums.*;
+import ru.fedichkindenis.schedule.StartNewGame;
 import ru.fedichkindenis.tools.HibernateUtils;
 import ru.fedichkindenis.tools.SessionUtils;
 
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Timer;
 
 /**
  * Created with IntelliJ IDEA.
@@ -59,7 +61,9 @@ public class CreateNewGame extends HttpServlet {
             /**
              * Функция для расчёта следующей цены покупки ресурса на Земле
              */
-            next = createFunction(null, null, null, new BigDecimal(1), null, null, session);
+            next = createFunction(null, null, Operand.CURR_SALE_COST_EARTH, null, null, null, session);
+            next = createFunction(null, ElFunction.ADDITION, null, null, null, next, session);
+            next = createFunction(null, null, null, new BigDecimal(1), null, next, session);
             next = createFunction(null, ElFunction.ADDITION, null, null, null, next, session);
             next = createFunction(null, null, null, new BigDecimal(0.4), null, next, session);
             next = createFunction(null, ElFunction.MULTIPLICATION, null, null, null, next, session);
@@ -334,6 +338,10 @@ public class CreateNewGame extends HttpServlet {
             addQueueResources(game, 8, SessionUtils.getResources(InitResources.METALLURGICAL_COMPLEX), 0, session);
 
             tx.commit();
+
+            Timer timer = new Timer();
+            timer.schedule(new StartNewGame(game), game.getStartDate());
+
         } catch (Exception e){
             HibernateUtils.rollback(tx);
             e.printStackTrace();

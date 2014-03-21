@@ -70,7 +70,7 @@ public class StartNewGame extends TimerTask {
                 GameStatistics gs = saveGameStatistics(game, gameDate, game.getCountPpl(), 0, game.getCreditPpl(), game.getCreditPpl(),
                         game.getCreditPpl(), game.getCountPpl(), 0, countFlat, countFlat, 0, 0, 0, 0,0, 0, session);
 
-                /*for(InitResources inRes : InitResources.values()){
+                for(InitResources inRes : InitResources.values()){
                     Resources res = SessionUtils.getResources(inRes);
                     Map<String, Object> info = getInfoResourcesByGameDate(res, game, gameDate, session);
 
@@ -90,10 +90,10 @@ public class StartNewGame extends TimerTask {
 
                     session.update(game);
                     session.flush();
-                }*/
+                }
             }
-            HibernateUtils.rollback(tx);
-           // tx.commit();
+
+            tx.commit();
 
         } catch (Exception e){
             HibernateUtils.rollback(tx);
@@ -186,7 +186,7 @@ public class StartNewGame extends TimerTask {
             Long fId = (Long) query.uniqueResult();
 
             marketEarth.setBuyCost(FormulaUtils.getResultFormula(fId,
-                    game, gameDate, (Resources)obj.get("res")).intValue());
+                    game, gameDate, (Resources)obj.get("res"), s).intValue());
 
             s.update(marketEarth);
             s.flush();
@@ -197,18 +197,19 @@ public class StartNewGame extends TimerTask {
 
         Map<String, Object> result = new HashMap<String, Object>();
 
-        Query query = s.createQuery("select count(sr.id) from StateResources sr where sr.resources = :res " +
+        Query query = s.createQuery("select sum(sr.countRes) from StateResources sr where sr.resources = :res " +
                 "and sr.game = :game and sr.gameDate = :date")
                 .setParameter("res", res)
                 .setDate("date", gameDate)
                 .setParameter("game", g);
 
-        result.put("count", ((Long) query.uniqueResult()).intValue());
+        Integer sum = query.uniqueResult() == null ? 0 : ((Long) query.uniqueResult()).intValue();
+        result.put("count", sum);
 
         query = s.createQuery("select me.saleCost, me.buyCost from MarketEarth me where me.game = :game " +
                 " and me.gameDate = :date and me.resources = :res")
                 .setParameter("game", g)
-                .setTimestamp("date", gameDate)
+                .setDate("date", gameDate)
                 .setParameter("res", res);
 
         List<Object[]> objects = query.list();
@@ -231,7 +232,7 @@ public class StartNewGame extends TimerTask {
         resourcesStatistics.setAdd(add);
         resourcesStatistics.setDel(del);
         resourcesStatistics.setSalePrice(salePrice);
-        resourcesStatistics.setSalePrice(salePriceChange);
+        resourcesStatistics.setSalePriceChange(salePriceChange);
         resourcesStatistics.setBuyPrice(buyPrice);
         resourcesStatistics.setBuyPriceChange(buyPriceChange);
 

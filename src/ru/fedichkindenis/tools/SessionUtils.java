@@ -83,12 +83,12 @@ public class SessionUtils {
         return (T)result;
     }
 
-    public static Object getValueOperand(Operand operand, Game game, Date gameDate, Resources resources){
+    public static Object getValueOperand(Operand operand, Game game, Date gameDate, Resources resources, Session session){
         Object result = null;
-        Session session = null;
+//        Session session = null;
 
-        try {
-            session = sessionFactory.openSession();
+//        try {
+//            session = sessionFactory.openSession();
 
             Query query = session.getNamedQuery(operand.getQuery());
 
@@ -108,9 +108,9 @@ public class SessionUtils {
 
             result = query.uniqueResult();
 
-        } finally {
-            HibernateUtils.close(session);
-        }
+//        } finally {
+//            HibernateUtils.close(session);
+//        }
 
         return result;
     }

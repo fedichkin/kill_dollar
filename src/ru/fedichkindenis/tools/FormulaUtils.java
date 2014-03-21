@@ -27,7 +27,7 @@ public class FormulaUtils {
     //private static final SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
 
     public static BigDecimal getResultFormula(Long idFunc, Game game,
-                                              Date gameDate, Resources resources){
+                                              Date gameDate, Resources resources, Session session){
 
         Stack<BigDecimal> operands = new Stack<BigDecimal>();
         Stack<ElFunction> elements = new Stack<ElFunction>();
@@ -61,7 +61,7 @@ public class FormulaUtils {
                     }
                 }
                 else if(functions.getOperand() != null){
-                    Object op = SessionUtils.getValueOperand(functions.getOperand(), game, gameDate, resources);
+                    Object op = SessionUtils.getValueOperand(functions.getOperand(), game, gameDate, resources, session);
                     try {
                         operands.push(NumberUtils.parseBigDecimal(op.toString(), "Не число"));
                     } catch (Exception e) {
@@ -73,8 +73,12 @@ public class FormulaUtils {
                     operands.push(op);
                 }
                 else if(functions.getFuncOperand() != null){
-                    operands.push(getResultFormula(functions.getFuncOperand().getId(), game, gameDate, resources));
+                    operands.push(getResultFormula(functions.getFuncOperand().getId(), game, gameDate, resources, session));
                 }
+            }
+
+            if(functions.getNextStep() != null){
+                id = functions.getNextStep().getId();
             }
 
         }while (functions.getNextStep() != null);
