@@ -10,7 +10,7 @@ $( document ).ready(function() {
 });
 
 load_congig = function(){
-    $.get('/GetConfig', {file: 'bizcontacts.xml'} , function(data){
+    $.post('/GetConfig', {file: 'bizcontacts.xml'} , function(data){
         if(data.success){
             $('#biz-moon').attr('data-redirect', data.redirect_page);
         }

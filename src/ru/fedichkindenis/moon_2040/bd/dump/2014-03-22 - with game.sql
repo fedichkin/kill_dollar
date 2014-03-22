@@ -392,7 +392,7 @@ DROP TABLE IF EXISTS `market_earth`;
 CREATE TABLE IF NOT EXISTS `market_earth` (
   `id` bigint(19) unsigned NOT NULL AUTO_INCREMENT,
   `game` bigint(19) unsigned NOT NULL,
-  `game_date` date NOT NULL,
+  `game_date` datetime NOT NULL,
   `resources` bigint(19) unsigned NOT NULL,
   `sale_cost` int(10) unsigned NOT NULL,
   `val` int(10) unsigned NOT NULL,

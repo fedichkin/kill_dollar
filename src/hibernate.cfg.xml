@@ -51,6 +51,7 @@
 
         <!-- HQL QUERY -->
         <mapping resource="ru/fedichkindenis/bd/hql_query/operand_functions.xml"/>
+        <mapping resource="ru/fedichkindenis/bd/hql_query/game_user.xml"/>
 
     </session-factory>
 

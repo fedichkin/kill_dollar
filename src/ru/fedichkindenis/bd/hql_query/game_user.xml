@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <query name="user_game.list_id_game_status"
+           comment="Список идентификаторов игр со статусом">
+        select
+            ug.game.id
+
+        from
+            UsrGame ug
+
+        where
+            ug.user = :user
+            and ug.delDate is null
+            and ug.game.status = :status
+    </query>
+
+    <query name="user_game.list_id_game"
+           comment="Список идентификаторов игр">
+        select
+        ug.game.id
+
+        from
+        UsrGame ug
+
+        where
+        ug.user = :user
+        and ug.delDate is null
+    </query>
+
+</hibernate-mapping>

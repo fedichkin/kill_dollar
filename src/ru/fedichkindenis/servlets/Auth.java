@@ -9,8 +9,10 @@ import org.hibernate.criterion.Restrictions;
 import org.json.JSONException;
 import org.json.JSONObject;
 import ru.fedichkindenis.entity.User;
+import ru.fedichkindenis.enums.StatusGame;
 import ru.fedichkindenis.tools.ConfUtils;
 import ru.fedichkindenis.tools.HibernateUtils;
+import ru.fedichkindenis.tools.SessionUtils;
 import ru.fedichkindenis.tools.SlUtils;
 
 import javax.servlet.ServletException;
@@ -22,6 +24,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -48,6 +51,7 @@ public class Auth extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException{
 
         Boolean isAuth = false;
+        Session s = null;
 
         try {
             /**
@@ -93,6 +97,10 @@ public class Auth extends HttpServlet {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("person_uid", personUid);
 
+                s = sessionFactory.openSession();
+                List<Long> listGame = SessionUtils.gelListIdGame(request, StatusGame.CURRENT_GAME, s);
+                session.setAttribute("list_current_game", listGame);
+
                 /**
                  * URL был с динамическим параметром, подставляем его.
                  * Заполняем параметры для тела запроса
@@ -116,6 +124,8 @@ public class Auth extends HttpServlet {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            HibernateUtils.close(s);
         }
 
         try {

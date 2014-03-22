@@ -1,3 +1,5 @@
+<%@ page import="java.util.List" %>
+<%@ page import="ru.fedichkindenis.tools.SlUtils" %>
 <%--
   Created by IntelliJ IDEA.
   User: Fedichkin.DY
@@ -10,6 +12,29 @@
     if(session.getAttribute("person_uid") == null){
 
         response.sendRedirect(request.getContextPath() + "/moon_2040/login.jsp");
+    }
+    else {
+        List<Long> listGame = (List<Long>) session.getAttribute("list_current_game");
+        Boolean isGame = false;
+        Long id;
+
+        try{
+            id = SlUtils.getLongParameter(request, "gameId", "gameId", 0, false);
+
+            for(Long game : listGame){
+                if(game.equals(id)){
+                    isGame = true;
+                    break;
+                }
+            }
+
+            if(!isGame){
+                response.sendRedirect(request.getContextPath() + "/moon_2040/list_game.jsp");
+            }
+
+        } catch (Exception e){
+            response.sendRedirect(request.getContextPath() + "/moon_2040/list_game.jsp");
+        }
     }
 %>
 <link rel="icon" href="img/favicon.ico" type="image/ico" />

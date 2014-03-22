@@ -12,10 +12,13 @@ import ru.fedichkindenis.entity.User;
 import ru.fedichkindenis.entity.UsrGame;
 import ru.fedichkindenis.enums.InitResources;
 import ru.fedichkindenis.enums.Operand;
+import ru.fedichkindenis.enums.StatusGame;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -56,7 +59,7 @@ public class SessionUtils {
         UsrGame usrGame = null;
         User user;
 
-            user = getUser(request, session);
+        user = getUser(request, session);
 
         Criteria criteria = session.createCriteria(UsrGame.class)
                 .add(Restrictions.eq("user", user))
@@ -66,6 +69,36 @@ public class SessionUtils {
         usrGame = (UsrGame) criteria.uniqueResult();
 
         return usrGame;
+    }
+
+    /**
+     * Получение списка индентификаторов игр где участвует текущий игрок
+     * @param request   - текущий запрос Http
+     * @param status    - статус игры, может быть равен null если нужны все игры
+     * @param session   - текущая сессия соединения с БД
+     * @return
+     */
+    public static List<Long> gelListIdGame(HttpServletRequest request, StatusGame status, Session session){
+        List<Long> listIdGame = new ArrayList<Long>();
+        User user;
+
+        user = getUser(request, session);
+
+        Query query;
+
+        if(status == null){
+            query = session.getNamedQuery("user_game.list_id_game")
+                    .setParameter("user", user);
+        }
+        else{
+            query = session.getNamedQuery("user_game.list_id_game_status")
+                    .setParameter("user", user)
+                    .setParameter("status", status);
+        }
+
+        listIdGame = query.list();
+
+        return listIdGame;
     }
 
     /**

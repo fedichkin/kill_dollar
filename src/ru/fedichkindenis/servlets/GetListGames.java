@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import ru.fedichkindenis.entity.Game;
 import ru.fedichkindenis.entity.User;
 import ru.fedichkindenis.enums.StatusGame;
+import ru.fedichkindenis.tools.DateFormatUtil;
 import ru.fedichkindenis.tools.HibernateUtils;
 import ru.fedichkindenis.tools.SessionUtils;
 import ru.fedichkindenis.tools.SlUtils;
@@ -85,8 +86,8 @@ public class GetListGames extends HttpServlet {
                 tmp.put("id",            game.getId());
                 tmp.put("name",          game.getName());
                 tmp.put("max_player",    game.getMaxPlayer());
-                tmp.put("start_date",    game.getStartDate());
-                tmp.put("finish_date",   game.getFinishDate());
+                tmp.put("start_date",    DateFormatUtil.formatDayTime(game.getStartDate()));
+                tmp.put("finish_date",   DateFormatUtil.formatDayTime(game.getFinishDate()));
                 tmp.put("step",          game.getStep());
                 tmp.put("count_ppl",     game.getCountPpl());
                 tmp.put("credit_ppl",    game.getCreditPpl());

@@ -13,7 +13,7 @@ $( document ).ready(function() {
 });
 
 load_listgame = function(type){
-    $.get('/GetListGames', {type: type}, function(data){
+    $.post('/GetListGames', {type: type}, function(data){
         if(data.success){
             if($('#list-g').length){
                 $('#list-g').remove();
@@ -35,13 +35,16 @@ load_listgame = function(type){
                     $('<a href="#" id="disconnect' + i + '">Покинуть игру</a>').appendTo(el);
                     $('#disconnect' + i).click(function (e){disconnect_from_game(game.id)})
                 }
+                else if(game.status == 'CURRENT_GAME' && game.is_user_game){
+                    $('<a href="game.jsp?gameId=' + game.id + '" id="enterInGame' + i + '">Войти в игру</a>').appendTo(el);
+                }
             }
         }
     }, 'json');
 }
 
 connect_to_game = function(game_id){
-    $.get('/ConnectToGame', {gameId: game_id}, function(data){
+    $.post('/ConnectToGame', {gameId: game_id}, function(data){
         if(data.success){
             $('.active a').click();
         }
@@ -49,7 +52,7 @@ connect_to_game = function(game_id){
 }
 
 disconnect_from_game = function(game_id){
-    $.get('/DisconnectFromGame', {gameId: game_id}, function(data){
+    $.post('/DisconnectFromGame', {gameId: game_id}, function(data){
         if(data.success){
             $('.active a').click();
         }

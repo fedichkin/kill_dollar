@@ -10,7 +10,7 @@ $( document ).ready(function() {
 });
 
 load_infouser = function(){
-    $.get('/GetInfoUser', function(data){
+    $.post('/GetInfoUser', function(data){
         if(data.success){
             $("#us img").attr("src", "http://bizcontacts.net/" + data.person_uid + "/picture");
         }
