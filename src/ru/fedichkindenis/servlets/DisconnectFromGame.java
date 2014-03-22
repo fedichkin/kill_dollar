@@ -55,7 +55,7 @@ public class DisconnectFromGame extends HttpServlet {
                 throw new Exception("Игры с id = " + gameId + " не найдено!");
             }
 
-            UsrGame usrGame = SessionUtils.getUserGame(request, game);
+            UsrGame usrGame = SessionUtils.getUserGame(request, game, session);
 
             if(usrGame == null){
                 throw new Exception("Пользователя нет в игре!");

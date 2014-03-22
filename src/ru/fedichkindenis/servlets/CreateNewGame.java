@@ -35,7 +35,7 @@ public class CreateNewGame extends HttpServlet {
     private final SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response
-        ) throws ServletException, IOException {
+    ) throws ServletException, IOException {
 
         Session session = null;
         Transaction tx = null;
@@ -49,6 +49,27 @@ public class CreateNewGame extends HttpServlet {
 
             Calendar time = Calendar.getInstance();
             time.setTime(new Date(24 * 60 * 60 * 1000));
+
+            /**
+             * Определение ресурсов
+             */
+            Resources ppl = SessionUtils.getResources(InitResources.PPL, session);
+            Resources credits = SessionUtils.getResources(InitResources.CREDITS, session);
+            Resources food = SessionUtils.getResources(InitResources.FOOD, session);
+            Resources oxygen = SessionUtils.getResources(InitResources.OXYGEN, session);
+            Resources helium3 = SessionUtils.getResources(InitResources.HELIUM3, session);
+            Resources ilmenite = SessionUtils.getResources(InitResources.ILMENITE, session);
+            Resources buildingMaterials = SessionUtils.getResources(InitResources.BUILDING_MATERIALS, session);
+            Resources energy = SessionUtils.getResources(InitResources.ENERGY, session);
+            Resources farm = SessionUtils.getResources(InitResources.FARM, session);
+            Resources greenhouse = SessionUtils.getResources(InitResources.GREENHOUSE, session);
+            Resources powerhouse = SessionUtils.getResources(InitResources.POWERHOUSE, session);
+            Resources miningStation = SessionUtils.getResources(InitResources.MINING_STATION, session);
+            Resources miningComplex = SessionUtils.getResources(InitResources.MINING_COMPLEX, session);
+            Resources metallurgicalComplex = SessionUtils.getResources(InitResources.METALLURGICAL_COMPLEX, session);
+            Resources constructionGang = SessionUtils.getResources(InitResources.CONSTRUCTION_GANG, session);
+            Resources residentialComplex = SessionUtils.getResources(InitResources.RESIDENTIAL_COMPLEX, session);
+            Resources flat = SessionUtils.getResources(InitResources.FLAT, session);
 
             /**
              * Создание игры
@@ -111,238 +132,208 @@ public class CreateNewGame extends HttpServlet {
             /**
              * Создание целей игры на поражение и победу
              */
-            addGoalGame(game, SessionUtils.getResources(InitResources.PPL),
+            addGoalGame(game, SessionUtils.getResources(InitResources.PPL, session),
                     ifWin, true, session);
-            addGoalGame(game, SessionUtils.getResources(InitResources.PPL),
+            addGoalGame(game, SessionUtils.getResources(InitResources.PPL, session),
                     ifNotWin, false, session);
 
             /**
              * Инициализация настроек рынка Земли
              */
-            addInitMarketEarth(game, SessionUtils.getResources(InitResources.FOOD), 20, 1000, 3000,
+            addInitMarketEarth(game, food, 20, 1000, 3000,
                     new BigDecimal(0.2), 3, session);
-            addInitMarketEarth(game, SessionUtils.getResources(InitResources.OXYGEN), 20, 1000, 7000,
+            addInitMarketEarth(game, oxygen, 20, 1000, 7000,
                     new BigDecimal(0.15), 3, session);
-            addInitMarketEarth(game, SessionUtils.getResources(InitResources.ENERGY), 20, 500, 2500,
+            addInitMarketEarth(game, energy, 20, 500, 2500,
                     new BigDecimal(0.18), 5, session);
-            addInitMarketEarth(game, SessionUtils.getResources(InitResources.HELIUM3), 20, 300, 100,
+            addInitMarketEarth(game, helium3, 20, 300, 100,
                     new BigDecimal(0.05), 5, session);
-            addInitMarketEarth(game, SessionUtils.getResources(InitResources.ILMENITE), 20, 300, 100,
+            addInitMarketEarth(game, ilmenite, 20, 300, 100,
                     new BigDecimal(0.05), 4, session);
-            addInitMarketEarth(game, SessionUtils.getResources(InitResources.BUILDING_MATERIALS), 20, 750, 1200,
+            addInitMarketEarth(game, buildingMaterials, 20, 750, 1200,
                     new BigDecimal(0.15), 4, session);
 
             /**
              * Добавление цен на ресурсы для первоначальной закупки при старте игры
              */
-            addStartCostResources(game, SessionUtils.getResources(InitResources.FOOD), 15, session);
-            addStartCostResources(game, SessionUtils.getResources(InitResources.OXYGEN), 10, session);
-            addStartCostResources(game, SessionUtils.getResources(InitResources.ENERGY), 25, session);
-            addStartCostResources(game, SessionUtils.getResources(InitResources.HELIUM3), 150, session);
-            addStartCostResources(game, SessionUtils.getResources(InitResources.ILMENITE), 150, session);
-            addStartCostResources(game, SessionUtils.getResources(InitResources.BUILDING_MATERIALS), 30, session);
-            addStartCostResources(game, SessionUtils.getResources(InitResources.FARM), 150, session);
-            addStartCostResources(game, SessionUtils.getResources(InitResources.GREENHOUSE), 150, session);
-            addStartCostResources(game, SessionUtils.getResources(InitResources.POWERHOUSE), 150, session);
-            addStartCostResources(game, SessionUtils.getResources(InitResources.MINING_STATION), 150, session);
-            addStartCostResources(game, SessionUtils.getResources(InitResources.MINING_COMPLEX), 150, session);
-            addStartCostResources(game, SessionUtils.getResources(InitResources.METALLURGICAL_COMPLEX), 150, session);
-            addStartCostResources(game, SessionUtils.getResources(InitResources.CONSTRUCTION_GANG), 150, session);
-            addStartCostResources(game, SessionUtils.getResources(InitResources.RESIDENTIAL_COMPLEX), 150, session);
+            addStartCostResources(game, food, 15, session);
+            addStartCostResources(game, oxygen, 10, session);
+            addStartCostResources(game, energy, 25, session);
+            addStartCostResources(game, helium3, 150, session);
+            addStartCostResources(game, ilmenite, 150, session);
+            addStartCostResources(game, buildingMaterials, 30, session);
+            addStartCostResources(game, farm, 150, session);
+            addStartCostResources(game, greenhouse, 150, session);
+            addStartCostResources(game, powerhouse, 150, session);
+            addStartCostResources(game, miningStation, 150, session);
+            addStartCostResources(game, miningComplex, 150, session);
+            addStartCostResources(game, metallurgicalComplex, 150, session);
+            addStartCostResources(game, constructionGang, 150, session);
+            addStartCostResources(game, residentialComplex, 150, session);
 
             /**
              * Цепочка ресурсов для производства еды
              */
-            LinkResources food;
-            food = addLinkResources(SessionUtils.getResources(InitResources.FARM), 1, null, session);
-            food = addLinkResources(SessionUtils.getResources(InitResources.ENERGY), 1, food, session);
-            food = addLinkResources(SessionUtils.getResources(InitResources.PPL), 1, food, session);
-            food = addLinkResources(SessionUtils.getResources(InitResources.CREDITS), null, food, session);
+            LinkResources foodL;
+            foodL = addLinkResources(farm, 1, null, session);
+            foodL = addLinkResources(energy, 1, foodL, session);
+            foodL = addLinkResources(ppl, 1, foodL, session);
+            foodL = addLinkResources(credits, null, foodL, session);
 
             /**
              * Цепочка ресурсов для производства кислорода
              */
-            LinkResources oxygen;
-            oxygen = addLinkResources(SessionUtils.getResources(InitResources.GREENHOUSE), 1, null, session);
-            oxygen = addLinkResources(SessionUtils.getResources(InitResources.ENERGY), 1, oxygen, session);
-            oxygen = addLinkResources(SessionUtils.getResources(InitResources.PPL), 1, oxygen, session);
-            oxygen = addLinkResources(SessionUtils.getResources(InitResources.CREDITS), null, oxygen, session);
+            LinkResources oxygenL;
+            oxygenL = addLinkResources(greenhouse, 1, null, session);
+            oxygenL = addLinkResources(energy, 1, oxygenL, session);
+            oxygenL = addLinkResources(ppl, 1, oxygenL, session);
+            oxygenL = addLinkResources(credits, null, oxygenL, session);
 
             /**
              * Цепочка ресурсов для производства энергии
              */
-            LinkResources energy;
-            energy = addLinkResources(SessionUtils.getResources(InitResources.POWERHOUSE), 1, null, session);
-            energy = addLinkResources(SessionUtils.getResources(InitResources.HELIUM3), 2, energy, session);
-            energy = addLinkResources(SessionUtils.getResources(InitResources.PPL), 1, energy, session);
-            energy = addLinkResources(SessionUtils.getResources(InitResources.CREDITS), null, energy, session);
+            LinkResources energyL;
+            energyL = addLinkResources(powerhouse, 1, null, session);
+            energyL = addLinkResources(helium3, 2, energyL, session);
+            energyL = addLinkResources(ppl, 1, energyL, session);
+            energyL = addLinkResources(credits, null, energyL, session);
 
             /**
              * Цепочка ресурсов для производства гелия-3
              */
-            LinkResources helium3;
-            helium3 = addLinkResources(SessionUtils.getResources(InitResources.MINING_STATION), 1, null, session);
-            helium3 = addLinkResources(SessionUtils.getResources(InitResources.ENERGY), 1, helium3, session);
-            helium3 = addLinkResources(SessionUtils.getResources(InitResources.PPL), 2, helium3, session);
-            helium3 = addLinkResources(SessionUtils.getResources(InitResources.CREDITS), null, helium3, session);
+            LinkResources helium3L;
+            helium3L = addLinkResources(miningStation, 1, null, session);
+            helium3L = addLinkResources(energy, 1, helium3L, session);
+            helium3L = addLinkResources(ppl, 2, helium3L, session);
+            helium3L = addLinkResources(credits, null, helium3L, session);
 
             /**
              * Цепочка ресурсов для производства ильменита
              */
-            LinkResources ilmenite;
-            ilmenite = addLinkResources(SessionUtils.getResources(InitResources.MINING_COMPLEX), 1, null, session);
-            ilmenite = addLinkResources(SessionUtils.getResources(InitResources.ENERGY), 2, ilmenite, session);
-            ilmenite = addLinkResources(SessionUtils.getResources(InitResources.PPL), 2, ilmenite, session);
-            ilmenite = addLinkResources(SessionUtils.getResources(InitResources.CREDITS), null, ilmenite, session);
+            LinkResources ilmeniteL;
+            ilmeniteL = addLinkResources(miningComplex, 1, null, session);
+            ilmeniteL = addLinkResources(energy, 2, ilmeniteL, session);
+            ilmeniteL = addLinkResources(ppl, 2, ilmeniteL, session);
+            ilmeniteL = addLinkResources(credits, null, ilmeniteL, session);
 
             /**
              * Цепочка ресурсов для производства 1 единицы строительных материалов
              */
-            LinkResources buildingMaterials1;
-            buildingMaterials1 = addLinkResources(SessionUtils.getResources(InitResources.METALLURGICAL_COMPLEX),
-                    1, null, session);
-            buildingMaterials1 = addLinkResources(SessionUtils.getResources(InitResources.ENERGY),
-                    1, buildingMaterials1, session);
-            buildingMaterials1 = addLinkResources(SessionUtils.getResources(InitResources.ILMENITE),
-                    1, buildingMaterials1, session);
-            buildingMaterials1 = addLinkResources(SessionUtils.getResources(InitResources.PPL),
-                    2, buildingMaterials1, session);
-            buildingMaterials1 = addLinkResources(SessionUtils.getResources(InitResources.CREDITS),
-                    null, buildingMaterials1, session);
+            LinkResources buildingMaterials1L;
+            buildingMaterials1L = addLinkResources(metallurgicalComplex, 1, null, session);
+            buildingMaterials1L = addLinkResources(energy, 1, buildingMaterials1L, session);
+            buildingMaterials1L = addLinkResources(ilmenite, 1, buildingMaterials1L, session);
+            buildingMaterials1L = addLinkResources(ppl, 2, buildingMaterials1L, session);
+            buildingMaterials1L = addLinkResources(credits, null, buildingMaterials1L, session);
 
             /**
              * Цепочка ресурсов для производства 2 единиц строительных материалов
              */
-            LinkResources buildingMaterials2;
-            buildingMaterials2 = addLinkResources(SessionUtils.getResources(InitResources.METALLURGICAL_COMPLEX),
-                    1, null, session);
-            buildingMaterials2 = addLinkResources(SessionUtils.getResources(InitResources.ENERGY),
-                    1, buildingMaterials2, session);
-            buildingMaterials2 = addLinkResources(SessionUtils.getResources(InitResources.ILMENITE),
-                    2, buildingMaterials2, session);
-            buildingMaterials2 = addLinkResources(SessionUtils.getResources(InitResources.PPL),
-                    2, buildingMaterials2, session);
-            buildingMaterials2 = addLinkResources(SessionUtils.getResources(InitResources.CREDITS),
-                    null, buildingMaterials2, session);
+            LinkResources buildingMaterials2L;
+            buildingMaterials2L = addLinkResources(metallurgicalComplex, 1, null, session);
+            buildingMaterials2L = addLinkResources(energy, 1, buildingMaterials2L, session);
+            buildingMaterials2L = addLinkResources(ilmenite, 2, buildingMaterials2L, session);
+            buildingMaterials2L = addLinkResources(ppl, 2, buildingMaterials2L, session);
+            buildingMaterials2L = addLinkResources(credits, null, buildingMaterials2L, session);
 
             /**
              * Цепочка ресурсов для производства 3 единиц строительных материалов
              */
-            LinkResources buildingMaterials3;
-            buildingMaterials3 = addLinkResources(SessionUtils.getResources(InitResources.METALLURGICAL_COMPLEX),
-                    1, null, session);
-            buildingMaterials3 = addLinkResources(SessionUtils.getResources(InitResources.ENERGY),
-                    1, buildingMaterials3, session);
-            buildingMaterials3 = addLinkResources(SessionUtils.getResources(InitResources.ILMENITE),
-                    3, buildingMaterials3, session);
-            buildingMaterials3 = addLinkResources(SessionUtils.getResources(InitResources.PPL),
-                    2, buildingMaterials3, session);
-            buildingMaterials3 = addLinkResources(SessionUtils.getResources(InitResources.CREDITS),
-                    null, buildingMaterials3, session);
+            LinkResources buildingMaterials3L;
+            buildingMaterials3L = addLinkResources(metallurgicalComplex, 1, null, session);
+            buildingMaterials3L = addLinkResources(energy, 1, buildingMaterials3L, session);
+            buildingMaterials3L = addLinkResources(ilmenite, 3, buildingMaterials3L, session);
+            buildingMaterials3L = addLinkResources(ppl, 2, buildingMaterials3L, session);
+            buildingMaterials3L = addLinkResources(credits, null, buildingMaterials3L, session);
 
             /**
              * Цепочка ресурсов для производства 4 единиц строительных материалов
              */
-            LinkResources buildingMaterials4;
-            buildingMaterials4 = addLinkResources(SessionUtils.getResources(InitResources.METALLURGICAL_COMPLEX),
-                    1, null, session);
-            buildingMaterials4 = addLinkResources(SessionUtils.getResources(InitResources.ENERGY),
-                    1, buildingMaterials4, session);
-            buildingMaterials4 = addLinkResources(SessionUtils.getResources(InitResources.ILMENITE),
-                    4, buildingMaterials4, session);
-            buildingMaterials4 = addLinkResources(SessionUtils.getResources(InitResources.PPL),
-                    2, buildingMaterials4, session);
-            buildingMaterials4 = addLinkResources(SessionUtils.getResources(InitResources.CREDITS),
-                    null, buildingMaterials4, session);
+            LinkResources buildingMaterials4L;
+            buildingMaterials4L = addLinkResources(metallurgicalComplex, 1, null, session);
+            buildingMaterials4L = addLinkResources(energy, 1, buildingMaterials4L, session);
+            buildingMaterials4L = addLinkResources(ilmenite, 4, buildingMaterials4L, session);
+            buildingMaterials4L = addLinkResources(ppl, 2, buildingMaterials4L, session);
+            buildingMaterials4L = addLinkResources(credits, null, buildingMaterials4L, session);
 
             /**
              * Цепочка ресурсов для производства 5 единиц строительных материалов
              */
-            LinkResources buildingMaterials5;
-            buildingMaterials5 = addLinkResources(SessionUtils.getResources(InitResources.METALLURGICAL_COMPLEX),
-                    1, null, session);
-            buildingMaterials5 = addLinkResources(SessionUtils.getResources(InitResources.ENERGY),
-                    1, buildingMaterials5, session);
-            buildingMaterials5 = addLinkResources(SessionUtils.getResources(InitResources.ILMENITE),
-                    5, buildingMaterials5, session);
-            buildingMaterials5 = addLinkResources(SessionUtils.getResources(InitResources.PPL),
-                    2, buildingMaterials5, session);
-            buildingMaterials5 = addLinkResources(SessionUtils.getResources(InitResources.CREDITS),
-                    null, buildingMaterials5, session);
+            LinkResources buildingMaterials5L;
+            buildingMaterials5L = addLinkResources(metallurgicalComplex, 1, null, session);
+            buildingMaterials5L = addLinkResources(energy, 1, buildingMaterials5L, session);
+            buildingMaterials5L = addLinkResources(ilmenite, 5, buildingMaterials5L, session);
+            buildingMaterials5L = addLinkResources(ppl, 2, buildingMaterials5L, session);
+            buildingMaterials5L = addLinkResources(credits, null, buildingMaterials5L, session);
 
             /**
              * Цепочка ресурсов для производства любого строения
              */
-            LinkResources building;
-            building = addLinkResources(SessionUtils.getResources(InitResources.CONSTRUCTION_GANG), 1, null, session);
-            building = addLinkResources(SessionUtils.getResources(InitResources.ENERGY), 1, building, session);
-            building = addLinkResources(SessionUtils.getResources(InitResources.BUILDING_MATERIALS), 2, building, session);
-            building = addLinkResources(SessionUtils.getResources(InitResources.PPL), 2, building, session);
-            building = addLinkResources(SessionUtils.getResources(InitResources.CREDITS), null, building, session);
+            LinkResources buildingL;
+            buildingL = addLinkResources(constructionGang, 1, null, session);
+            buildingL = addLinkResources(energy, 1, buildingL, session);
+            buildingL = addLinkResources(buildingMaterials, 2, buildingL, session);
+            buildingL = addLinkResources(ppl, 2, buildingL, session);
+            buildingL = addLinkResources(credits, null, buildingL, session);
 
             /**
              * Цепочка ресурсов для получения жилых квартир
              * TODO Особый случай, производится мгновенно, надо придумать как обойти костыль
              */
-            LinkResources flat;
-            flat = addLinkResources(SessionUtils.getResources(InitResources.RESIDENTIAL_COMPLEX), 1, null, session);
-            flat = addLinkResources(SessionUtils.getResources(InitResources.ENERGY), 1, flat, session);
+            LinkResources flatL;
+            flatL = addLinkResources(residentialComplex, 1, null, session);
+            flatL = addLinkResources(energy, 1, flatL, session);
 
             /**
              * Цепочка ресурсов для получения кредитов
              */
-            LinkResources credit;
-            credit = addLinkResources(SessionUtils.getResources(InitResources.FLAT), 1, null, session);
-            credit = addLinkResources(SessionUtils.getResources(InitResources.OXYGEN), 1, credit, session);
-            credit = addLinkResources(SessionUtils.getResources(InitResources.FOOD), 1, credit, session);
-            credit = addLinkResources(SessionUtils.getResources(InitResources.PPL), 1, credit, session);
+            LinkResources creditL;
+            creditL = addLinkResources(flat, 1, null, session);
+            creditL = addLinkResources(oxygen, 1, creditL, session);
+            creditL = addLinkResources(food, 1, creditL, session);
+            creditL = addLinkResources(ppl, 1, creditL, session);
 
             /**
              * Связь производимых ресурсов, игры и цпеочки производящих ресурсов
              */
-            addGameLinkResources(game, SessionUtils.getResources(InitResources.FOOD), 8, 12, food, session);
-            addGameLinkResources(game, SessionUtils.getResources(InitResources.OXYGEN), 8, 12, oxygen, session);
-            addGameLinkResources(game, SessionUtils.getResources(InitResources.ENERGY), 8, 12, energy, session);
-            addGameLinkResources(game, SessionUtils.getResources(InitResources.HELIUM3), 4, 6, helium3, session);
-            addGameLinkResources(game, SessionUtils.getResources(InitResources.BUILDING_MATERIALS), 1, 1,
-                    buildingMaterials1, session);
-            addGameLinkResources(game, SessionUtils.getResources(InitResources.BUILDING_MATERIALS), 2, 2,
-                    buildingMaterials2, session);
-            addGameLinkResources(game, SessionUtils.getResources(InitResources.BUILDING_MATERIALS), 3, 3,
-                    buildingMaterials3, session);
-            addGameLinkResources(game, SessionUtils.getResources(InitResources.BUILDING_MATERIALS), 4, 4,
-                    buildingMaterials4, session);
-            addGameLinkResources(game, SessionUtils.getResources(InitResources.BUILDING_MATERIALS), 5, 5,
-                    buildingMaterials5, session);
-            addGameLinkResources(game, SessionUtils.getResources(InitResources.FARM), 1, 1, building, session);
-            addGameLinkResources(game, SessionUtils.getResources(InitResources.GREENHOUSE), 1, 1, building, session);
-            addGameLinkResources(game, SessionUtils.getResources(InitResources.POWERHOUSE), 1, 1, building, session);
-            addGameLinkResources(game, SessionUtils.getResources(InitResources.MINING_STATION), 1, 1, building, session);
-            addGameLinkResources(game, SessionUtils.getResources(InitResources.MINING_COMPLEX), 1, 1, building, session);
-            addGameLinkResources(game, SessionUtils.getResources(InitResources.METALLURGICAL_COMPLEX), 1, 1, building, session);
-            addGameLinkResources(game, SessionUtils.getResources(InitResources.CONSTRUCTION_GANG), 1, 1, building, session);
-            addGameLinkResources(game, SessionUtils.getResources(InitResources.RESIDENTIAL_COMPLEX), 1, 1, building, session);
-            addGameLinkResources(game, SessionUtils.getResources(InitResources.FLAT), 10, 10, flat, session);
-            addGameLinkResources(game, SessionUtils.getResources(InitResources.CREDITS), null, null, credit, session);
+            addGameLinkResources(game, food, 8, 12, foodL, session);
+            addGameLinkResources(game, oxygen, 8, 12, oxygenL, session);
+            addGameLinkResources(game, energy, 8, 12, energyL, session);
+            addGameLinkResources(game, helium3, 4, 6, helium3L, session);
+            addGameLinkResources(game, buildingMaterials, 1, 1, buildingMaterials1L, session);
+            addGameLinkResources(game, buildingMaterials, 2, 2, buildingMaterials2L, session);
+            addGameLinkResources(game, buildingMaterials, 3, 3, buildingMaterials3L, session);
+            addGameLinkResources(game, buildingMaterials, 4, 4, buildingMaterials4L, session);
+            addGameLinkResources(game, buildingMaterials, 5, 5, buildingMaterials5L, session);
+            addGameLinkResources(game, farm, 1, 1, buildingL, session);
+            addGameLinkResources(game, greenhouse, 1, 1, buildingL, session);
+            addGameLinkResources(game, powerhouse, 1, 1, buildingL, session);
+            addGameLinkResources(game, miningStation, 1, 1, buildingL, session);
+            addGameLinkResources(game, miningComplex, 1, 1, buildingL, session);
+            addGameLinkResources(game, metallurgicalComplex, 1, 1, buildingL, session);
+            addGameLinkResources(game, constructionGang, 1, 1, buildingL, session);
+            addGameLinkResources(game, residentialComplex, 1, 1, buildingL, session);
+            addGameLinkResources(game, flat, 10, 10, flatL, session);
+            addGameLinkResources(game, credits, null, null, creditL, session);
 
             /**
              * Создание очереди ресурсов которые раздаются по очереди игрокам
              */
-            addQueueResources(game, 1, SessionUtils.getResources(InitResources.CONSTRUCTION_GANG), 0, session);
-            addQueueResources(game, 2, SessionUtils.getResources(InitResources.RESIDENTIAL_COMPLEX), 0, session);
-            addQueueResources(game, 3, SessionUtils.getResources(InitResources.FARM), 0, session);
-            addQueueResources(game, 4, SessionUtils.getResources(InitResources.GREENHOUSE), 0, session);
-            addQueueResources(game, 5, SessionUtils.getResources(InitResources.POWERHOUSE), 0, session);
-            addQueueResources(game, 6, SessionUtils.getResources(InitResources.MINING_STATION), 0, session);
-            addQueueResources(game, 7, SessionUtils.getResources(InitResources.MINING_COMPLEX), 0, session);
-            addQueueResources(game, 8, SessionUtils.getResources(InitResources.METALLURGICAL_COMPLEX), 0, session);
+            addQueueResources(game, 1, constructionGang, 0, session);
+            addQueueResources(game, 2, residentialComplex, 0, session);
+            addQueueResources(game, 3, farm, 0, session);
+            addQueueResources(game, 4, greenhouse, 0, session);
+            addQueueResources(game, 5, powerhouse, 0, session);
+            addQueueResources(game, 6, miningStation, 0, session);
+            addQueueResources(game, 7, miningComplex, 0, session);
+            addQueueResources(game, 8, metallurgicalComplex, 0, session);
 
             tx.commit();
 
             Timer timer = new Timer();
             timer.schedule(new StartNewGame(game), game.getStartDate());
 
-        } catch (Exception e){
+        } catch (Exception e) {
             HibernateUtils.rollback(tx);
             e.printStackTrace();
         } finally {
@@ -358,22 +349,23 @@ public class CreateNewGame extends HttpServlet {
 
     /**
      * Метод для создания новой игры
-     * @param name          - наименование игры
-     * @param maxPlayer     - максимальное количество игроков (-1 не ограничено)
-     * @param startDate     - дата начала игры
-     * @param step          - длительность игрового дня
-     * @param countPpl      - стартовое количество колонистов
-     * @param creditPpl     - стартовое количество кредитов у колонистов
-     * @param creditUser    - стартовое количество кредитов у игроков
-     * @param lifeOutFlat   - количество дней на которые расчитаны капсулы
-     * @param description   - описание игры
-     * @param status        - статус игры
-     * @param session       - текущая сессия соединения с БД
+     *
+     * @param name        - наименование игры
+     * @param maxPlayer   - максимальное количество игроков (-1 не ограничено)
+     * @param startDate   - дата начала игры
+     * @param step        - длительность игрового дня
+     * @param countPpl    - стартовое количество колонистов
+     * @param creditPpl   - стартовое количество кредитов у колонистов
+     * @param creditUser  - стартовое количество кредитов у игроков
+     * @param lifeOutFlat - количество дней на которые расчитаны капсулы
+     * @param description - описание игры
+     * @param status      - статус игры
+     * @param session     - текущая сессия соединения с БД
      * @return
      */
     private Game createGame(String name, Integer maxPlayer, Date startDate, Date step,
                             Integer countPpl, Integer creditPpl, Integer creditUser,
-                            Integer lifeOutFlat, String description, StatusGame status, Session session){
+                            Integer lifeOutFlat, String description, StatusGame status, Session session) {
 
         Game game = new Game();
         game.setName(name);
@@ -395,37 +387,34 @@ public class CreateNewGame extends HttpServlet {
 
     /**
      * Метод для создания функций (формул и условий)
-     * @param typeIf        - знак условия
-     * @param el            - оператор
-     * @param op            - операнд
-     * @param constOp       - фиксированый операнд
-     * @param funcOperand   - операнд вычисляемый через функцию
-     * @param next          - следующий элемент функции
-     * @param session       - текущая сессия соединения с БД
+     *
+     * @param typeIf      - знак условия
+     * @param el          - оператор
+     * @param op          - операнд
+     * @param constOp     - фиксированый операнд
+     * @param funcOperand - операнд вычисляемый через функцию
+     * @param next        - следующий элемент функции
+     * @param session     - текущая сессия соединения с БД
      * @return
      */
     private Functions createFunction(TypeIf typeIf, ElFunction el, Operand op, BigDecimal constOp,
-                                     Functions funcOperand, Functions next, Session session){
+                                     Functions funcOperand, Functions next, Session session) {
 
         Functions functions = new Functions();
-        if(typeIf == null){
+        if (typeIf == null) {
             functions.setIf(false);
-        }
-        else{
+        } else {
             functions.setIf(true);
             functions.setTypeIf(typeIf);
         }
 
-        if(el != null){
+        if (el != null) {
             functions.setElFunction(el);
-        }
-        else if(op != null){
+        } else if (op != null) {
             functions.setOperand(op);
-        }
-        else if(constOp != null){
+        } else if (constOp != null) {
             functions.setConstOperand(constOp);
-        }
-        else if(funcOperand != null){
+        } else if (funcOperand != null) {
             functions.setFuncOperand(funcOperand);
         }
 
@@ -439,13 +428,14 @@ public class CreateNewGame extends HttpServlet {
 
     /**
      * Метод добавляет функции в игру
-     * @param game          - игра
-     * @param name          - наименование функции
-     * @param functions     - функция
-     * @param session       - текущая сессия соединения с БД
+     *
+     * @param game      - игра
+     * @param name      - наименование функции
+     * @param functions - функция
+     * @param session   - текущая сессия соединения с БД
      */
     private void addFuncToGame(Game game, PurposeOfFunctions name, Functions functions,
-                               Session session){
+                               Session session) {
 
         GameFunctions gameFunctions = new GameFunctions();
         gameFunctions.setGame(game);
@@ -458,14 +448,15 @@ public class CreateNewGame extends HttpServlet {
 
     /**
      * Метод добавления целей игры
-     * @param game          - игра
-     * @param resources     - ресурс
-     * @param functions     - условие
-     * @param win           - победа? (победа: true, поражение: false)
-     * @param session       - текущая сессия соединения с БД
+     *
+     * @param game      - игра
+     * @param resources - ресурс
+     * @param functions - условие
+     * @param win       - победа? (победа: true, поражение: false)
+     * @param session   - текущая сессия соединения с БД
      */
     private void addGoalGame(Game game, Resources resources, Functions functions, Boolean win,
-                             Session session){
+                             Session session) {
 
         GoalGame goalGame = new GoalGame();
         goalGame.setGame(game);
@@ -479,18 +470,19 @@ public class CreateNewGame extends HttpServlet {
 
     /**
      * Метод инициализирует настройки рынка Земли для каждого ресурса
-     * @param game              - игра
-     * @param resources         - ресурс
-     * @param startCost         - стартовая цена
-     * @param constValue        - константа количества
-     * @param startValue        - стартовое количество ресурсов
-     * @param constConsum       - константа потребления
-     * @param multiPriceIncr    - мультипликатор роста цен
-     * @param session           - текущая сессия соединения с БД
+     *
+     * @param game           - игра
+     * @param resources      - ресурс
+     * @param startCost      - стартовая цена
+     * @param constValue     - константа количества
+     * @param startValue     - стартовое количество ресурсов
+     * @param constConsum    - константа потребления
+     * @param multiPriceIncr - мультипликатор роста цен
+     * @param session        - текущая сессия соединения с БД
      */
     private void addInitMarketEarth(Game game, Resources resources, Integer startCost, Integer constValue,
-                                       Integer startValue, BigDecimal constConsum, Integer multiPriceIncr,
-                                       Session session){
+                                    Integer startValue, BigDecimal constConsum, Integer multiPriceIncr,
+                                    Session session) {
 
         InitMarketEarth initMarketEarth = new InitMarketEarth();
         initMarketEarth.setGame(game);
@@ -507,12 +499,13 @@ public class CreateNewGame extends HttpServlet {
 
     /**
      * Метод задаёт цены на ресурсы используемые при старте игры для первичной закупки
-     * @param game          - игра
-     * @param resources     - ресурс
-     * @param cost          - цена на ресурс
-     * @param session       - текущая сессия соединения с БД
+     *
+     * @param game      - игра
+     * @param resources - ресурс
+     * @param cost      - цена на ресурс
+     * @param session   - текущая сессия соединения с БД
      */
-    private void addStartCostResources(Game game, Resources resources, Integer cost, Session session){
+    private void addStartCostResources(Game game, Resources resources, Integer cost, Session session) {
 
         StartCostResources startCostResources = new StartCostResources();
         startCostResources.setGame(game);
@@ -525,14 +518,15 @@ public class CreateNewGame extends HttpServlet {
 
     /**
      * Метод добавляет элемент в цепочку элементов для создания ресурсов
-     * @param resources     - ресурс
-     * @param countRes      - количество ресурсов
-     * @param next          - ссылка на следующий элемент цепочки
-     * @param session       - текущая сессия соединения с БД
+     *
+     * @param resources - ресурс
+     * @param countRes  - количество ресурсов
+     * @param next      - ссылка на следующий элемент цепочки
+     * @param session   - текущая сессия соединения с БД
      * @return
      */
     private LinkResources addLinkResources(Resources resources, Integer countRes, LinkResources next,
-                                           Session session){
+                                           Session session) {
 
         LinkResources linkResources = new LinkResources();
         linkResources.setResources(resources);
@@ -547,15 +541,16 @@ public class CreateNewGame extends HttpServlet {
 
     /**
      * Метод добавляет связь между цепочкой производящих ресурсов, игрой и производимым ресурсом
-     * @param game              - игра
-     * @param resources         - ресурс
-     * @param countUp           - количество ресурсов (верхняя граница)
-     * @param countDown         - количество ресурсов (нижняя граница)
-     * @param linkResources     - ссылка на цепочку ресурсов
-     * @param session           - текущая сессия соединения с БД
+     *
+     * @param game          - игра
+     * @param resources     - ресурс
+     * @param countUp       - количество ресурсов (верхняя граница)
+     * @param countDown     - количество ресурсов (нижняя граница)
+     * @param linkResources - ссылка на цепочку ресурсов
+     * @param session       - текущая сессия соединения с БД
      */
     private void addGameLinkResources(Game game, Resources resources, Integer countUp, Integer countDown,
-                                      LinkResources linkResources, Session session){
+                                      LinkResources linkResources, Session session) {
 
         GameLinkResources gameLinkResources = new GameLinkResources();
         gameLinkResources.setGame(game);
@@ -570,13 +565,14 @@ public class CreateNewGame extends HttpServlet {
 
     /**
      * Метод добавляет элемент очереди в таблицу из которой распределяются ресурсы
-     * @param game          - игра
-     * @param sortRes       - номер сортировки ресурса
-     * @param resources     - ресурс
-     * @param queue         - ключ показывающий что выбрано и сколько раз
-     * @param session       - текущая сессия соединения с БД
+     *
+     * @param game      - игра
+     * @param sortRes   - номер сортировки ресурса
+     * @param resources - ресурс
+     * @param queue     - ключ показывающий что выбрано и сколько раз
+     * @param session   - текущая сессия соединения с БД
      */
-    private  void addQueueResources(Game game, Integer sortRes, Resources resources, Integer queue, Session session){
+    private void addQueueResources(Game game, Integer sortRes, Resources resources, Integer queue, Session session) {
 
         QueueResources queueResources = new QueueResources();
         queueResources.setGame(game);

@@ -36,7 +36,7 @@ public class FormulaUtils {
         Long id = idFunc;
 
         do{
-            functions = SessionUtils.getEntityObject(Functions.class, id);
+            functions = SessionUtils.getEntityObject(Functions.class, id, session);
             id = functions.getId();
 
             if(!functions.getIf()){

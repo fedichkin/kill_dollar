@@ -54,13 +54,13 @@ public class ConnectToGame extends HttpServlet {
                 throw new Exception("Игры с id = " + gameId + " не найдено!");
             }
 
-            if(SessionUtils.getUserGame(request, game) != null){
+            if(SessionUtils.getUserGame(request, game, session) != null){
                 throw new Exception("Пользователь уже в игре!");
             }
 
             UsrGame usrGame = new UsrGame();
             usrGame.setGame(game);
-            usrGame.setUser(SessionUtils.getUser(request));
+            usrGame.setUser(SessionUtils.getUser(request, session));
             usrGame.setRegDate(new Date());
 
             session.save(usrGame);
