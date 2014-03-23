@@ -100,7 +100,7 @@
                 <div class="statistic-page">
                     <div class="statistic-page-header population">Население колонии</div>
                     <div class="statistic-page-content">
-                        <div class="statistic-block">
+                        <div class="statistic-block" id="ppl">
                             <a class="tip"><img alt="Колонисты" src="img/population-summary.png" class="tip"/><span class="hint">Колонисты</span></a>
                             <a class="tip"><span class="green">+12</span><span class="hint">Изменение численности за последний месяц</span></a>
                             /
@@ -541,9 +541,9 @@
 </body>
 
 
-
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
+<script src="js/game.js"></script>
 
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

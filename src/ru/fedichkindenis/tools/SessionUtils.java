@@ -169,4 +169,18 @@ public class SessionUtils {
 
         return resources;
     }
+
+    /**
+     * Возвращает текущий день игры
+     * @param game      - игра
+     * @param session   - текущая сессия соединения с БД
+     * @return
+     */
+    public static Date getCurrentGameDate(Game game, Session session){
+
+        Query query = session.createQuery("select max(gs.gameDate) from GameStatistics gs where gs.game = :game")
+                .setParameter("game", game);
+
+        return (Date) query.uniqueResult();
+    }
 }

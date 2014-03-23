@@ -39,7 +39,7 @@ public class FormulaUtils {
             functions = SessionUtils.getEntityObject(Functions.class, id, session);
             id = functions.getId();
 
-            if(!functions.getIf()){
+           // if(!functions.getIf()){
                 if(functions.getElFunction() != null){
                     ElFunction el = functions.getElFunction();
 
@@ -75,7 +75,7 @@ public class FormulaUtils {
                 else if(functions.getFuncOperand() != null){
                     operands.push(getResultFormula(functions.getFuncOperand().getId(), game, gameDate, resources, session));
                 }
-            }
+           // }
 
             if(functions.getNextStep() != null){
                 id = functions.getNextStep().getId();

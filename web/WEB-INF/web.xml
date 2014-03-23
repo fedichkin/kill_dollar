@@ -45,6 +45,11 @@
         <servlet-name>DisconnectFromGame</servlet-name>
     </filter-mapping>
 
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <servlet-name>GetStatistics</servlet-name>
+    </filter-mapping>
+
     <!--########################################################-->
 
     <!--#########################SERVLET########################-->
@@ -74,6 +79,11 @@
         <servlet-class>ru.fedichkindenis.servlets.DisconnectFromGame</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>GetStatistics</servlet-name>
+        <servlet-class>ru.fedichkindenis.servlets.GetStatistics</servlet-class>
+    </servlet>
+
     <!--########################################################-->
 
     <!--#####################SERVLET MAPPING####################-->
@@ -101,6 +111,11 @@
     <servlet-mapping>
         <servlet-name>DisconnectFromGame</servlet-name>
         <url-pattern>/DisconnectFromGame</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>GetStatistics</servlet-name>
+        <url-pattern>/GetStatistics</url-pattern>
     </servlet-mapping>
 
     <!--########################################################-->
