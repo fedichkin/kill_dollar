@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import ru.fedichkindenis.entity.Game;
+import ru.fedichkindenis.entity.GameDay;
 import ru.fedichkindenis.entity.Resources;
 import ru.fedichkindenis.enums.ElFunction;
 import ru.fedichkindenis.entity.Functions;
@@ -27,7 +28,7 @@ public class FormulaUtils {
     //private static final SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
 
     public static BigDecimal getResultFormula(Long idFunc, Game game,
-                                              Date gameDate, Resources resources, Session session){
+                                              GameDay gameDate, Resources resources, Session session){
 
         Stack<BigDecimal> operands = new Stack<BigDecimal>();
         Stack<ElFunction> elements = new Stack<ElFunction>();

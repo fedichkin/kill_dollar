@@ -33,9 +33,9 @@ public class StateResources {
     /**
      * День игры
      */
-    @Column(name = "game_date", nullable = false)
-    @Temporal(value = TemporalType.DATE)
-    private Date gameDate;
+    @ManyToOne
+    @JoinColumn(name = "game_date", nullable = false)
+    private GameDay gameDate;
 
     /**
      * Ссылка на пользователя
@@ -83,11 +83,11 @@ public class StateResources {
         this.game = game;
     }
 
-    public Date getGameDate() {
+    public GameDay getGameDate() {
         return gameDate;
     }
 
-    public void setGameDate(Date gameDate) {
+    public void setGameDate(GameDay gameDate) {
         this.gameDate = gameDate;
     }
 

@@ -47,32 +47,37 @@ public class StartNewGame extends TimerTask {
 
             List<User> users = query.list();
 
-            Date gameDate = new Date();
+            GameDay gameDay = new GameDay();
+            gameDay.setGame(game);
+            gameDay.setNumberDay(1);
+            gameDay.setSvd(new Date());
+            session.save(gameDay);
+            session.flush();
 
             if(!users.isEmpty()){
 
                 for(User user : users){
 
-                    saveStateResources(game, gameDate, user, getGenerateResources(session), 1, true, session);
-                    saveStateResources(game, gameDate, user, SessionUtils.getResources(InitResources.CREDITS, session),
+                    saveStateResources(game, gameDay, user, getGenerateResources(session), 1, true, session);
+                    saveStateResources(game, gameDay, user, SessionUtils.getResources(InitResources.CREDITS, session),
                             game.getCreditUser(), true, session);
                 }
 
                 for(int i = 0;i < game.getCountPpl();i++){
-                    Ppl ppl = savePpl(game, 1, StatusPpl.IN_GAME, gameDate, session);
-                    saveStateResourcesPpl(game, gameDate, ppl, game.getCreditPpl(), 0, 0, false, 0, session);
+                    Ppl ppl = savePpl(game, 1, StatusPpl.IN_GAME, gameDay, session);
+                    saveStateResourcesPpl(game, gameDay, ppl, game.getCreditPpl(), 0, 0, false, 0, session);
                 }
 
-                firstSaveMarketEarth(game, gameDate, session);
+                firstSaveMarketEarth(game, gameDay, session);
 
-                Integer countFlat = getCountFlat(game, gameDate, session);
+                Integer countFlat = getCountFlat(game, gameDay, session);
 
-                GameStatistics gs = saveGameStatistics(game, gameDate, game.getCountPpl(), 0, game.getCreditPpl(), game.getCreditPpl(),
+                GameStatistics gs = saveGameStatistics(game, gameDay, game.getCountPpl(), 0, game.getCreditPpl(), game.getCreditPpl(),
                         game.getCreditPpl(), game.getCountPpl(), 0, countFlat, countFlat, 0, 0, 0, 0,0, 0, session);
 
                 for(InitResources inRes : InitResources.values()){
                     Resources res = SessionUtils.getResources(inRes, session);
-                    Map<String, Object> info = getInfoResourcesByGameDate(res, game, gameDate, session);
+                    Map<String, Object> info = getInfoResourcesByGameDate(res, game, gameDay, session);
 
                     ResourcesStatistics rs = saveResourcesStatistics(res, (Integer)info.get("count"), 0, 0, (Integer)info.get("sale_price"),
                             0, (Integer)info.get("buy_price"), 0, session);
@@ -116,12 +121,12 @@ public class StartNewGame extends TimerTask {
         return res;
     }
 
-    private void saveStateResources(Game g, Date gameDate, User user, Resources res,
+    private void saveStateResources(Game g, GameDay gameDay, User user, Resources res,
                                     Integer val, Boolean hide, Session session){
 
         StateResources stateResources = new StateResources();
         stateResources.setGame(g);
-        stateResources.setGameDate(gameDate);
+        stateResources.setGameDate(gameDay);
         stateResources.setUser(user);
         stateResources.setResources(res);
         stateResources.setCountRes(val);
@@ -130,7 +135,7 @@ public class StartNewGame extends TimerTask {
         session.flush();
     }
 
-    private Ppl savePpl(Game g, Integer dayCaps, StatusPpl stat, Date addDate, Session session){
+    private Ppl savePpl(Game g, Integer dayCaps, StatusPpl stat, GameDay addDate, Session session){
         Ppl ppl = new Ppl();
         ppl.setGame(g);
         ppl.setDaysCapsule(dayCaps);
@@ -142,12 +147,12 @@ public class StartNewGame extends TimerTask {
         return ppl;
     }
 
-    private void saveStateResourcesPpl(Game g, Date gameDate, Ppl ppl, Integer credit, Integer payHouse,
+    private void saveStateResourcesPpl(Game g, GameDay gameDay, Ppl ppl, Integer credit, Integer payHouse,
                                        Integer salary, Boolean parasit, Integer parasitStep, Session session){
 
         StateResourcesPpl stateResourcesPpl = new StateResourcesPpl();
         stateResourcesPpl.setGame(g);
-        stateResourcesPpl.setGameDate(gameDate);
+        stateResourcesPpl.setGameDate(gameDay);
         stateResourcesPpl.setPpl(ppl);
         stateResourcesPpl.setCredit(credit);
         stateResourcesPpl.setPayHouse(payHouse);
@@ -158,7 +163,7 @@ public class StartNewGame extends TimerTask {
         session.flush();
     }
 
-    private void firstSaveMarketEarth(Game g, Date gameDate, Session session){
+    private void firstSaveMarketEarth(Game g, GameDay gameDay, Session session){
 
         Query query = session.createQuery("select " +
                 " new map(ime.resources as res, ime.startCost as cost, " +
@@ -170,7 +175,7 @@ public class StartNewGame extends TimerTask {
         for(Map<String, Object> obj : objectList){
             MarketEarth marketEarth = new MarketEarth();
             marketEarth.setGame(g);
-            marketEarth.setGameDate(gameDate);
+            marketEarth.setGameDate(gameDay);
             marketEarth.setResources((Resources)obj.get("res"));
             marketEarth.setSaleCost((Integer)obj.get("cost"));
             marketEarth.setVal((Integer)obj.get("val"));
@@ -186,21 +191,21 @@ public class StartNewGame extends TimerTask {
             Long fId = (Long) query.uniqueResult();
 
             marketEarth.setBuyCost(FormulaUtils.getResultFormula(fId,
-                    game, gameDate, (Resources)obj.get("res"), session).intValue());
+                    game, gameDay, (Resources)obj.get("res"), session).intValue());
 
             session.update(marketEarth);
             session.flush();
         }
     }
 
-    private Map<String, Object> getInfoResourcesByGameDate(Resources res, Game g, Date gameDate, Session session){
+    private Map<String, Object> getInfoResourcesByGameDate(Resources res, Game g, GameDay gameDay, Session session){
 
         Map<String, Object> result = new HashMap<String, Object>();
 
         Query query = session.createQuery("select sum(sr.countRes) from StateResources sr where sr.resources = :res " +
                 "and sr.game = :game and sr.gameDate = :date")
                 .setParameter("res", res)
-                .setDate("date", gameDate)
+                .setParameter("date", gameDay)
                 .setParameter("game", g);
 
         Integer sum = query.uniqueResult() == null ? 0 : ((Long) query.uniqueResult()).intValue();
@@ -209,7 +214,7 @@ public class StartNewGame extends TimerTask {
         query = session.createQuery("select me.saleCost, me.buyCost from MarketEarth me where me.game = :game " +
                 " and me.gameDate = :date and me.resources = :res")
                 .setParameter("game", g)
-                .setDate("date", gameDate)
+                .setParameter("date", gameDay)
                 .setParameter("res", res);
 
         List<Object[]> objects = query.list();
@@ -242,7 +247,7 @@ public class StartNewGame extends TimerTask {
         return resourcesStatistics;
     }
 
-    private GameStatistics saveGameStatistics(Game g, Date gameDate, Integer countPpl, Integer changeCountPpl,
+    private GameStatistics saveGameStatistics(Game g, GameDay gameDay, Integer countPpl, Integer changeCountPpl,
                                     Integer summMaxPpl, Integer summMinPpl, Integer summAvgPpl, Integer worklessCount,
                                     Integer parazitCount, Integer flatCount, Integer flatCountEmpty,
                                     Integer priceMaxFalt, Integer priceMinFlat, Integer priceAvgFlat,
@@ -250,7 +255,7 @@ public class StartNewGame extends TimerTask {
 
         GameStatistics gameStatistics = new GameStatistics();
         gameStatistics.setGame(g);
-        gameStatistics.setGameDate(gameDate);
+        gameStatistics.setGameDate(gameDay);
         gameStatistics.setCountPpl(countPpl);
         gameStatistics.setChangeCountPpl(changeCountPpl);
         gameStatistics.setSummMaxPpl(summMaxPpl);
@@ -273,13 +278,13 @@ public class StartNewGame extends TimerTask {
         return gameStatistics;
     }
 
-    private Integer getCountFlat(Game g, Date gameDate, Session session){
+    private Integer getCountFlat(Game g, GameDay gameDay, Session session){
 
         Integer count = 0;
 
         Map<String, Object> info =
                 getInfoResourcesByGameDate(SessionUtils.getResources(InitResources.RESIDENTIAL_COMPLEX, session),
-                        g, gameDate, session);
+                        g, gameDay, session);
         Integer countComplex = (Integer)info.get("count");
 
         count = countComplex * 10;

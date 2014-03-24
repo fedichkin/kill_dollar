@@ -61,7 +61,7 @@ public class GetStatistics extends HttpServlet {
             query = session.createQuery("select gs, grs.resStat from GameResStat grs join grs.gameStat gs " +
                     " where gs.game = :game and gs.gameDate = :gameDate")
                     .setParameter("game", game)
-                    .setDate("gameDate", SessionUtils.getCurrentGameDate(game, session));
+                    .setParameter("gameDate", SessionUtils.getCurrentGameDate(game, session));
 
             List<Object[]> statistics = query.list();
 

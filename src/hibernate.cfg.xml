@@ -48,6 +48,7 @@
         <mapping class="ru.fedichkindenis.entity.MarketEarth"/>
         <mapping class="ru.fedichkindenis.entity.GameLinkResources"/>
         <mapping class="ru.fedichkindenis.entity.GameFunctions"/>
+        <mapping class="ru.fedichkindenis.entity.GameDay"/>
 
         <!-- HQL QUERY -->
         <mapping resource="ru/fedichkindenis/bd/hql_query/operand_functions.xml"/>

@@ -47,16 +47,16 @@ public class Ppl {
     /**
      * Дата прилета на Луну
      */
-    @Column(name = "add_date", nullable = false)
-    @Temporal(value = TemporalType.DATE)
-    private Date addDate;
+    @ManyToOne
+    @JoinColumn(name = "add_date", nullable = false)
+    private GameDay addDate;
 
     /**
      * Дата смерти или выбытия
      */
-    @Column(name = "del_date", nullable = true)
-    @Temporal(value = TemporalType.DATE)
-    private Date delDate;
+    @ManyToOne
+    @JoinColumn(name = "del_date", nullable = true)
+    private GameDay delDate;
 
     /**********GETTERS AND SETTERS**********/
 
@@ -88,19 +88,19 @@ public class Ppl {
         this.stat = stat;
     }
 
-    public Date getAddDate() {
+    public GameDay getAddDate() {
         return addDate;
     }
 
-    public void setAddDate(Date addDate) {
+    public void setAddDate(GameDay addDate) {
         this.addDate = addDate;
     }
 
-    public Date getDelDate() {
+    public GameDay getDelDate() {
         return delDate;
     }
 
-    public void setDelDate(Date delDate) {
+    public void setDelDate(GameDay delDate) {
         this.delDate = delDate;
     }
 }

@@ -6,10 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import ru.fedichkindenis.entity.Game;
-import ru.fedichkindenis.entity.Resources;
-import ru.fedichkindenis.entity.User;
-import ru.fedichkindenis.entity.UsrGame;
+import ru.fedichkindenis.entity.*;
 import ru.fedichkindenis.enums.InitResources;
 import ru.fedichkindenis.enums.Operand;
 import ru.fedichkindenis.enums.StatusGame;
@@ -126,7 +123,7 @@ public class SessionUtils {
      * @param session       - текущая сессия соединения с БД
      * @return
      */
-    public static Object getValueOperand(Operand operand, Game game, Date gameDate, Resources resources, Session session){
+    public static Object getValueOperand(Operand operand, Game game, GameDay gameDate, Resources resources, Session session){
         Object result = null;
 
         Query query = session.getNamedQuery(operand.getQuery());
@@ -138,7 +135,7 @@ public class SessionUtils {
         }
 
         if(queryString.indexOf(":gameDate") > -1){
-            query.setDate("gameDate", gameDate);
+            query.setParameter("gameDate", gameDate);
         }
 
         if(queryString.indexOf(":resources") > -1){
@@ -176,11 +173,13 @@ public class SessionUtils {
      * @param session   - текущая сессия соединения с БД
      * @return
      */
-    public static Date getCurrentGameDate(Game game, Session session){
+    public static GameDay getCurrentGameDate(Game game, Session session){
 
-        Query query = session.createQuery("select max(gs.gameDate) from GameStatistics gs where gs.game = :game")
-                .setParameter("game", game);
+        Query query = session.createQuery("select gd from GameStatistics gs join gs.gameDate gd " +
+                "where gs.game = :game and :period >= gd.svd and (gd.fvd is null or :period <= gd.fvd)")
+                .setParameter("game", game)
+                .setTimestamp("period", new Date());
 
-        return (Date) query.uniqueResult();
+        return (GameDay) query.uniqueResult();
     }
 }
