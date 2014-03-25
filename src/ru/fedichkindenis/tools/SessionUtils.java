@@ -175,10 +175,9 @@ public class SessionUtils {
      */
     public static GameDay getCurrentGameDate(Game game, Session session){
 
-        Query query = session.createQuery("select gd from GameStatistics gs join gs.gameDate gd " +
-                "where gs.game = :game and :period >= gd.svd and (gd.fvd is null or :period <= gd.fvd)")
-                .setParameter("game", game)
-                .setTimestamp("period", new Date());
+        Query query = session.createQuery("from GameDay gd " +
+                "where gd.game = :game and gd.fvd is null")
+                .setParameter("game", game);
 
         return (GameDay) query.uniqueResult();
     }
