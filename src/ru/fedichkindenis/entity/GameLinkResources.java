@@ -1,5 +1,7 @@
 package ru.fedichkindenis.entity;
 
+import ru.fedichkindenis.enums.TypeOperation;
+
 import javax.persistence.*;
 
 /**
@@ -54,6 +56,13 @@ public class GameLinkResources {
     @JoinColumn(name = "link_resources", nullable = true)
     private LinkResources linkResources;
 
+    /**
+     * Тип операции
+     */
+    @Column(name = "type_operation", nullable = false)
+    @Enumerated(value = EnumType.ORDINAL)
+    private TypeOperation typeOperation;
+
     /**********GETTERS AND SETTERS**********/
 
     public Long getId() {
@@ -98,5 +107,13 @@ public class GameLinkResources {
 
     public void setCountDown(Integer countDown) {
         this.countDown = countDown;
+    }
+
+    public TypeOperation getTypeOperation() {
+        return typeOperation;
+    }
+
+    public void setTypeOperation(TypeOperation typeOperation) {
+        this.typeOperation = typeOperation;
     }
 }

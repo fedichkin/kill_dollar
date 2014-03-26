@@ -58,6 +58,7 @@
       <column name="count_up" sqlType="INT UNSIGNED" length="10" precision="0" nullable="true" jdbcType="-5" />
       <column name="count_down" sqlType="INT UNSIGNED" length="10" precision="0" nullable="true" jdbcType="-5" />
       <column name="link_resources" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" />
+      <column name="type_operation" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
     </table>
     <table name="game_res_stat" schema="" catalog="moon_2040" type="BASE TABLE" remarks="0KHQstGP0LfRjCDRgdGC0LDRgtC40YHRgtC40LrQuCDRgNC10YHRg9GA0YHQvtCyINGBINGB0YLQsNGC0LjRgdGC0LjQutC+0Lkg0LjQs9GA0Ys=">
       <column name="id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />

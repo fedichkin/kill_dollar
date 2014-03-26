@@ -296,25 +296,44 @@ public class CreateNewGame extends HttpServlet {
             /**
              * Связь производимых ресурсов, игры и цпеочки производящих ресурсов
              */
-            addGameLinkResources(game, food, 8, 12, foodL, session);
-            addGameLinkResources(game, oxygen, 8, 12, oxygenL, session);
-            addGameLinkResources(game, energy, 8, 12, energyL, session);
-            addGameLinkResources(game, helium3, 4, 6, helium3L, session);
-            addGameLinkResources(game, buildingMaterials, 1, 1, buildingMaterials1L, session);
-            addGameLinkResources(game, buildingMaterials, 2, 2, buildingMaterials2L, session);
-            addGameLinkResources(game, buildingMaterials, 3, 3, buildingMaterials3L, session);
-            addGameLinkResources(game, buildingMaterials, 4, 4, buildingMaterials4L, session);
-            addGameLinkResources(game, buildingMaterials, 5, 5, buildingMaterials5L, session);
-            addGameLinkResources(game, farm, 1, 1, buildingL, session);
-            addGameLinkResources(game, greenhouse, 1, 1, buildingL, session);
-            addGameLinkResources(game, powerhouse, 1, 1, buildingL, session);
-            addGameLinkResources(game, miningStation, 1, 1, buildingL, session);
-            addGameLinkResources(game, miningComplex, 1, 1, buildingL, session);
-            addGameLinkResources(game, metallurgicalComplex, 1, 1, buildingL, session);
-            addGameLinkResources(game, constructionGang, 1, 1, buildingL, session);
-            addGameLinkResources(game, residentialComplex, 1, 1, buildingL, session);
-            addGameLinkResources(game, flat, 10, 10, flatL, session);
-            addGameLinkResources(game, credits, null, null, creditL, session);
+            addGameLinkResources(game, food, 8, 12, foodL,
+                    TypeOperation.FOOD_PRODUCTION, session);
+            addGameLinkResources(game, oxygen, 8, 12, oxygenL,
+                    TypeOperation.OXYGEN_PRODUCTION, session);
+            addGameLinkResources(game, energy, 8, 12, energyL,
+                    TypeOperation.ENERGY_PRODUCTION, session);
+            addGameLinkResources(game, helium3, 4, 6, helium3L,
+                    TypeOperation.HELIUM3_PRODUCTION, session);
+            addGameLinkResources(game, buildingMaterials, 1, 1, buildingMaterials1L,
+                    TypeOperation.BUILDING_MATERIALS_PRODUCTION, session);
+            addGameLinkResources(game, buildingMaterials, 2, 2, buildingMaterials2L,
+                    TypeOperation.BUILDING_MATERIALS_PRODUCTION, session);
+            addGameLinkResources(game, buildingMaterials, 3, 3, buildingMaterials3L,
+                    TypeOperation.BUILDING_MATERIALS_PRODUCTION, session);
+            addGameLinkResources(game, buildingMaterials, 4, 4, buildingMaterials4L,
+                    TypeOperation.BUILDING_MATERIALS_PRODUCTION, session);
+            addGameLinkResources(game, buildingMaterials, 5, 5, buildingMaterials5L,
+                    TypeOperation.BUILDING_MATERIALS_PRODUCTION, session);
+            addGameLinkResources(game, farm, 1, 1, buildingL,
+                    TypeOperation.FARM_BUILDING, session);
+            addGameLinkResources(game, greenhouse, 1, 1, buildingL,
+                    TypeOperation.GREENHOUSE_BUILDING, session);
+            addGameLinkResources(game, powerhouse, 1, 1, buildingL,
+                    TypeOperation.POWERHOUSE_BUILDING, session);
+            addGameLinkResources(game, miningStation, 1, 1, buildingL,
+                    TypeOperation.MINING_STATION_BUILDING, session);
+            addGameLinkResources(game, miningComplex, 1, 1, buildingL,
+                    TypeOperation.MINING_COMPLEX_BUILDING, session);
+            addGameLinkResources(game, metallurgicalComplex, 1, 1, buildingL,
+                    TypeOperation.METALLURGICAL_COMPLEX_BUILDING, session);
+            addGameLinkResources(game, constructionGang, 1, 1, buildingL,
+                    TypeOperation.CONSTRUCTION_GAND_BUILDING, session);
+            addGameLinkResources(game, residentialComplex, 1, 1, buildingL,
+                    TypeOperation.RESIDENTIAL_COMPLEX_BUILDING, session);
+            addGameLinkResources(game, flat, 10, 10, flatL,
+                    TypeOperation.FLAT_PROVIDING, session);
+            addGameLinkResources(game, credits, null, null, creditL,
+                    TypeOperation.RENTAL_HOUSING, session);
 
             /**
              * Создание очереди ресурсов которые раздаются по очереди игрокам
@@ -550,7 +569,7 @@ public class CreateNewGame extends HttpServlet {
      * @param session       - текущая сессия соединения с БД
      */
     private void addGameLinkResources(Game game, Resources resources, Integer countUp, Integer countDown,
-                                      LinkResources linkResources, Session session) {
+                                      LinkResources linkResources, TypeOperation typeOperation, Session session) {
 
         GameLinkResources gameLinkResources = new GameLinkResources();
         gameLinkResources.setGame(game);
@@ -558,6 +577,7 @@ public class CreateNewGame extends HttpServlet {
         gameLinkResources.setCountUp(countUp);
         gameLinkResources.setCountDown(countDown);
         gameLinkResources.setLinkResources(linkResources);
+        gameLinkResources.setTypeOperation(typeOperation);
 
         session.save(gameLinkResources);
         session.flush();
