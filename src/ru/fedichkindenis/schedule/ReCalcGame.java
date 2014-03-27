@@ -59,20 +59,12 @@ public class ReCalcGame extends TimerTask {
 
             /**
              * Создаём новые статистики колонистов,
-             * для начала получим список колонистов
+             * загрузив старые и обнулив идентификатор
              */
-            Query query = session.getNamedQuery("recalc_game.getList_id_ppl");
-            List<Ppl> listPpl = query.list();
+            List<Long> orderPpl = new ArrayList<Long>();
             Map<Long, StateResourcesPpl> mapStatPpl = new HashMap<Long, StateResourcesPpl>();
 
-            for(Ppl ppl : listPpl){
-                StateResourcesPpl stPpl = new StateResourcesPpl();
-                stPpl.setGame(game);
-                stPpl.setGameDate(newGameDay);
-                stPpl.setPpl(ppl);
-
-                mapStatPpl.put(ppl.getId(), stPpl);
-            }
+            mapStatPpl = getMapStatePpl(session, gameDay, orderPpl);
 
             /**
              * Заселение коллонистов
@@ -88,7 +80,34 @@ public class ReCalcGame extends TimerTask {
         }
     }
 
-    private void rentalHousing(GameDay gameDate, Session session){
+    private Map<Long, StateResourcesPpl> getMapStatePpl(Session session, GameDay gameDate,
+                                                        List<Long> orderPpl){
+
+        /**
+         * Получаем спичок статистики на каждого колониста в игре с сортировкой по кредитам,
+         * начиная с самого богатого колониста
+         */
+        Query query = session.getNamedQuery("recalc_game.get_list_ppl_order_by_credit")
+                .setParameter("game", game)
+                .setParameter("gameDate", gameDate);
+
+        List<StateResourcesPpl> stateResourcesPplList = query.list();
+
+        Map<Long, StateResourcesPpl> mapStatePpl = new HashMap<Long, StateResourcesPpl>();
+
+        for(StateResourcesPpl stPpl : stateResourcesPplList){
+            stPpl.setNullId();
+            mapStatePpl.put(stPpl.getPpl().getId(), stPpl);
+            orderPpl.add(stPpl.getPpl().getId());
+        }
+
+        return mapStatePpl;
+    }
+
+    private void rentalHousing(GameDay gameDate,
+                               Map<Long, StateResourcesPpl> mapStPpl,
+                               List<Long> orderPpl,
+                               Session session){
 
         /**
          * Получаем список операций по аренде квартир с сортировкой по цене,
@@ -101,21 +120,11 @@ public class ReCalcGame extends TimerTask {
 
         List<OperationGame> operationGameList = query.list();
 
-        /**
-         * Получаем спичок статистики на каждого колониста в игре с сортировкой по кредитам,
-         * начиная с самого богатого колониста
-         */
-        query = session.getNamedQuery("recalc_game.get_list_ppl_order_by_credit")
-                .setParameter("game", game)
-                .setParameter("gameDate", gameDate);
-
-        List<StateResourcesPpl> stateResourcesPplList = query.list();
-
         Integer currentPpl = 0;
 
         for(OperationGame opG : operationGameList){
 
-            StateResourcesPpl stPpl = stateResourcesPplList.get(currentPpl);
+            StateResourcesPpl stPpl = mapStPpl.get(orderPpl.get(currentPpl));
             Integer creditPpl = stPpl.getCredit();
             Integer costFlat = opG.getCountRes();
 
@@ -130,10 +139,10 @@ public class ReCalcGame extends TimerTask {
         }
     }
 
-    private void rentPayment(StateResourcesPpl stPpl, Integer costFlat, Session session){
+    private void rentPayment(StateResourcesPpl stPpl, Integer creditPpl,
+                             Integer costFlat){
 
-        /*stPpl.setPayHouse(costFlat);
-        stPpl.setCredit(stPpl.getCredit() - costFlat);
-        stPpl.set*/
+        stPpl.setPayHouse(costFlat);
+        stPpl.setCredit(creditPpl - costFlat);
     }
 }

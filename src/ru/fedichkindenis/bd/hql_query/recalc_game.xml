@@ -33,12 +33,4 @@
         order by sp.credit desc
     </query>
 
-    <query name="recalc_game.getList_id_ppl"
-           comment="Список колонистов в игре">
-        from Ppl p
-
-        where
-            p.stat = ru.fedichkindenis.enums.StatusPpl.IN_GAME
-    </query>
-
 </hibernate-mapping>
