@@ -123,10 +123,11 @@
       <column name="game_date" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JTQsNGC0LAg0LjQs9GA0Ys=" />
       <column name="usr" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" remarks="0JjQtNC10L3RgtC40YTQuNC60LDRgtC+0YAg0L/QvtC70YzQt9C+0LLQsNGC0LXQu9GP" />
       <column name="type_operation" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0JjQtNC10L3RgtC40YTQuNC60LDRgtC+0YAg0YLQuNC/0LAg0L7Qv9C10YDQsNGG0LjQuA==" />
-      <column name="link_object" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" remarks="0KDQtdGB0YPRgNGBINC90LDQtCDQutC+0YLQvtGA0YvQvCDQv9GA0L7QuNC30LLQvtC00LjRgtGB0Y8g0L7Qv9C10YDQsNGG0LjRjyAo0LXRgdC70Lgg0LXRgdGC0Ywp" />
-      <column name="link_goal" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" remarks="0JrQvtC70LjRh9C10YHRgtCy0L4g0YDQtdGB0YPRgNGB0LAg0L3QsNC0INC60L7RgtC+0YDRi9C8INC/0YDQvtC40LfQstC+0LTQuNGC0YHRjyDQvtC/0LXRgNCw0YbQuNGP" />
+      <column name="count_res" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" />
+      <column name="link_object" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" />
+      <column name="link_goal" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" />
       <column name="partner" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="true" jdbcType="-5" remarks="0JjQs9GA0L7QuiDRgSDQutC+0YLQvtGA0YvQvCDQv9GA0L7QuNC30LLQvtC00LjRgtGB0Y8g0L7Qv9C10YDQsNGG0LjRjyAo0LXRgdC70Lgg0LXRgdGC0Ywp" />
-      <column name="svd" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" remarks="0JLRgNC10LzRjyDRgdCy0LXRgNGI0LXQvdC40Y8g0L7Qv9C10YDQsNGG0LjQuCAo0YHQvNC10L3QsCDRgdGC0LDRgtGD0YHQsCk=" />
+      <column name="svd" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" />
       <column name="fvd" sqlType="TIMESTAMP" length="19" precision="0" nullable="true" jdbcType="93" />
       <column name="status_operation" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="-5" remarks="0KLQtdC60YPRidC40Lkg0YHRgtCw0YLRg9GBINC+0L/QtdGA0LDRhtC40Lg=" />
     </table>

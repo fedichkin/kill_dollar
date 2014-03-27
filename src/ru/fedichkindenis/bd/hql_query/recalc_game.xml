@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <query name="recalc_game.get_list_operation_rental_housing"
+           comment="Получаем список сдаваемых квартир с сортировкой по цене">
+        from OperationGame og
+
+        where
+            og.game = :game
+            and og.gameDate = :gameDate
+            and :sd >= og.svd
+            and og.fvd is null
+            and og.statusOperation = ru.fedichkindenis.enums.StatusOperation.CONFIRM
+            and og.typeOperation = ru.fedichkindenis.enums.TypeOperation.RENTAL_HOUSING
+
+        order by og.countRes
+    </query>
+
+    <query name="recalc_game.get_list_ppl_order_by_credit"
+           comment="Список статистики колонистов отсортиованых по количеству кредитов">
+        from StateResourcesPpl sp
+
+        join sp.ppl p
+
+        where
+            sp.game = :game
+            and sp.gameDate = :gameDate
+            and p.stat = ru.fedichkindenis.enums.StatusPpl.IN_GAME
+
+        order by sp.credit desc
+    </query>
+
+    <query name="recalc_game.getList_id_ppl"
+           comment="Список колонистов в игре">
+        from Ppl p
+
+        where
+            p.stat = ru.fedichkindenis.enums.StatusPpl.IN_GAME
+    </query>
+
+</hibernate-mapping>

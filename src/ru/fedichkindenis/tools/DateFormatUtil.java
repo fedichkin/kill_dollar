@@ -1,6 +1,7 @@
 package ru.fedichkindenis.tools;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -37,5 +38,14 @@ public class DateFormatUtil {
 
     public static String formatDayTime(Date date){
         return date != null ? dayTimeFormat.get().format(date) : null;
+    }
+
+    public static Date getNextSvd(Date fvd){
+
+        Calendar calendar = Calendar.getInstance(LOCALE_RU);
+        calendar.setTime(fvd);
+        calendar.add(Calendar.MILLISECOND, 1);
+
+        return calendar.getTime();
     }
 }

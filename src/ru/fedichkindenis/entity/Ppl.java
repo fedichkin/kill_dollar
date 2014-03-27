@@ -38,7 +38,7 @@ public class Ppl {
     private Integer daysCapsule;
 
     /**
-     * Количество дней проведеных в капсуле
+     * Статус колониста
      */
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "stat", nullable = false)

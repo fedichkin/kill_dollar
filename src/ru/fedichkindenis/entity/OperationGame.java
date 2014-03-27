@@ -54,6 +54,12 @@ public class OperationGame {
     private TypeOperation typeOperation;
 
     /**
+     * Количество целевого ресурса
+     */
+    @Column(name = "count_res", nullable = false)
+    private Integer countRes;
+
+    /**
      * Ссылка на цепочку ресурсов - используемых
      */
     @ManyToOne
@@ -180,5 +186,13 @@ public class OperationGame {
 
     public void setStatusOperation(StatusOperation statusOperation) {
         this.statusOperation = statusOperation;
+    }
+
+    public Integer getCountRes() {
+        return countRes;
+    }
+
+    public void setCountRes(Integer countRes) {
+        this.countRes = countRes;
     }
 }
