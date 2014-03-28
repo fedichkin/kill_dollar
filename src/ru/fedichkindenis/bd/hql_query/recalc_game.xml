@@ -33,4 +33,15 @@
         order by sp.credit desc
     </query>
 
+    <query name="recalc_game.get_list_state_resources"
+           comment="Список статистики ресурсов с сортировкой по игрокам">
+        from StateResources sr
+
+        where
+            sr.game = :game
+            and sr.gameDate = :gameDate
+
+        order by sr.user.id
+    </query>
+
 </hibernate-mapping>

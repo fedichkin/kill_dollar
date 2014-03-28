@@ -25,6 +25,9 @@ public class Resources {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    /**
+     * ссылка на Enum
+     */
     @Column(name = "id_enum", nullable = false)
     @Enumerated(value = EnumType.ORDINAL)
     private InitResources idEnum;
@@ -103,5 +106,13 @@ public class Resources {
 
     public void setImgMin(String imgMin) {
         this.imgMin = imgMin;
+    }
+
+    public InitResources getIdEnum() {
+        return idEnum;
+    }
+
+    public void setIdEnum(InitResources idEnum) {
+        this.idEnum = idEnum;
     }
 }

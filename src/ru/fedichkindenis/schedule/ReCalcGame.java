@@ -67,6 +67,12 @@ public class ReCalcGame extends TimerTask {
             mapStatPpl = getMapStatePpl(session, gameDay, orderPpl);
 
             /**
+             * Создаём новые статистики ресурсов для каждого игрока,
+             * для этого  загрузим старые и обнулим идентификаторы
+             */
+            Map<Long, StateResources> mapStatResUser = new HashMap<Long, StateResources>();
+
+            /**
              * Заселение коллонистов
              */
 
@@ -80,6 +86,13 @@ public class ReCalcGame extends TimerTask {
         }
     }
 
+    /**
+     * Получаем карту статистик и список идентификаторов колонистов в порядке начиная с самых богатых
+     * @param session   - текущая сессия соединения с БД
+     * @param gameDate  - день игры
+     * @param orderPpl  - лист идентификаторов колонистов (заполняется внутри метода)
+     * @return
+     */
     private Map<Long, StateResourcesPpl> getMapStatePpl(Session session, GameDay gameDate,
                                                         List<Long> orderPpl){
 
@@ -104,8 +117,41 @@ public class ReCalcGame extends TimerTask {
         return mapStatePpl;
     }
 
+    /**
+     * Получаем карту статистик ресурсов по игрокам
+     * @param session   - текущая сессия соединения с БД
+     * @param gameDay   - день игры
+     * @return
+     */
+    private Map<Long, Map<Integer, StateResources>> getMapStateResUser(Session session, GameDay gameDay){
+
+        Query query = session.getNamedQuery("recalc_game.get_list_state_resources")
+                .setParameter("game", game)
+                .setParameter("gameDate", gameDay);
+
+        List<StateResources> stateResourcesList = query.list();
+
+        Map<Long, Map<Integer, StateResources>> mapStateResUser = new HashMap<Long, Map<Integer, StateResources>>();
+
+        for(StateResources stRes : stateResourcesList){
+            stRes.setNullId();
+            Long idUser = stRes.getUser().getId();
+            Integer idInitRes = stRes.getResources().getIdEnum().getId();
+            if(!mapStateResUser.containsKey(idUser)){
+                mapStateResUser.put(idUser, new HashMap<Integer, StateResources>());
+                mapStateResUser.get(idUser).put(idInitRes, stRes);
+            }
+            else{
+                mapStateResUser.get(idUser).put(idInitRes, stRes);
+            }
+        }
+
+        return mapStateResUser;
+    }
+
     private void rentalHousing(GameDay gameDate,
                                Map<Long, StateResourcesPpl> mapStPpl,
+                               Map<Long, Map<Integer, StateResources>> mapStResUser,
                                List<Long> orderPpl,
                                Session session){
 
@@ -139,10 +185,13 @@ public class ReCalcGame extends TimerTask {
         }
     }
 
-    private void rentPayment(StateResourcesPpl stPpl, Integer creditPpl,
-                             Integer costFlat){
+    private void rentPayment(StateResourcesPpl stPpl, StateResources stResUser, Integer creditPpl,
+                             Integer costFlat, Session session){
+
+
 
         stPpl.setPayHouse(costFlat);
         stPpl.setCredit(creditPpl - costFlat);
+        session.saveOrUpdate(stPpl);
     }
 }

@@ -75,6 +75,10 @@ public class StateResources {
         return id;
     }
 
+    public void setNullId() {
+        this.id = null;
+    }
+
     public Game getGame() {
         return game;
     }
