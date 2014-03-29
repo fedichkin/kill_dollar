@@ -112,6 +112,8 @@ public class ReCalcGame extends TimerTask {
             stPpl.setNullId();
             mapStatePpl.put(stPpl.getPpl().getId(), stPpl);
             orderPpl.add(stPpl.getPpl().getId());
+
+            session.save(stPpl);
         }
 
         return mapStatePpl;
@@ -144,6 +146,8 @@ public class ReCalcGame extends TimerTask {
             else{
                 mapStateResUser.get(idUser).put(idInitRes, stRes);
             }
+
+            session.save(stRes);
         }
 
         return mapStateResUser;
@@ -174,8 +178,6 @@ public class ReCalcGame extends TimerTask {
             Integer creditPpl = stPpl.getCredit();
             Integer costFlat = opG.getCountRes();
 
-            //TODO логика на тунеядство
-
             if(creditPpl.compareTo(costFlat) >= 0){
                 //если у колониста хватает денег на квартиру
             }
@@ -185,13 +187,34 @@ public class ReCalcGame extends TimerTask {
         }
     }
 
-    private void rentPayment(StateResourcesPpl stPpl, StateResources stResUser, Integer creditPpl,
+    /**
+     * Процесс аренды квартиры, пересчёт ресурсов у игроков и колонистов
+     * @param stPpl         - статистика колониста
+     * @param stResUser     - статистика ресурсов игрока
+     * @param usedRes       - потраченые и заработаные ресурсы игроком и их количество
+     * @param creditPpl     - сумма кредитов у колониста перед сделкой
+     * @param costFlat      - стоимость аренды квартиры
+     * @param session       - текущая сессия соединения с БД
+     */
+    private void rentPayment(StateResourcesPpl stPpl, Map<Integer, StateResources> stResUser,
+                             Map<Integer, Integer> usedRes, Integer creditPpl,
                              Integer costFlat, Session session){
 
+        //Пользователь тратит и получает ресурсы при сдаче квартиры, обновляем его статистику ресурсов
+        for(Integer res : usedRes.keySet()){
+            StateResources stRes = stResUser.get(res);
+            Integer count = stRes.getCountRes();
+            stRes.setCountRes(count + usedRes.get(res));
+            session.update(stRes);
+        }
 
-
+        //Колонист тратит ресурсы на аренду квартиры
         stPpl.setPayHouse(costFlat);
         stPpl.setCredit(creditPpl - costFlat);
-        session.saveOrUpdate(stPpl);
+        session.update(stPpl);
+    }
+
+    private Map<Integer, Integer> getUserResources(){
+
     }
 }
