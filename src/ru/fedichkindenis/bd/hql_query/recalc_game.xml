@@ -43,5 +43,14 @@
 
         order by sr.user.id
     </query>
+    
+    <query name="recalc_game.get_game_link_resources"
+           comment="Возвращает на сущность связи игры, типа операции и ссылку на цепочку ресурсов">
+        from GameLinkResources glr
+
+        where
+            glr.game = :game
+            and glr.typeOperation = :typeOperation
+    </query>
 
 </hibernate-mapping>

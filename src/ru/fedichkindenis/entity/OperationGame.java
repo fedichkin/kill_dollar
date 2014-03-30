@@ -56,7 +56,7 @@ public class OperationGame {
     /**
      * Количество целевого ресурса
      */
-    @Column(name = "count_res", nullable = false)
+    @Column(name = "count_res", nullable = true)
     private Integer countRes;
 
     /**
