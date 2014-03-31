@@ -19,6 +19,19 @@
         order by og.countRes
     </query>
 
+    <query name="recalc_game.get_list_operation"
+           comment="Получаем список операций с задаваемым типом">
+        from OperationGame og
+
+        where
+        og.game = :game
+        and og.gameDate = :gameDate
+        and :sd >= og.svd
+        and og.fvd is null
+        and og.statusOperation = ru.fedichkindenis.enums.StatusOperation.CONFIRM
+        and og.typeOperation = :typeOperation
+    </query>
+
     <query name="recalc_game.get_list_ppl_order_by_credit"
            comment="Список статистики колонистов отсортиованых по количеству кредитов">
         from StateResourcesPpl sp

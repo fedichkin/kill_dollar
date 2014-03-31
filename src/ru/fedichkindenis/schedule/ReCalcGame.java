@@ -6,7 +6,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import ru.fedichkindenis.entity.*;
+import ru.fedichkindenis.enums.StatusOperation;
 import ru.fedichkindenis.enums.StatusPpl;
+import ru.fedichkindenis.enums.TypeOperation;
 import ru.fedichkindenis.tools.DateFormatUtil;
 import ru.fedichkindenis.tools.HibernateUtils;
 import ru.fedichkindenis.tools.SessionUtils;
@@ -70,6 +72,11 @@ public class ReCalcGame extends TimerTask {
              * для этого  загрузим старые и обнулим идентификаторы
              */
             Map<Long, Map<Integer, StateResources>> mapStatResUser = getMapStateResUser(session, gameDay);
+
+            /**
+             * Этап 1. Бартер
+             */
+            Barter(session, gameDay, mapStatResUser);
 
             /**
              * Этап 4. Заселение коллонистов в квартиры
@@ -153,6 +160,14 @@ public class ReCalcGame extends TimerTask {
         return mapStateResUser;
     }
 
+    /**
+     * В методе выполняется процедура аренды квартиры
+     * @param gameDate          - день игры
+     * @param mapStPpl          - карта статистики колониста
+     * @param mapStResUser      - карта статистики ресурсов пользователя
+     * @param orderPpl          - индефикаторы колонистов отсортированые от самого богатого
+     * @param session           - текущая сессия соединения с БД
+     */
     private void rentalHousing(GameDay gameDate,
                                Map<Long, StateResourcesPpl> mapStPpl,
                                Map<Long, Map<Integer, StateResources>> mapStResUser,
@@ -182,7 +197,8 @@ public class ReCalcGame extends TimerTask {
 
             if(creditPpl.compareTo(costFlat) >= 0){
                 //если у колониста хватает денег на квартиру
-                rentPayment(stPpl, stResUser, getUserResources(opG, session), creditPpl, costFlat, session);
+                rentPayment(stPpl, stResUser, getUsedResources(opG, session), creditPpl, costFlat, session);
+                opG.setStatusOperation(StatusOperation.EXEC);
             }
             else{
                 //если у колониста не хватает денег на квартиру
@@ -190,15 +206,16 @@ public class ReCalcGame extends TimerTask {
                 Ppl ppl = stPpl.getPpl();
 
                 //у колониста ещё есть возможность жить в капсуле?
-                if(game.getLifeOutFlat() > gameDate.getNumberDay()){
-                    //TODO обдумать алгоритм капсулы
+                if(game.getLifeOutFlat() >= gameDate.getNumberDay()){
                     ppl.setDaysCapsule(ppl.getDaysCapsule() + 1);
                 }
                 else{
                     ppl.setDelDate(gameDate);  //Колонист умирает если у него нет возможности где то жить
                     ppl.setStat(StatusPpl.DIE);
                 }
+                opG.setStatusOperation(StatusOperation.CANCEL);
             }
+            session.update(opG);
         }
     }
 
@@ -235,7 +252,7 @@ public class ReCalcGame extends TimerTask {
      * @param session           - текущая сессия соединения с БД
      * @return
      */
-    private Map<Integer, Integer> getUserResources(OperationGame operationGame, Session session){
+    private Map<Integer, Integer> getUsedResources(OperationGame operationGame, Session session){
 
         Map<Integer, Integer> userRes = new HashMap<Integer, Integer>();
         LinkResources linkResAdd = null;
@@ -274,5 +291,38 @@ public class ReCalcGame extends TimerTask {
         }
 
         return userRes;
+    }
+
+    /**
+     * Операция бартера
+     * @param session           - текущая сессия соединения с БД
+     * @param gameDay           - день игры
+     * @param mapStResUser      - карта статистики ресурсов пользователей
+     */
+    public void Barter(Session session, GameDay gameDay, Map<Long, Map<Integer, StateResources>> mapStResUser){
+
+        //Получаем список бартерных сделок
+        Query query = session.getNamedQuery("recalc_game.get_list_operation")
+                .setParameter("game", game)
+                .setParameter("gameDate", gameDay)
+                .setParameter("sd", CURRENT_DATE)
+                .setParameter("typeOperation", TypeOperation.BARTER);
+
+        List<OperationGame> operationGameList = query.list();
+
+        for(OperationGame opG : operationGameList){
+
+            Map<Integer, Integer> mapUsedRes = getUsedResources(opG, session);
+            Map<Integer, StateResources> statUser = mapStResUser.get(opG.getUser().getId());
+
+            //Обновляем статистику ресурсво пользователя по каждой операции, по каждому ресурсу
+            for(Integer res : mapUsedRes.keySet()){
+                StateResources stRes = statUser.get(res);
+                Integer count = stRes.getCountRes();
+                stRes.setCountRes(count + mapUsedRes.get(res));
+
+                session.update(stRes);
+            }
+        }
     }
 }
