@@ -91,7 +91,7 @@ public class OperationGame {
      * Время окончания видимости операции (устанавливается когда сменяется статус)
      * Новый статус - новая операция, реализовано для сохранения истории
      */
-    @Column(name = "fvd", nullable = false)
+    @Column(name = "fvd", nullable = true)
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date fvd;
 
@@ -106,6 +106,10 @@ public class OperationGame {
 
     public Long getId() {
         return id;
+    }
+
+    public void setNullId() {
+        this.id = null;
     }
 
     public Game getGame() {

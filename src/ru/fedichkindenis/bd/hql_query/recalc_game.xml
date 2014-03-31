@@ -66,4 +66,14 @@
             and glr.typeOperation = :typeOperation
     </query>
 
+    <query name="recalc_game.get_earth_market_resources"
+           comment="Получаме расклад Земного рынка для конкретного ресурса">
+        from MarketEarth me
+
+        where
+            me.game = :game
+            and me.gameDate = :gameDate
+            and me.resources = :resources
+    </query>
+
 </hibernate-mapping>

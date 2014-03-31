@@ -10,6 +10,7 @@ import ru.fedichkindenis.entity.*;
 import ru.fedichkindenis.enums.InitResources;
 import ru.fedichkindenis.enums.Operand;
 import ru.fedichkindenis.enums.StatusGame;
+import ru.fedichkindenis.enums.StatusOperation;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
@@ -180,5 +181,29 @@ public class SessionUtils {
                 .setParameter("game", game);
 
         return (GameDay) query.uniqueResult();
+    }
+
+    /**
+     * Проставление статуса операции
+     * @param operationGame     - операции игры
+     * @param statusOperation   - новый статус операции
+     * @param fvd               - время смены статуса
+     * @param session           - текущая сессия соединения с БД
+     */
+    public static void setStatusOperation(OperationGame operationGame,
+                                   StatusOperation statusOperation,
+                                   Date fvd,
+                                   Session session){
+
+        operationGame.setFvd(fvd);
+        session.update(operationGame);
+        session.flush();
+
+        operationGame.setNullId();
+        operationGame.setStatusOperation(statusOperation);
+        operationGame.setSvd(DateFormatUtil.getNextSvd(fvd));
+        operationGame.setFvd(null);
+        session.save(operationGame);
+        session.flush();
     }
 }

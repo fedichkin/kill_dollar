@@ -24,7 +24,8 @@ public enum TypeOperation {
     RESIDENTIAL_COMPLEX_BUILDING(12, "Строительство жилого комплекса"),
     FLAT_PROVIDING(13, "Обеспечение квартиры"),
     RENTAL_HOUSING(14, "Сдача в аренду жилья"),
-    BARTER(15, "Бартер");
+    BARTER(15, "Бартер"),
+    TRADE_EARTH(16, "Торговя с Землёй");
 
     private Integer id;
     private String name;

@@ -76,7 +76,12 @@ public class ReCalcGame extends TimerTask {
             /**
              * Этап 1. Бартер
              */
-            Barter(session, gameDay, mapStatResUser);
+            OtherOperation(session, gameDay, mapStatResUser, TypeOperation.BARTER);
+
+            /**
+             * Этап 2. Торговля с Землёй
+             */
+            OtherOperation(session, gameDay, mapStatResUser, TypeOperation.TRADE_EARTH);
 
             /**
              * Этап 4. Заселение коллонистов в квартиры
@@ -121,6 +126,7 @@ public class ReCalcGame extends TimerTask {
             orderPpl.add(stPpl.getPpl().getId());
 
             session.save(stPpl);
+            session.flush();
         }
 
         return mapStatePpl;
@@ -155,6 +161,7 @@ public class ReCalcGame extends TimerTask {
             }
 
             session.save(stRes);
+            session.flush();
         }
 
         return mapStateResUser;
@@ -198,7 +205,7 @@ public class ReCalcGame extends TimerTask {
             if(creditPpl.compareTo(costFlat) >= 0){
                 //если у колониста хватает денег на квартиру
                 rentPayment(stPpl, stResUser, getUsedResources(opG, session), creditPpl, costFlat, session);
-                opG.setStatusOperation(StatusOperation.EXEC);
+                SessionUtils.setStatusOperation(opG, StatusOperation.EXEC, CURRENT_DATE, session);
             }
             else{
                 //если у колониста не хватает денег на квартиру
@@ -213,9 +220,8 @@ public class ReCalcGame extends TimerTask {
                     ppl.setDelDate(gameDate);  //Колонист умирает если у него нет возможности где то жить
                     ppl.setStat(StatusPpl.DIE);
                 }
-                opG.setStatusOperation(StatusOperation.CANCEL);
+                SessionUtils.setStatusOperation(opG, StatusOperation.CANCEL, CURRENT_DATE, session);
             }
-            session.update(opG);
         }
     }
 
@@ -238,12 +244,14 @@ public class ReCalcGame extends TimerTask {
             Integer count = stRes.getCountRes();
             stRes.setCountRes(count + usedRes.get(res));
             session.update(stRes);
+            session.flush();
         }
 
         //Колонист тратит ресурсы на аренду квартиры
         stPpl.setPayHouse(costFlat);
         stPpl.setCredit(creditPpl - costFlat);
         session.update(stPpl);
+        session.flush();
     }
 
     /**
@@ -294,19 +302,22 @@ public class ReCalcGame extends TimerTask {
     }
 
     /**
-     * Операция бартера
+     * Не фиксированые операции
      * @param session           - текущая сессия соединения с БД
      * @param gameDay           - день игры
      * @param mapStResUser      - карта статистики ресурсов пользователей
+     * @param typeOperation     - тип операции
      */
-    public void Barter(Session session, GameDay gameDay, Map<Long, Map<Integer, StateResources>> mapStResUser){
+    public void OtherOperation(Session session, GameDay gameDay,
+                               Map<Long, Map<Integer, StateResources>> mapStResUser,
+                               TypeOperation typeOperation){
 
         //Получаем список бартерных сделок
         Query query = session.getNamedQuery("recalc_game.get_list_operation")
                 .setParameter("game", game)
                 .setParameter("gameDate", gameDay)
                 .setParameter("sd", CURRENT_DATE)
-                .setParameter("typeOperation", TypeOperation.BARTER);
+                .setParameter("typeOperation", typeOperation);
 
         List<OperationGame> operationGameList = query.list();
 
@@ -315,14 +326,47 @@ public class ReCalcGame extends TimerTask {
             Map<Integer, Integer> mapUsedRes = getUsedResources(opG, session);
             Map<Integer, StateResources> statUser = mapStResUser.get(opG.getUser().getId());
 
-            //Обновляем статистику ресурсво пользователя по каждой операции, по каждому ресурсу
+            //Обновляем статистику ресурсов пользователя по каждой операции, по каждому ресурсу
             for(Integer res : mapUsedRes.keySet()){
                 StateResources stRes = statUser.get(res);
                 Integer count = stRes.getCountRes();
                 stRes.setCountRes(count + mapUsedRes.get(res));
 
                 session.update(stRes);
+                session.flush();
+
+                if(typeOperation.equals(TypeOperation.TRADE_EARTH)){
+                    writeValEndMarketEarth(stRes.getResources(), count, gameDay, session);
+                }
             }
+
+            SessionUtils.setStatusOperation(opG, StatusOperation.EXEC, CURRENT_DATE, session);
+        }
+    }
+
+    /**
+     * Заполняем количество ресурсов на конец хода на рынке Земли
+     * @param resources     - ресурс
+     * @param count         - количество ресурса
+     * @param gameDay       - день игры
+     * @param session       - текущая сессия соединения с БД
+     */
+    private void writeValEndMarketEarth(Resources resources, Integer count, GameDay gameDay, Session session){
+
+        Query query = session.getNamedQuery("recalc_game.get_earth_market_resources")
+                .setParameter("game", game)
+                .setParameter("gameDate", gameDay)
+                .setParameter("resources", resources);
+
+        MarketEarth marketEarth = (MarketEarth) query.uniqueResult();
+
+        if(marketEarth.getValEnd() == null){
+            Integer val = marketEarth.getVal();
+            marketEarth.setValEnd(val + count);
+        }
+        else {
+            Integer val = marketEarth.getValEnd();
+            marketEarth.setValEnd(val + count);
         }
     }
 }

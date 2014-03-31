@@ -59,6 +59,12 @@ public class MarketEarth {
     private Integer val;
 
     /**
+     * Количество ресурса в конце хода
+     */
+    @Column(name = "val_end", nullable = true)
+    private Integer valEnd;
+
+    /**
      * Цена покупки ресурса
      */
     @Column(name = "buy_cost", nullable = true)
@@ -116,5 +122,13 @@ public class MarketEarth {
 
     public void setBuyCost(Integer buyCost) {
         this.buyCost = buyCost;
+    }
+
+    public Integer getValEnd() {
+        return valEnd;
+    }
+
+    public void setValEnd(Integer valEnd) {
+        this.valEnd = valEnd;
     }
 }
