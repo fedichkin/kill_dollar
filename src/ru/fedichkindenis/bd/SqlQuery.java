@@ -1,5 +1,7 @@
 package ru.fedichkindenis.bd;
 
+import org.apache.log4j.Logger;
+
 import java.io.*;
 import java.util.HashMap;
 
@@ -11,6 +13,8 @@ import java.util.HashMap;
  * To change this template use File | Settings | File Templates.
  */
 public class SqlQuery {
+
+    private static final Logger log = Logger.getLogger(SqlQuery.class);
 
     private static final String PATH = "query/";
 
@@ -67,15 +71,15 @@ public class SqlQuery {
             } catch (UnsupportedEncodingException e) {
 
                 error = error.concat(e.toString());
-                e.printStackTrace();
+                log.error(e.getMessage());
             } catch (FileNotFoundException e) {
 
                 error = error.concat(e.toString());
-                e.printStackTrace();
+                log.error(e.getMessage());
             } catch (IOException e) {
 
                 error = error.concat(e.toString());
-                e.printStackTrace();
+                log.error(e.getMessage());
             } finally{
 
                 try {
@@ -84,7 +88,7 @@ public class SqlQuery {
                     if(isr != null)
                         isr.close();
                 } catch (IOException e) {
-
+                    log.error(e.getMessage());
                     error = error.concat(e.toString());
                 }
             }

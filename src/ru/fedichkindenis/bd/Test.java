@@ -1,5 +1,7 @@
 package ru.fedichkindenis.bd;
 
+import org.apache.log4j.Logger;
+
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.sql.Connection;
@@ -16,6 +18,9 @@ import java.sql.SQLException;
  */
 @WebServlet("/Tets")
 public class Test extends javax.servlet.http.HttpServlet {
+
+    private static final Logger log = Logger.getLogger(Test.class);
+
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
         Connection c = null;
@@ -27,7 +32,7 @@ public class Test extends javax.servlet.http.HttpServlet {
             st = c.prepareStatement("select * from usr");
             rs = st.executeQuery();
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            log.error(e.getMessage());
         }
         finally {
             DbUtils.close(c, st, rs);

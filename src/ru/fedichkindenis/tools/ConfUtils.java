@@ -1,5 +1,8 @@
 package ru.fedichkindenis.tools;
 
+import org.apache.log4j.Logger;
+import ru.fedichkindenis.servlets.GetListGames;
+
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
@@ -14,6 +17,8 @@ import java.io.InputStream;
  * To change this template use File | Settings | File Templates.
  */
 public class ConfUtils {
+
+    private static final Logger log = Logger.getLogger(ConfUtils.class);
 
     public static String getParamConfigXML(InputStream file, String param){
 
@@ -39,13 +44,13 @@ public class ConfUtils {
             }
 
         } catch (XMLStreamException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         } finally {
             if(reader != null){
                 try {
                     reader.close();
                 } catch (XMLStreamException e) {
-                    e.printStackTrace();
+                    log.error(e.getMessage());
                 }
             }
         }

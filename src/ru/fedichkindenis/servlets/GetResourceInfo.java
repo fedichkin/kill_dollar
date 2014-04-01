@@ -1,5 +1,6 @@
 package ru.fedichkindenis.servlets;
 
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,6 +29,9 @@ import java.sql.SQLException;
  */
 @WebServlet("/GetResourceInfo")
 public class GetResourceInfo extends HttpServlet {
+
+    private static final Logger log = Logger.getLogger(GetResourceInfo.class);
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Connection c = null;
         PreparedStatement st = null;
@@ -98,11 +102,11 @@ public class GetResourceInfo extends HttpServlet {
             writer.write(jo.toString());
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         } catch (JSONException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         } finally {
             DbUtils.close(c, st, rs);
             writer.close();

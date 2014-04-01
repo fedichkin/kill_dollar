@@ -36,7 +36,7 @@ import java.util.List;
 @WebServlet("/Auth")
 public class Auth extends HttpServlet {
 
-    private static final Logger LOG = Logger.getLogger(Auth.class);
+    private static final Logger log = Logger.getLogger(Auth.class);
     private final SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
 
     private static final String XML_FILE = "bizcontacts.xml";
@@ -121,9 +121,9 @@ public class Auth extends HttpServlet {
             }
 
         } catch (JSONException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         } finally {
             HibernateUtils.close(s);
         }
@@ -131,7 +131,7 @@ public class Auth extends HttpServlet {
         try {
             response.sendRedirect(isAuth ? START_PAGE : LOGIN_PAGE);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 
@@ -179,7 +179,7 @@ public class Auth extends HttpServlet {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         } finally {
             if(conn != null){
                 conn.disconnect();
@@ -207,7 +207,7 @@ public class Auth extends HttpServlet {
                 try {
                     configFile.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    log.error(e.getMessage());
                 }
             }
         }
@@ -257,7 +257,7 @@ public class Auth extends HttpServlet {
 
         } catch (Exception e) {
             HibernateUtils.rollback(tx);
-            e.printStackTrace();
+            log.error(e.getMessage());
         } finally {
             HibernateUtils.close(session);
         }

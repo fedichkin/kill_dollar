@@ -24,7 +24,7 @@ import java.util.Stack;
  */
 public class FormulaUtils {
 
-    private static final Logger LOG = Logger.getLogger(GetListGames.class);
+    private static final Logger log = Logger.getLogger(GetListGames.class);
     //private static final SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
 
     public static BigDecimal getResultFormula(Long idFunc, Game game,
@@ -66,7 +66,7 @@ public class FormulaUtils {
                     try {
                         operands.push(NumberUtils.parseBigDecimal(op.toString(), "Не число"));
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        log.error(e.getMessage());
                     }
                 }
                 else if(functions.getConstOperand() != null){
@@ -99,7 +99,7 @@ public class FormulaUtils {
             first = NumberUtils.parseBigDecimal(operands.pop().toString(), "Не число!");
             second = NumberUtils.parseBigDecimal(operands.pop().toString(), "Не число!");
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
 
         switch (el){

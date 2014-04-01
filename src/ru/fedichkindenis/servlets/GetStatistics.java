@@ -30,7 +30,7 @@ import java.util.List;
  */
 public class GetStatistics extends HttpServlet {
 
-    private static final Logger LOG = Logger.getLogger(GetListGames.class);
+    private static final Logger log = Logger.getLogger(GetListGames.class);
     private final SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -75,7 +75,7 @@ public class GetStatistics extends HttpServlet {
             writer.write(jo.toString());
 
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         } finally {
             HibernateUtils.close(session);
             writer.close();

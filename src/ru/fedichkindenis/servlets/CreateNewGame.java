@@ -31,7 +31,7 @@ import java.util.Timer;
 @WebServlet("/CreateNewGame")
 public class CreateNewGame extends HttpServlet {
 
-    private static final Logger LOG = Logger.getLogger(GetListGames.class);
+    private static final Logger log = Logger.getLogger(GetListGames.class);
     private final SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response
@@ -354,7 +354,7 @@ public class CreateNewGame extends HttpServlet {
 
         } catch (Exception e) {
             HibernateUtils.rollback(tx);
-            e.printStackTrace();
+            log.error(e.getMessage());
         } finally {
             HibernateUtils.close(session);
         }

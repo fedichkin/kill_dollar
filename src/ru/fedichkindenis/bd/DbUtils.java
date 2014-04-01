@@ -1,5 +1,7 @@
 package ru.fedichkindenis.bd;
 
+import org.apache.log4j.Logger;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -15,6 +17,8 @@ import java.sql.*;
  */
 public class DbUtils {
 
+    private static final Logger log = Logger.getLogger(DbUtils.class);
+
     public static Connection getConnect(){
 
         Connection c = null;
@@ -26,9 +30,9 @@ public class DbUtils {
             DataSource ds = (DataSource) context.lookup("connpool");
             c = ds.getConnection();
         } catch (NamingException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
 
         return c;
@@ -47,7 +51,7 @@ public class DbUtils {
                 rs.close();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 
@@ -61,7 +65,7 @@ public class DbUtils {
                 st.close();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 }

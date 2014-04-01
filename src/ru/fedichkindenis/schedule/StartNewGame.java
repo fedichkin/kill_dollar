@@ -102,7 +102,7 @@ public class StartNewGame extends TimerTask {
 
         } catch (Exception e){
             HibernateUtils.rollback(tx);
-            e.printStackTrace();
+            log.error(e.getMessage());
         } finally {
             HibernateUtils.close(session);
         }
