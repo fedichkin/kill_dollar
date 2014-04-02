@@ -7,10 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import ru.fedichkindenis.entity.*;
-import ru.fedichkindenis.enums.InitResources;
-import ru.fedichkindenis.enums.Operand;
-import ru.fedichkindenis.enums.StatusGame;
-import ru.fedichkindenis.enums.StatusOperation;
+import ru.fedichkindenis.enums.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
@@ -205,5 +202,22 @@ public class SessionUtils {
         operationGame.setFvd(null);
         session.save(operationGame);
         session.flush();
+    }
+
+    /**
+     * Получение индетификатора функции
+     * @param game          - игра
+     * @param functions     - наименование функции
+     * @param session       - текущая сессия соединения с БД
+     * @return
+     */
+    public static Long getIdFunction(Game game, PurposeOfFunctions functions, Session session){
+
+        Query query = session.createQuery("select gf.id from GameFunctions gf " +
+                " where gf.game = :game and gf.nameFunc = :functions ")
+                .setParameter("game", game)
+                .setParameter("functions", functions);
+
+        return (Long) query.uniqueResult();
     }
 }

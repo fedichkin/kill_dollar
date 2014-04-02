@@ -6,10 +6,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import ru.fedichkindenis.entity.*;
+import ru.fedichkindenis.enums.PurposeOfFunctions;
 import ru.fedichkindenis.enums.StatusOperation;
 import ru.fedichkindenis.enums.StatusPpl;
 import ru.fedichkindenis.enums.TypeOperation;
 import ru.fedichkindenis.tools.DateFormatUtil;
+import ru.fedichkindenis.tools.FormulaUtils;
 import ru.fedichkindenis.tools.HibernateUtils;
 import ru.fedichkindenis.tools.SessionUtils;
 
@@ -84,7 +86,12 @@ public class ReCalcGame extends TimerTask {
             OtherOperation(session, gameDay, mapStatResUser, TypeOperation.TRADE_EARTH);
 
             /**
-             * Этап 4. Заселение коллонистов в квартиры
+             * Этап 3. Расчёт цен Земли на следующий ход
+             */
+            calcCostEarth(session, gameDay, newGameDay);
+
+            /**
+             * Этап 5. Заселение коллонистов в квартиры
              */
             rentalHousing(gameDay, mapStatPpl, mapStatResUser, orderPpl, session);
 
@@ -308,7 +315,7 @@ public class ReCalcGame extends TimerTask {
      * @param mapStResUser      - карта статистики ресурсов пользователей
      * @param typeOperation     - тип операции
      */
-    public void OtherOperation(Session session, GameDay gameDay,
+    private void OtherOperation(Session session, GameDay gameDay,
                                Map<Long, Map<Integer, StateResources>> mapStResUser,
                                TypeOperation typeOperation){
 
@@ -367,6 +374,52 @@ public class ReCalcGame extends TimerTask {
         else {
             Integer val = marketEarth.getValEnd();
             marketEarth.setValEnd(val + count);
+        }
+    }
+
+    /**
+     * Расчёт цен Земли на новый день
+     * @param session       - текущая сессия соединения с БД
+     * @param gameDay       - день игра
+     * @param newGameDay    - новый день игры
+     */
+    private void calcCostEarth(Session session, GameDay gameDay, GameDay newGameDay){
+
+        Query query = session.getNamedQuery("recalc_game.get_list_earth_market")
+                .setParameter("game", game)
+                .setParameter("gameDate", gameDay);
+
+        List<MarketEarth> marketEarthList = query.list();
+
+        for(MarketEarth me : marketEarthList){
+
+            MarketEarth marketEarth = new MarketEarth();
+            marketEarth.setGame(game);
+            marketEarth.setGameDate(newGameDay);
+            marketEarth.setResources(me.getResources());
+            session.save(marketEarth);
+            session.flush();
+
+            //Вычисляем количество ресурсов
+            Long fId = SessionUtils.getIdFunction(game, PurposeOfFunctions.VALUE_RES_EARTH, session);
+            marketEarth.setVal(FormulaUtils.getResultFormula(fId, game, newGameDay,
+                    me.getResources(), session).intValue());
+            session.update(marketEarth);
+            session.flush();
+
+            //Вычисляем стоимость продажи ресурсов
+            fId = SessionUtils.getIdFunction(game, PurposeOfFunctions.SALE_COST_EARTH, session);
+            marketEarth.setSaleCost(FormulaUtils.getResultFormula(fId, game, newGameDay,
+                    me.getResources(), session).intValue());
+            session.update(marketEarth);
+            session.flush();
+
+            //Вычисляем стоимость покупки ресурсов
+            fId = SessionUtils.getIdFunction(game, PurposeOfFunctions.BUY_COST_EARTH, session);
+            marketEarth.setBuyCost(FormulaUtils.getResultFormula(fId, game, newGameDay,
+                    me.getResources(), session).intValue());
+            session.update(marketEarth);
+            session.flush();
         }
     }
 }

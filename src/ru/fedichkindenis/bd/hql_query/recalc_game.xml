@@ -76,4 +76,13 @@
             and me.resources = :resources
     </query>
 
+    <query name="recalc_game.get_list_earth_market"
+           comment="Получаме расклад Земного рынка на конкретный день">
+        from MarketEarth me
+
+        where
+        me.game = :game
+        and me.gameDate = :gameDate
+    </query>
+
 </hibernate-mapping>
