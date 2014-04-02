@@ -91,6 +91,10 @@ public class ReCalcGame extends TimerTask {
             calcCostEarth(session, gameDay, newGameDay);
 
             /**
+             * Этап 4. Производство
+             */
+
+            /**
              * Этап 5. Заселение коллонистов в квартиры
              */
             rentalHousing(gameDay, mapStatPpl, mapStatResUser, orderPpl, session);
@@ -228,6 +232,32 @@ public class ReCalcGame extends TimerTask {
                     ppl.setStat(StatusPpl.DIE);
                 }
                 SessionUtils.setStatusOperation(opG, StatusOperation.CANCEL, CURRENT_DATE, session);
+            }
+
+            if(orderPpl.size() == (currentPpl + 1)){
+                //колонисты закончились, отменяем оставшиеся операции с арендой
+                SessionUtils.setStatusOperation(opG, StatusOperation.CANCEL, CURRENT_DATE, session);
+            }
+            else {
+                currentPpl++;
+            }
+        }
+
+        if(orderPpl.size() > (currentPpl + 1)){
+            //предложения на рынке недвижимости закончились но ещё есть колонисты
+            for(int i = currentPpl; i < orderPpl.size();i++){
+
+                StateResourcesPpl stPpl = mapStPpl.get(orderPpl.get(i));
+                Ppl ppl = stPpl.getPpl();
+
+                //у колониста ещё есть возможность жить в капсуле?
+                if(game.getLifeOutFlat() >= gameDate.getNumberDay()){
+                    ppl.setDaysCapsule(ppl.getDaysCapsule() + 1);
+                }
+                else{
+                    ppl.setDelDate(gameDate);  //Колонист умирает если у него нет возможности где то жить
+                    ppl.setStat(StatusPpl.DIE);
+                }
             }
         }
     }
