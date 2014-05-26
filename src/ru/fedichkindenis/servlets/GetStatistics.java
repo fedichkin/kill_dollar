@@ -71,6 +71,25 @@ public class GetStatistics extends HttpServlet {
             jo.put("change_count_ppl", gameStatistics.getChangeCountPpl());
             jo.put("goal_ppl", goalPpl);
 
+            jo.put("count_free_flat",gameStatistics.getFlatCountEmpty());
+            jo.put("count_all_flat",gameStatistics.getFlatCount());
+
+            jo.put("sum_max_ppl", gameStatistics.getSummMaxPpl());
+            jo.put("sum_min_ppl", gameStatistics.getSummMinPpl());
+            jo.put("sum_avg_ppl", gameStatistics.getSummAvgPpl());
+
+            jo.put("price_max_flat", gameStatistics.getPriceMaxFlat());
+            jo.put("price_min_flat", gameStatistics.getPriceMinFlat());
+            jo.put("price_avg_flat", gameStatistics.getPriceAvgFlat());
+
+            jo.put("all_workless_count", gameStatistics.getWorklessCount());
+            jo.put("parazit_count", gameStatistics.getParazitCount());
+            jo.put("workless_count", gameStatistics.getWorklessCount() - gameStatistics.getParazitCount());
+
+            jo.put("salary_max", gameStatistics.getSalaryMax());
+            jo.put("salary_min", gameStatistics.getSalaryMin());
+            jo.put("salary_avg", gameStatistics.getSalaryAvg());
+
             jo.put("success", true);
             writer.write(jo.toString());
 

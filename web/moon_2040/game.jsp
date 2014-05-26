@@ -108,13 +108,13 @@
                             /
                             <a class="tip">2000<span class="hint">Требуемое число колонистов для успешнеой колонизации</span></a>
                         </div>
-                        <div class="statistic-block">
+                        <div class="statistic-block" id="flat">
                             <a class="tip"><img alt="" src="img/city.png" class="tip"/><span class="hint">Жилое пространство</span></a>
                             <a class="tip">26<span class="hint">Свободные жилые места</span></a>
                             /
                             <a class="tip">160<span class="hint">Общее число жилых мест</span></a>
                         </div>
-                        <div class="statistic-block">
+                        <div class="statistic-block" id="summ_ppl">
                             <a class="tip"><img alt="" src="img/wallet.png" class="tip"/><span class="hint">Богатство населения</span></a>
                             <a class="tip"><span class="red">8</span><span class="hint">Состояние самого бедного колониста</span></a>
                             /
@@ -122,7 +122,7 @@
                             /
                             <a class="tip"><span class="yellow">53</span><span class="hint">Состояние самого богатого колониста</span></a>
                         </div>
-                        <div class="statistic-block">
+                        <div class="statistic-block" id="price_flat">
                             <a class="tip"><img alt="" src="img/price.png" class="tip"/><span class="hint">Стоимость проживания</span></a>
                             <a class="tip"><span class="green">9</span><span class="hint">Самое доступное жилье за последний месяц</span></a>
                             /
@@ -130,7 +130,7 @@
                             /
                             <a class="tip"><span class="yellow">22</span><span class="hint">Самое дорогое жилье за последний месяц</span></a>
                         </div>
-                        <div class="statistic-block">
+                        <div class="statistic-block" id="workless">
                             <a class="tip"><img alt="" src="img/chair.png" class="tip"/><span class="hint">Уровень безработицы</span></a>
                             <a class="tip"><span class="red">21</span><span class="hint">Вынужденно безработные</span></a>
                             /
@@ -138,7 +138,7 @@
                             /
                             <a class="tip"><span class="yellow">8</span><span class="hint">Тунеядцы</span></a>
                         </div>
-                        <div class="statistic-block">
+                        <div class="statistic-block" id="salary">
                             <a class="tip"><img alt="" src="img/work.png" class="tip"/><span class="hint">Оплата труда колонистов</span></a>
                             <a class="tip"><span class="red">10</span><span class="hint">Минимальная заработная плата за последний месяц</span></a>
                             /

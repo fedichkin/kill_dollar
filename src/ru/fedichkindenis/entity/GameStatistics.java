@@ -68,7 +68,7 @@ public class GameStatistics {
     private Integer summAvgPpl;
 
     /**
-     * КОличество безработных
+     * КОличество безработных (включая тунеядцев)
      */
     @Column(name = "workless_count", nullable = false)
     private Integer worklessCount;
