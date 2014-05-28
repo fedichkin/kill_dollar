@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import ru.fedichkindenis.entity.Functions;
 import ru.fedichkindenis.entity.Game;
 import ru.fedichkindenis.entity.GameStatistics;
+import ru.fedichkindenis.entity.ResourcesStatistics;
 import ru.fedichkindenis.tools.FormulaUtils;
 import ru.fedichkindenis.tools.HibernateUtils;
 import ru.fedichkindenis.tools.SessionUtils;
@@ -89,6 +90,17 @@ public class GetStatistics extends HttpServlet {
             jo.put("salary_max", gameStatistics.getSalaryMax());
             jo.put("salary_min", gameStatistics.getSalaryMin());
             jo.put("salary_avg", gameStatistics.getSalaryAvg());
+
+            for(Object [] obj : statistics){
+
+                ResourcesStatistics resStat = (ResourcesStatistics) obj[1];
+
+                String nameRes = resStat.getResources().getIdEnum().name().toLowerCase();
+
+                jo.put("count_" + nameRes, resStat.getCount());
+                jo.put("add_" + nameRes, resStat.getAdd());
+                jo.put("del_" + nameRes, resStat.getDel());
+            }
 
             jo.put("success", true);
             writer.write(jo.toString());

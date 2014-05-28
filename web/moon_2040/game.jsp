@@ -164,27 +164,27 @@
                             <td><a class="tip"><img alt="" src="img/ironbeam.png" class="tip"/><span class="hint">Строительные материалы</span></a></td>
                         </tr>
                         <tr>
-                            <td><span class="tip">161<span class="hint">Общие запасы еды</span></span><br/>
+                            <td id="food"><span class="tip">161<span class="hint">Общие запасы еды</span></span><br/>
                                 <span class="tip"><span class="green">+76<span class="hint">Производство еды за последний месяц</span></span></span><br />
                                 <span class="tip"><span class="red">-150<span class="hint">Потребление еды за последний месяц</span></span></span>
                             </td>
-                            <td><span class="tip">204<span class="hint">Общие запасы кислорода</span></span><br/>
+                            <td id="oxygen"><span class="tip">204<span class="hint">Общие запасы кислорода</span></span><br/>
                                 <span class="tip"><span class="green">+108<span class="hint">Производство кислорода за последний месяц</span></span></span><br />
                                 <span class="tip"><span class="red">-150<span class="hint">Потребление кислорода за последний месяц</span></span></span>
                             </td>
-                            <td><span class="tip">43<span class="hint">Общие запасы гелия-3</span></span><br/>
+                            <td id="helium3"><span class="tip">43<span class="hint">Общие запасы гелия-3</span></span><br/>
                                 <span class="tip"><span class="green">+41<span class="hint">Добыча гелия-3 за последний месяц</span></span></span><br />
                                 <span class="tip"><span class="red">-32<span class="hint">Расход гелия-3 за последний месяц</span></span></span>
                             </td>
-                            <td><span class="tip">96<span class="hint">Общие запасы электроэнергии</span></span><br/>
+                            <td id="energy"><span class="tip">96<span class="hint">Общие запасы электроэнергии</span></span><br/>
                                 <span class="tip"><span class="green">+97<span class="hint">Производство электроэнергии за последний месяц</span></span></span><br />
                                 <span class="tip"><span class="red">-81<span class="hint">Расход электроэнергии за последний месяц</span></span></span>
                             </td>
-                            <td><span class="tip">22<span class="hint">Общие запасы минералов</span></span><br/>
+                            <td id="ilmenite"><span class="tip">22<span class="hint">Общие запасы минералов</span></span><br/>
                                 <span class="tip"><span class="green">+31<span class="hint">Добыча минералов за последний месяц</span></span></span><br />
                                 <span class="tip"><span class="red">-28<span class="hint">Расход минералов за последний месяц</span></span></span>
                             </td>
-                            <td><span class="tip">38<span class="hint">Общие запасы материалов</span></span><br/>
+                            <td id="building_materials"><span class="tip">38<span class="hint">Общие запасы материалов</span></span><br/>
                                 <span class="tip"><span class="green">+28<span class="hint">Производство материалов за последний месяц</span></span></span><br />
                                 <span class="tip"><span class="red">-27<span class="hint">Расход материалов за последний месяц</span></span></span>
                             </td>
@@ -199,13 +199,13 @@
                             <td><a class="tip"><img alt="" src="img/bulldozer.png" class="tip"/><span class="hint">Строительные бригады</span></a></td>
                         </tr>
                         <tr>
-                            <td><span class="tip">10<span class="hint">Общee число ферм</span></span></td>
-                            <td><span class="tip">12<span class="hint">Общee число оранжирей</span></span></td>
-                            <td><span class="tip">4<span class="hint">Общee число гелиевых шахт</span></span></td>
-                            <td><span class="tip">12<span class="hint">Общee число электростанций</span></span></td>
-                            <td><span class="tip">7<span class="hint">Общee число минеральных шахт</span></span></td>
-                            <td><span class="tip">8<span class="hint">Общee число заводов</span></span></td>
-                            <td><span class="tip">17<span class="hint">Общee число строительных бригад</span></span></td></tr>
+                            <td id="farm"><span class="tip">10<span class="hint">Общee число ферм</span></span></td>
+                            <td id="greenhouse"><span class="tip">12<span class="hint">Общee число оранжирей</span></span></td>
+                            <td id="mining_station"><span class="tip">4<span class="hint">Общee число гелиевых шахт</span></span></td>
+                            <td id="powerhouse"><span class="tip">12<span class="hint">Общee число электростанций</span></span></td>
+                            <td id="mining_complex"><span class="tip">7<span class="hint">Общee число минеральных шахт</span></span></td>
+                            <td id="metallurgical_complex"><span class="tip">8<span class="hint">Общee число заводов</span></span></td>
+                            <td id="construction_gang"><span class="tip">17<span class="hint">Общee число строительных бригад</span></span></td></tr>
                         </tbody></table>
                     </div>
                 </div></div>
