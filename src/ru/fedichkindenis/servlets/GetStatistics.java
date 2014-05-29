@@ -100,6 +100,8 @@ public class GetStatistics extends HttpServlet {
                 jo.put("count_" + nameRes, resStat.getCount());
                 jo.put("add_" + nameRes, resStat.getAdd());
                 jo.put("del_" + nameRes, resStat.getDel());
+                jo.put("buy_" + nameRes, resStat.getBuyPrice());
+                jo.put("buy_change_" + nameRes, resStat.getBuyPriceChange());
             }
 
             jo.put("success", true);

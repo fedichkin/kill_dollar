@@ -226,27 +226,27 @@
 
                         </tr>
                         <tr>
-                            <td><span class="tip">3<span class="hint">Закупочная цена на еду в этом месяце</span></span><br/>
+                            <td id="buy_food"><span class="tip">3<span class="hint">Закупочная цена на еду в этом месяце</span></span><br/>
                                 <span class="tip"><span class="green">+1<span class="hint">Изменение цены по сравнению с прошлым месяцем</span></span></span><br />
                                 <span class="tip"><span class="">0<span class="hint">Поставки еды на Землю в прошлом месяце</span></span></span>
                             </td>
-                            <td><span class="tip">2<span class="hint">Закупочная цена на кислород в этом месяце</span></span><br/>
+                            <td id="buy_oxygen"><span class="tip">2<span class="hint">Закупочная цена на кислород в этом месяце</span></span><br/>
                                 <span class="tip"><span class="green">+1<span class="hint">Изменение цены по сравнению с прошлым месяцем</span></span></span><br />
                                 <span class="tip"><span class="">0<span class="hint">Поставки кислорода на Землю в прошлом месяце</span></span></span>
                             </td>
-                            <td><span class="tip">14<span class="hint">Закупочная цена на гелий-3 в этом месяце</span></span><br/>
+                            <td id="buy_helium3"><span class="tip">14<span class="hint">Закупочная цена на гелий-3 в этом месяце</span></span><br/>
                                 <span class="tip"><span class="red">-2<span class="hint">Изменение цены по сравнению с прошлым месяцем</span></span></span><br />
                                 <span class="tip"><span class="">12<span class="hint">Поставки гелия-3 на Землю в прошлом месяце</span></span></span>
                             </td>
-                            <td><span class="tip">8<span class="hint">Закупочная цена на электроэнергию в этом месяце</span></span><br/>
+                            <td id="buy_energy"><span class="tip">8<span class="hint">Закупочная цена на электроэнергию в этом месяце</span></span><br/>
                                 <span class="tip"><span class="red">-3<span class="hint">Изменение цены по сравнению с прошлым месяцем</span></span></span><br />
                                 <span class="tip"><span class="">30<span class="hint">Поставки электроэнергии на Землю в прошлом месяце</span></span></span>
                             </td>
-                            <td><span class="tip">11<span class="hint">Закупочная цена на минералы в этом месяце</span></span><br/>
+                            <td id="buy_ilmenite"><span class="tip">11<span class="hint">Закупочная цена на минералы в этом месяце</span></span><br/>
                                 <span class="tip"><span class="green">+1<span class="hint">Изменение цены по сравнению с прошлым месяцем</span></span></span><br />
                                 <span class="tip"><span class="">0<span class="hint">Поставки минералов на Землю в прошлом месяце</span></span></span>
                             </td>
-                            <td><span class="tip">12<span class="hint">Закупочная цена на материалы в этом месяце</span></span><br/>
+                            <td id="buy_building_materials"><span class="tip">12<span class="hint">Закупочная цена на материалы в этом месяце</span></span><br/>
                                 <span class="tip"><span class="green">+1<span class="hint">Изменение цены по сравнению с прошлым месяцем</span></span></span><br />
                                 <span class="tip"><span class="">0<span class="hint">Поставки материалов на Землю в прошлом месяце</span></span></span>
                             </td></tr>

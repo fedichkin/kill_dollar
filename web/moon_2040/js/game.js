@@ -11,7 +11,7 @@ $( document ).ready(function() {
 
 load_statistics = function(){
 
-    var arrCount = [ 6, 19 ];
+    var arrCount = [ 6, 25 ];
 
     var arrData = [ ['change_count_ppl', 'count_ppl', 'goal_ppl'],
                     ['count_free_flat', 'count_all_flat'],
@@ -31,7 +31,13 @@ load_statistics = function(){
                     ['count_powerhouse'],
                     ['count_mining_complex'],
                     ['count_metallurgical_complex'],
-                    ['count_construction_gang']
+                    ['count_construction_gang'],
+                    ['buy_food', 'buy_change_food'],
+                    ['buy_oxygen', 'buy_change_oxygen'],
+                    ['buy_helium3', 'buy_change_helium3'],
+                    ['buy_energy', 'buy_change_energy'],
+                    ['buy_ilmenite', 'buy_change_ilmenite'],
+                    ['buy_building_materials', 'buy_change_building_materials']
                   ];
 
     var arrName = [
@@ -53,7 +59,13 @@ load_statistics = function(){
                     ['Электростанции'],
                     ['Минеральные шахты'],
                     ['Заводы материалов'],
-                    ['Строительные бригады']
+                    ['Строительные бригады'],
+                    ['Закупочная цена на еду в этом месяце', 'Изменение цены по сравнению с прошлым месяцем'],
+                    ['Закупочная цена на кислород в этом месяце', 'Изменение цены по сравнению с прошлым месяцем'],
+                    ['Закупочная цена на гелий-3 в этом месяце', 'Изменение цены по сравнению с прошлым месяцем'],
+                    ['Закупочная цена на электроэнергию в этом месяце', 'Изменение цены по сравнению с прошлым месяцем'],
+                    ['Закупочная цена на минералы в этом месяце', 'Изменение цены по сравнению с прошлым месяцем'],
+                    ['Закупочная цена на материалы в этом месяце', 'Изменение цены по сравнению с прошлым месяцем']
                   ];
 
     var arrImg = [
@@ -93,7 +105,13 @@ load_statistics = function(){
                     '#powerhouse',
                     '#mining_complex',
                     '#metallurgical_complex',
-                    '#construction_gang'
+                    '#construction_gang',
+                    '#buy_food',
+                    '#buy_oxygen',
+                    '#buy_helium3',
+                    '#buy_energy',
+                    '#buy_ilmenite',
+                    '#buy_building_materials'
                  ];
 
     $.post('/GetStatistics', {gameId: getUrlVars()['gameId']} , function(data){

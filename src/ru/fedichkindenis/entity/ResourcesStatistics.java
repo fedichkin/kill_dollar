@@ -48,25 +48,25 @@ public class ResourcesStatistics {
 
 
     /**
-     * Цена ресурса на Земле
+     * Цена ресурса на Земле (продажа)
      */
     @Column(name = "sale_price", nullable = true)
     private Integer salePrice;
 
     /**
-     * Изменение цены ресурса
+     * Изменение цены ресурса (продажа)
      */
     @Column(name = "sale_price_change", nullable = true)
     private Integer salePriceChange;
 
     /**
-     * Цена ресурса на Земле
+     * Цена ресурса на Земле (покупка)
      */
     @Column(name = "buy_price", nullable = true)
     private Integer buyPrice;
 
     /**
-     * Изменение цены ресурса
+     * Изменение цены ресурса (покупка)
      */
     @Column(name = "buy_price_change", nullable = true)
     private Integer buyPriceChange;
