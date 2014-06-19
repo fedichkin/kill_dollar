@@ -39,13 +39,51 @@ public class UsrFriends {
     /**
      * Дата и время
      */
-    @Column(name = "sd", nullable = true)
+    @Column(name = "sd", nullable = false)
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date delDate;
 
     /**
      * дружба / не дружба
      */
-    @Column(name = "friend")
+    @Column(name = "friend", nullable = false)
     Boolean isFriend;
+
+    /**********GETTERS AND SETTERS**********/
+
+    public Long getId() {
+        return id;
+    }
+
+    public User getUserFirst() {
+        return userFirst;
+    }
+
+    public void setUserFirst(User userFirst) {
+        this.userFirst = userFirst;
+    }
+
+    public User getUserSecond() {
+        return userSecond;
+    }
+
+    public void setUserSecond(User userSecond) {
+        this.userSecond = userSecond;
+    }
+
+    public Date getDelDate() {
+        return delDate;
+    }
+
+    public void setDelDate(Date delDate) {
+        this.delDate = delDate;
+    }
+
+    public Boolean getFriend() {
+        return isFriend;
+    }
+
+    public void setFriend(Boolean friend) {
+        isFriend = friend;
+    }
 }
